@@ -44,7 +44,7 @@ h3 {
  .social {
  	width: 25%;
  	vertical-align: middle;
- 	padding-top: 30px;
+ 	padding-top: 50px;
  	/*background-color: green;*/
  	font-size: 0.75em;
  	text-align: left;
@@ -62,7 +62,7 @@ h3 {
     margin-left: 0;
     height: auto;
     padding: 10px;
-    max-width: 700px;
+    max-width: 1000px;
 }
 
 .card img {
