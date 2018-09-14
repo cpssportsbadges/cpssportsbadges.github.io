@@ -19,9 +19,6 @@ h3 {
  }
 
 
-p {
-	overflow-wrap: break-word;
-}
  .titleBar  {
  	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
  	margin-left: 100px;
@@ -51,35 +48,7 @@ p {
  	font-size: 0.75em;
  	text-align: left;
  }
-.header {
-	grid-area: header;
-	background-color: blue;
-}
 
-.menu  {
-	grid-area: menu;
-	background-color: red;
-}
-
-.content  {
-	grid-area: main;
-	background-color: yellow;
-}
-
-.footer {
-	grid-area: footer;
-	background-color: green;
-}
-
-.grid-container  {
-	display: grid;
-	grid-template-areas: 
-	'menu header header header'
-	'menu main main main'
-	'menu main main main'
-	'menu main main main'
-	'footer footer footer footer';
-}
 
 .card {
     /* Add shadows to create the "card" effect */
