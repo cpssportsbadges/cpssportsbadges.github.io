@@ -1,0 +1,182 @@
+body  {
+	background-color: #eeeeee;
+	font-size: 0.4;
+}
+
+h3 { 
+	font-size: 2em;
+ }
+
+
+p {
+	overflow-wrap: break-word;
+}
+ .titleBar  {
+ 	padding-left: 5%;
+ 	font-size: 30px;
+ 	background-color: #42a5f5;
+ 	margin-right: 0;
+ 	margin-left: 0;
+ 	display: flex;
+ }
+
+ .titleName {
+ 	display: flex;
+ 	width: 75%;
+ 	/*background-color: red;*/
+ 	padding: 20px;
+ }
+
+ .subtitle  {
+ 	font-size: 0.6em;
+ 	font-style: italic;
+ }
+ .social {
+ 	width: 25%;
+
+ 	/*background-color: green;*/
+ 	font-size: 0.75em;
+ 	text-align: left;
+ }
+.header {
+	grid-area: header;
+	background-color: blue;
+}
+
+.menu  {
+	grid-area: menu;
+	background-color: red;
+}
+
+.content  {
+	grid-area: main;
+	background-color: yellow;
+}
+
+.footer {
+	grid-area: footer;
+	background-color: green;
+}
+
+.grid-container  {
+	display: grid;
+	grid-template-areas: 
+	'menu header header header'
+	'menu main main main'
+	'menu main main main'
+	'menu main main main'
+	'footer footer footer footer';
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #80d6ff;
+    transition: 0.3s;
+    font-size: 1.2em;
+    text-align: center;
+    margin: 5% 10% 5% 10%;
+    height: auto;
+    padding: 10px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+#experience, #education {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+}
+.horizontalCard  {
+	width: 75%;
+	height: 1px;
+	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #80d6ff;
+    transition: 0.3s;
+    font-size: 1.2em;
+    text-align: center;
+    margin: 2% 2% 2% 2%;
+    height: auto;
+    padding: 10px;
+    text-overflow: hide;
+}
+
+.horizontalCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    height: auto;
+}
+/* Add some padding inside the card container */
+.container {
+    padding: 5% 5%;
+}
+
+.divisor {
+	background-color: #42a5f5;
+	height: 10px;
+	width: 100px;
+	border-radius: 50px;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	padding-left: 10px;
+}
+
+.aboutText {
+	grid-area: 'abouttext';
+	background-color: blue;
+}
+
+.photo {
+	grid-area: 'photo';
+	background-color: red;
+}
+
+.aboutGrid  {
+	display: 'grid';
+	grid-template-areas: 
+	'photo photo abouttext'
+	'abouttext abouttext abouttext';
+}
+#headshot {
+	width: 150px;
+	justify-content: left;
+	align-content: left;
+	margin-right: 30px;
+	margin: 5%;
+}
+
+#headshot img {
+	-webkit-border-radius: 50px;
+	border-radius: 100px;
+	width: 1px;
+	margin: 5%;
+	float: left;
+
+}
+
+#skills,  #projects {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+.verticalCard  {
+	width: 200px;
+	min-height: 300px;
+	text-align: center;
+	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #80d6ff;
+    transition: 0.3s;
+    font-size: 1.2em;
+    text-align: center;
+    margin: 2%;
+    height: auto;
+    padding: 10px;
+}
+
+.verticalCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
