@@ -1,216 +1,226 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Joseph Varilla</title>
-		<link rel="stylesheet" href="./style.css"></link>
-		<script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+<html lang="en">
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style3.css"></link>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-cyan w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-cyan" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="#skills" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Skills</a>
+    <a href="#projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">
+      <i class="fa fa-skills"></i>Projects</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">CV</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Contact Me</a>
+    <a href="https://www.linkedin.com/in/joseph-v-10ab6a130/" target="_blank" class="w3-bar-item w3-padding-large  w3-right"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <a href="https://github.com/jvarilla" target="_blank" class="w3-bar-item w3-padding-large w3-right"><i class="fa fa-github w3-hover-opacity"></i></a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large"> 
+    <a href="#skills" class="w3-bar-item w3-button w3-padding-large">Skills</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Experience</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-container w3-cyan w3-center" style="padding:128px 16px;">
+  <h1 id="splashHeader" class="w3-margin w3-jumbo">JOSEPH VARILLA</h1>
+  <p class="w3-xlarge">Developer | Student | Instructor </p>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container w3-white" data-aos="fade-right">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1>About</h1>
+      <h5 class="w3-padding-32">
+      Hi there! I'm Joseph, full-time student,
+      part-time instructor, and night-time coder 🧛. Just kidding, I program during the day too, and I don't bite</h5> 
+      <p class="w3-text-grey">Ever since I was introduced to programming at
+      a young age, I fell in love with it. Initially, I started off creating
+      graphics, then animations, then games, and now web applications. I enjoy the challenge of solving difficult problems, but more importantly, I like finding how to use technology to help people. I'm always learning new things (especially reading Medium articles that pop-up in my email) and sharing what I know so far through my work as an instructor. </p>
+    </div>
+
+    <div class="w3-third w3-center">
+     <img src="https://media.licdn.com/dms/image/C4E03AQGYPdSuKb4AqQ/profile-displayphoto-shrink_200_200/0?e=1550102400&v=beta&t=jdS_RFlqeO7_0ni9w6SLbcdqzjJOPS97xm3ed3PCKi4"
+     style="border-radius:50%;" alt="A young man with a blue shirt, black hair, brown eyes, and glasses. "/>
+    </div>
+  </div>
+</div>
+
+<div id="dividerImage1" class="dividerImage w3-padding-64"></div>
+<!-- Second Grid -->
+<div id="skills" class="w3-container w3-grey w3-padding-64" data-aos="flip-right"> 
+  <div class="w3-content">
+        <div><!-- class="w3-twothird" -->
+      <h1>Skills</h1>
+      <div class="skillsPool">
+        <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>JavaScript</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>HTML</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32  w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>CSS</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>Java</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>SQL</h3>
+        </div>
+        <div class="w3-card w3-center w3-padding-32 w3-cyan  w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>Command Line</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="dividerImage2" class="dividerImage w3-padding-64"></div>
+<!-- Third Grid: Projects -->
+<div id="projects" class="w3-row-padding w3-dark-grey w3-padding-64 w3-container">
+  <h1>Projects</h1>
+  <div class="w3-content">
+   <!--  <div class="w3-third w3-center">
+      <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
+    </div> -->
+
+      <!-- MCYAF Project Card -->
+      <div data-aos="fade-up-left" id="mcyaf-project-card"class="projectCard w3-card w3-center w3-padding-32 w3-left"><!-- w3-hover-opacity w3-hover-black -->
+        <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+          <div class="overlay-text">
+            <h2>MCYAF Site Revamp</h2>
+            <p>Caption Here</p>
+          </div>
+        </div>
+      </div>
+
+      <!--Face Detection App Project Card -->
+      <div data-aos="fade-up-right" id="facedetection-project-card"data-aos="fade-up-left" class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black projectCard w3-right">
+         <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+            <div class="overlay-text">
+               <h2>Face Detection App</h2>
+               <p>Caption Here</p>
+             </div>
+           </div>
+      </div>
+
+      <!-- Owe Knowe Project Card -->
+      <div data-aos="fade-up-left" class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black projectCard w3-left">
+        <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+          <div class="overlay-text">
+             <h2>Owe Know</h2>
+             <p>Caption Here</p>
+           </div>
+         </div>
+       </div>
+
+      <!-- Coming Soon Project Card -->
+      <div data-aos="fade-up-right" data-aos="fade-up-left" class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black projectCard w3-right">
+        <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+           <div class="overlay-text">
+            <h2>Coming Soon...</h2>
+           </div>
+         </div>
+    </div>
+  </div>
+</div>
+ <div id="dividerImage3" class="dividerImage w3-padding-64"></div>
+<div id="cv" class="w3-container w3-light-grey w3-padding-32"  data-aos="zoom-in"> 
+  <div class="w3-content">
+        <div><!-- class="w3-twothird" -->
+      <h1>Curriculum Vitae</h1>
+      <div class="w3-container w3-bar">
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="background_cv_tab" value="background" onclick="loadTab(event,'background')">Background</span>
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="education_cv_tab" value="education"  onclick="loadTab(event,'education')">Education</span>
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="experience_cv_tab" value="experience" onclick="loadTab(event,'experience')">Experience</span>
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="skills_cv_tab" value="skills" onclick="loadTab(event,'skills')">Skills</span>
+      </div>
+      <div id="cv_container" class="w3-container w3-white w3-padding-64 w3-large">
+        <div class="cvSection" id="cv_background" data-aom="fade-right">
+          <h2>Background</h2>
+          <p>A self-starting, IT student with good communication skills, a working knowledge of various web technologies, and over a year of experience as a K-12 educator in programming seeking a summer internship opportunity in full-stack development.</p>
+        </div>
+        <div class="cvSection" id="cv_education" hidden>
+          <h2>Education</h2>
+          <h3>Information Techonology Concentration in Web Development</h3>
+          <h4>Bachelor of Science | DePaul University Chicago, IL</h4>
+          <h3>High School</h3>
+          <h4>East Maine Township High School Park Ridge, IL | 2017</h4>
+          <p></p>
+        </div>
+        <div class="cvSection" id="cv_experience" hidden>
+          <h2>Background</h2>
+          <p></p>
+        </div>
+        <div class="cvSection" id="cv_skills" hidden>
+          <h2>Skills</h2>
+          <h3>Information Techonology Concentration in Web Development</h3>
+          <h4>Bachelor of Science | DePaul University Chicago, IL</h4>
+          <h3>High School</h3>
+          <h4>East Maine Township High School Park Ridge, IL | 2017</h4>
+          <p></p>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Quote of the day: "If you do what no one will do today. In a year, you will do what others can't do.</h1>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+  <div class="w3-xlarge w3-padding-32">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <i class="fa fa-github w3-hover-opacity"></i>
+ </div>
+ <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.js"
+  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
   crossorigin="anonymous"></script>
-		 <script src="./ui.js"></script>
-	</head>
-	<body>
-		<div class="titleBar">
-				<div class="titleName">
-					<h1><span>Joseph Varilla
-					<br><span class="subtitle">Web Developer | K-12 Coding Instructor</span></h1>
-				</div>
-				<div class="social">
-					<p>Email: <a href="mailto:jvarilla981@gmail.com">jvarilla981@gmail.com</a></p> 
-					<p>Github: <a href="https://github.com/jvarilla">https://github.com/jvarilla</a></p>
-					<p> <a href="https://www.linkedin.com/in/joseph-v-10ab6a130/">LinkedIn</a></p>
-				</div>
-			</div>
-		<div class="resume">
-	
-		<article class="main">
-			<h3>About</h3>
-				<div class="divisor"></div>
-				<div id="about" class="scrollContent">	
-						
-				<div class="card">
-					<div class="aboutGrid">
-						<img id="headshot" src="https://www.dailyherald.com/storyimage/DA/20170523/NEWS/170529732/EP/1/21/EP-170529732.jpg&updated=201705221325&MaxW=300&noborder" style="float:left;" alt="Joseph Varilla" />
-							<p>Hi, I'm Joseph Varilla, part-time teacher,<p> full-time student, and night-time coder.
-							I taught myself programming, as a hobby, at the age of 8.  Now I teach 8 year olds to program :).</p>
-							<p>I started by using drag-and-drop based programming interfaces to program games and have progressed to make apps for the web and the terminal.</p>
-							<p>I have experience helping non-profit organizations with their websites as well as a number of independent projects that use a variety of technlogies. I am a product-oriented programmer who enjoys making applications that can help an organization or just make a person's day.</p>
-					</div>
-				</div>
-
-			</div>
-			<h3>Experience</h3>
-				<div class="divisor"></div>
-				<br>
-			<div id="experience" class="scrollContent">
-				
-				<div class="horizontalCard">
-					<h4>Instructor at Code Play Learn | August 2017 - Present</h4>
-					<!--Link To Code Play Learn-->
-					<div class='horizontalCardBody' hidden="true">
-						<ul>
-							<li>Teach programming and logical thinking to a K-12 audience</li>
-							<li>Work in both public and private
-							schools as well as at company owned property and othe private venues</li>
-							<li>Adapt curriculum to engage students</li>
-							<li>Act as responsible guardian of minors</li>
-							<li>Communicate with customers</li>
-							<li>Troubleshoot errors with third party software</li>
-						</ul>
-					</div>
-					<!-- Work Period Duration should adjust dynamically-->
-				</div>
-				<div class="horizontalCard">
-					<h4>Partner at Quora | August 2018 - Present</h4>
-					<!--Link To Code Play Learn-->
-					<p></p>
-					<div class='horizontalCardBody' hidden="true">
-						<ul>
-							<li>Ask question to engage users of the platform</li>
-							<li>Research users to assess whether a question is in their domain of expertise and request and answer if so</li>
-							<li>Tailor questions to trending subjects and advertising partners to increase monetization of each question</li>
-						</ul>
-					</div>
-					<!-- Work Period Duration should adjust dynamically-->
-				</div>
-
-				<div class="horizontalCard">
-					<h4>Volunteer at Maine Community Youth Assistance Foundation (MCYAF) | October 2016 - May 2017 </h4>
-					<!--Link To Code Play Learn-->
-					<div class='horizontalCardBody' hidden="true">
-						<ul>
-							<li>Assess organizational needs and gather requirements for a new website</li>
-							<li>Restructure page structure for easier navigation</li> 
-							<li>Migrate system from a static website to a content management system</li> 
-							<li>Train organization members on how to enter content</li> 
-						</ul>
-					</div>
-					<!-- Work Period Duration should adjust dynamically-->
-				</div>
-			</div>
-			<h3>Skills</h3>
-				<div class="divisor"></div>
-			<div id="skills" class="scrollContent">
-				<div class="verticalCard">
-					<h4>Front-end</h4>
-					<div class="verticalCardBody" hidden="true">
-						<ul>
-							<li>HTML</li>
-							<li>CSS</li>
-							<li>Javascript</li>
-							<li>JQuery</li>	
-							<li>ReactJS</li>
-						</ul>
-					</div>
-				</div>
-				<div class="verticalCard" >
-					<h4>Back-end</h4>
-					<div class="verticalCardBody" hidden="true">
-						<ul>
-							<li>NodeJS</li>
-							<li>Express</li>
-							<li>Java</li>
-							<li>PostgreSQL</li>
-							<li>SQLite</li>	
-						</ul>
-					</div>
-				</div>
-				<div class="verticalCard">
-					<h4>Other</h4>
-					<div class="verticalCardBody" hidden="true">
-						<ul>
-							<li>Teaching</li>
-							<li>Learning</li>
-							<li>Public Speaking</li>
-							<li>Analysis</li>
-							<li>Troubleshooting</li>	
-						</ul>
-					</div>
-				</div>
-			</div>
-			<h3>Projects</h3>
-				<div class="divisor"></div>
-			<div id="projects" class="scrollContent">
-				<div class="verticalCard">
-					<h4><a href="https://smart-brain-client.herokuapp.com/">Image Recognition App</a></h4>
-					<div class="verticalCardBody" hidden="true">
-						<ul>
-							<li>A full-stack Javascript application that uses an image processing API to count and mark the number of faces in a photo.</li>
-							<li>Technologies: JS, HTML, CSS, Node, PostgreSQL</li>
-						</ul>
-					</div>
-				</div>
-				<div class="verticalCard">
-					<h4><a href="http://www.mcyaf.com/">MCYAF Website</a></h4>
-					<div class="verticalCardBody"  hidden="true">
-						<ul>
-							<li>Worked with MCYAF to assess organizational needs, taking into consideration ease of content entry.</li>
-							<li>Migrated and re-organized page structure from a static website to a Content Management System</li>	
-						</ul>
-					</div>
-				</div>
-				<div class="verticalCard">
-					<h4><a href="https://east.maine207.org/"">District 207 Site</a></h4>
-					<div class="verticalCardBody"  hidden="true">
-						<ul>
-							<li>Assessed multiple stakeholder needs for the website</li>
-							<li>Researched student web needs and collaborated with multiple school departments gather input</li>
-							<li>Developed and presented prototypes for the new site, including a function to view club, class, and internship info</li>
-							<li>Contributed our findings and prototypes to be included in the final district-wide website re-design</li>
-						</ul>
-					</div>
-				</div>
-				<div class="verticalCard">
-					<h4><a href="http://studentweb.cdm.depaul.edu/~jvarilla/IT238/oweKnowe/index.html">Knowe</a></h4>
-					<div class="verticalCardBody"  hidden="true">
-						<ul>
-							<li>An application to manage loans, both owed by and owed to the user</li>
-							<li>Currently the app is client side only in HTML, CSS, JS, and, JQuery</li>
-							<li>I am working to add a backend with a database, and changing the client from JQuery to ReactJS</li>	
-						</ul>
-					</div>
-				</div>
-			</div>
-			<h3>Education</h3>
-				<div class="divisor"></div>
-				<br>
-			<div id="education" class="scrollContent">
-				
-				<div class="horizontalCard">
-					<h4>DePaul University | BS Information Technology (Web Development)</h4>
-					<div class='horizontalCardBody' hidden="true">
-						<ul>
-							<li>Expected to graduate in 2020</li>
-							<li>University Honors Program Student</li>
-							<li>Awarded Deans Scholarsip</li>
-						</ul>
-						<p>Key Classes: <br>Databases, Web Scripting, Web Development, Content Management Systems, Advanced Application Developement</p>
-					</div>
-				</div>
-				<div class="horizontalCard">
-					<h4>Maine East High School | Graduate</h4>
-					<div class='horizontalCardBody' hidden="true">
-						<ul>
-							<li>Class of 2017</li>
-							<li><a href="http://www.chicagotribune.com/suburbs/park-ridge/news/ct-prh-maine-scholars-tl-0608-20170531-story.html">Graduated in top 1% of class</a></li>
-							<li>Member of National Honor Society</li>
-							<li>State-level Mathlete | Varsity Tennis Captain</li>
-						</ul>
-					</div>
-				</div>
-				<div class="horizontalCard">
-					<h4>Udemy</h4>
-					<div class='horizontalCardBody' hidden="true">
-						<ul>
-							<li>Ongoing Education</li>
-							<li>Courses enrolled in: Web Development, Machine Learning, Business, Databases</li>
-							<li>Courses Completed: <a href="https://www.udemy.com/the-complete-web-developer-in-2018/">Zero to Mastery: Web Development with Andrei Neagoie</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</article>
-		
-	</div>
-	</body>
+<script src="ui.js"></script>
+</body>
 </html>
