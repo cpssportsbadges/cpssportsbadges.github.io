@@ -1,0 +1,93 @@
+a {
+	text-decoration: none;
+}
+
+a:visited {
+	color: white;
+}
+
+body {
+	background-color: black;
+	font-family: consolas;
+}
+
+#grid-container {
+	background-color: white;
+	display: grid;
+	grid-template-areas:
+    'header header header header header header header'
+    'menu main main main main main main'
+    'menu footer footer footer footer footer footer';
+    padding: 5% 2%;
+}
+#header {
+	grid-area: header;
+	background-color: #026bee;
+	padding-left: 5%;
+	z-index: 2;
+	box-shadow: 5px 5px 0px 5px rgba(0,0,0,0.5);
+}
+
+#socialBar {
+	float: right;
+	padding-right: 5%;
+}
+#menu {
+	display: flex;
+	flex-direction: column;
+	/*justify-content: space-around;*/
+	padding-bottom: 50%;
+	padding-top: 5%;
+	grid-area: menu;
+	background-color: #0041ba;/*red;*/
+	color: white;
+	min-width: 120px;
+
+}
+
+#menu span  {
+	padding: 2% 0% 2% 5%;
+	margin: 5% 0%;
+
+}
+#menu span:hover  {
+	background-color: rgba(0,0,0,0.5);
+}
+
+#footer {
+	grid-area: footer;
+	background-color: #026bee;/*green;*/
+}
+
+#main {
+	grid-area: main;
+	z-index: 1;
+	padding-top: 10%;
+	padding-left: 2%;
+	padding-bottom: 2%;
+	/*box-shadow: -5px 5px 0px 5px rgba(0,0,0,0.3);*/
+	background-color: #6698ff;/*white;*/
+}
+
+.sectionHeader {
+	display: block;
+	color: white;
+	background-color: #026bee;
+	padding-left: 5%;
+	max-width: 150px;
+	min-width: 100px;
+	z-index: 2;
+	box-shadow: 5px 5px 0px 5px rgba(0,0,0,0.5);
+}
+
+.experienceCard {
+	background-color: #0041ba;
+	max-width: 300px;
+	min-width: 150px;
+}
+
+.content img{
+	flex-wrap: wrap;
+	float: left;
+	margin: 1%;
+}

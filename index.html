@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style3.css"></link>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-cyan w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-cyan" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="#skills" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Skills</a>
+    <a href="#projects" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">
+      <i class="fa fa-skills"></i>Projects</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">CV</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Contact Me</a>
+    <a href="https://www.linkedin.com/in/joseph-v-10ab6a130/" target="_blank" class="w3-bar-item w3-padding-large  w3-right"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <a href="https://github.com/jvarilla" target="_blank" class="w3-bar-item w3-padding-large w3-right"><i class="fa fa-github w3-hover-opacity"></i></a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large"> 
+    <a href="#skills" class="w3-bar-item w3-button w3-padding-large">Skills</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Experience</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-container w3-cyan w3-center" style="padding:128px 16px;">
+  <h1 id="splashHeader" class="w3-margin w3-jumbo">JOSEPH VARILLA</h1>
+  <p class="w3-xlarge">Developer | Student | Instructor </p>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container w3-white" data-aos="fade-right">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1>About</h1>
+      <h5 class="w3-padding-32">
+      Hi there! I'm Joseph, full-time student,
+      part-time instructor, and night-time coder 🧛. Just kidding, I program during the day too, and I don't bite</h5> 
+      <p class="w3-text-grey">Ever since I was introduced to programming at
+      a young age, I fell in love with it. Initially, I started off creating
+      graphics, then animations, then games, and now web applications. I enjoy the challenge of solving difficult problems, but more importantly, I like finding how to use technology to help people. I'm always learning new things (especially reading Medium articles that pop-up in my email) and sharing what I know so far through my work as an instructor. </p>
+    </div>
+
+    <div class="w3-third w3-center">
+     <img src="https://media.licdn.com/dms/image/C4E03AQGYPdSuKb4AqQ/profile-displayphoto-shrink_200_200/0?e=1550102400&v=beta&t=jdS_RFlqeO7_0ni9w6SLbcdqzjJOPS97xm3ed3PCKi4"
+     style="border-radius:50%;" alt="A young man with a blue shirt, black hair, brown eyes, and glasses. "/>
+    </div>
+  </div>
+</div>
+
+<div id="dividerImage1" class="dividerImage w3-padding-64"></div>
+<!-- Second Grid -->
+<div id="skills" class="w3-container w3-grey w3-padding-64" data-aos="flip-right"> 
+  <div class="w3-content">
+        <div><!-- class="w3-twothird" -->
+      <h1>Skills</h1>
+      <div class="skillsPool">
+        <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>JavaScript</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>HTML</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32  w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>CSS</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>Java</h3>
+        </div>
+         <div class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>SQL</h3>
+        </div>
+        <div class="w3-card w3-center w3-padding-32 w3-cyan  w3-hover-opacity w3-hover-black skillCard" data-aos="flip-left">
+          <h3>Command Line</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="dividerImage2" class="dividerImage w3-padding-64"></div>
+<!-- Third Grid: Projects -->
+<div id="projects" class="w3-row-padding w3-dark-grey w3-padding-64 w3-container">
+  <h1>Projects</h1>
+  <div class="w3-content">
+   <!--  <div class="w3-third w3-center">
+      <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
+    </div> -->
+
+      <!-- MCYAF Project Card -->
+      <div data-aos="fade-up-left" id="mcyaf-project-card"class="projectCard w3-card w3-center w3-padding-32 w3-left"><!-- w3-hover-opacity w3-hover-black -->
+        <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+          <div class="overlay-text">
+            <h2>MCYAF Site Revamp</h2>
+            <p>Caption Here</p>
+          </div>
+        </div>
+      </div>
+
+      <!--Face Detection App Project Card -->
+      <div data-aos="fade-up-right" id="facedetection-project-card"data-aos="fade-up-left" class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black projectCard w3-right">
+         <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+            <div class="overlay-text">
+               <h2>Face Detection App</h2>
+               <p>Caption Here</p>
+             </div>
+           </div>
+      </div>
+
+      <!-- Owe Knowe Project Card -->
+      <div data-aos="fade-up-left" class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black projectCard w3-left">
+        <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+          <div class="overlay-text">
+             <h2>Owe Know</h2>
+             <p>Caption Here</p>
+           </div>
+         </div>
+       </div>
+
+      <!-- Coming Soon Project Card -->
+      <div data-aos="fade-up-right" data-aos="fade-up-left" class="w3-card w3-center w3-padding-32 w3-cyan w3-hover-opacity w3-hover-black projectCard w3-right">
+        <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
+           <div class="overlay-text">
+            <h2>Coming Soon...</h2>
+           </div>
+         </div>
+    </div>
+  </div>
+</div>
+ <div id="dividerImage3" class="dividerImage w3-padding-64"></div>
+<div id="cv" class="w3-container w3-light-grey w3-padding-32"  data-aos="zoom-in"> 
+  <div class="w3-content">
+        <div><!-- class="w3-twothird" -->
+      <h1>Curriculum Vitae</h1>
+      <div class="w3-container w3-bar">
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="background_cv_tab" value="background" onclick="loadTab(event,'background')">Background</span>
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="education_cv_tab" value="education"  onclick="loadTab(event,'education')">Education</span>
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="experience_cv_tab" value="experience" onclick="loadTab(event,'experience')">Experience</span>
+        <span class="w3-bar-item cv-tab-item w3-hover-text-white w3-hover-dark-grey" id="skills_cv_tab" value="skills" onclick="loadTab(event,'skills')">Skills</span>
+      </div>
+      <div id="cv_container" class="w3-container w3-white w3-padding-64 w3-large">
+        <div class="cvSection" id="cv_background" data-aom="fade-right">
+          <h2>Background</h2>
+          <p>A self-starting, IT student with good communication skills, a working knowledge of various web technologies, and over a year of experience as a K-12 educator in programming seeking a summer internship opportunity in full-stack development.</p>
+        </div>
+        <div class="cvSection" id="cv_education" hidden>
+          <h2>Education</h2>
+          <h3>Information Techonology Concentration in Web Development</h3>
+          <h4>Bachelor of Science | DePaul University Chicago, IL</h4>
+          <h3>High School</h3>
+          <h4>East Maine Township High School Park Ridge, IL | 2017</h4>
+          <p></p>
+        </div>
+        <div class="cvSection" id="cv_experience" hidden>
+          <h2>Background</h2>
+          <p></p>
+        </div>
+        <div class="cvSection" id="cv_skills" hidden>
+          <h2>Skills</h2>
+          <h3>Information Techonology Concentration in Web Development</h3>
+          <h4>Bachelor of Science | DePaul University Chicago, IL</h4>
+          <h3>High School</h3>
+          <h4>East Maine Township High School Park Ridge, IL | 2017</h4>
+          <p></p>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Quote of the day: "If you do what no one will do today. In a year, you will do what others can't do.</h1>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+  <div class="w3-xlarge w3-padding-32">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <i class="fa fa-github w3-hover-opacity"></i>
+ </div>
+ <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.js"
+  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+  crossorigin="anonymous"></script>
+<script src="ui.js"></script>
+</body>
+</html>
