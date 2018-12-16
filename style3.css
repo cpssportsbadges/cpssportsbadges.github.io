@@ -73,7 +73,7 @@ html {
   background-attachment: fixed;
 }
 #dividerImage1 {
-  background-image: url("https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_960_720.jpg");
+  background-image: url("./html-code.jpg");
 }
 
 #dividerImage2 {
@@ -81,7 +81,7 @@ html {
 }
 
 #dividerImage3 {
-  background-image: url("https://cdn.pixabay.com/photo/2016/11/21/11/40/chicago-1844829_1280.jpg");
+  background-image: url("./chicago-skyline.jpg");
 }
 
 body {
