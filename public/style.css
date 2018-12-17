@@ -58,12 +58,35 @@ body,h1,h2,h3,h4,h5,h6 {
   background-color: rgba(0,0,0,0.7);
 }
 
+.project-card-flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+
+}
 .projectCard {
-  margin: 5% 5% 25% 5%;
-  max-width: 500px;
+  /*margin: 5% 5% 25% 5%;*/
+  width: 300px;
+  height: 300px;
+ /* max-width: 500px;
   max-height: 500px;
   min-width: 300px;
-  min-height: 300px;
+  min-height: 300px;*/
+}
+
+.projectCard:hover {
+  /*width: 400px;
+  height: 400px;*/
+  flex-grow: 1;
+}
+
+.projectCard .project-stack {
+  visibility: hidden;
+}
+
+.projectCard:hover .project-stack {
+  visibility: visible;
 }
 
 
@@ -135,6 +158,13 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: #582e82;
+}
+
+#owe-knowe-project-card  {
+  background-image: url('../assets/oweKnowe.PNG');
+}
+#advanced-minecraft-project-card  {
+  background-image: url('../assets/minecraft.jpg')
 }
 
 .projectCard:hover .overlay {
