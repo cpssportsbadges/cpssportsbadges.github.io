@@ -1,6 +1,20 @@
 html {
   scroll-behavior: smooth;
 }
+
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Lato", sans-serif
+}
+
+.w3-bar,h1,button {
+  font-family: "Montserrat", sans-serif
+}
+
+.fa-anchor,.fa-coffee {
+  font-size:200px
+}
+
+
 .typewriter h1 {
   width: auto;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -73,15 +87,15 @@ html {
   background-attachment: fixed;
 }
 #dividerImage1 {
-  background-image: url("./html-code.jpg");
+  background-image: url("../assets/html-code.jpg");
 }
 
 #dividerImage2 {
-  background-image: url("./rotaryInteract.jpg");
+  background-image: url("../assets/rotaryInteract.jpg");
 }
 
 #dividerImage3 {
-  background-image: url("./chicago-skyline.jpg");
+  background-image: url("../assets/chicago-skyline.jpg");
 }
 
 body {
@@ -117,7 +131,7 @@ body {
 }
 
 #mcyaf-project-card {
-  background-image: url('./mcyaf_logo.PNG');
+  background-image: url('../assets/mcyaf_logo.PNG');
   background-repeat: no-repeat;
   background-position: center;
   background-color: #582e82;
