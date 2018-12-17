@@ -119,18 +119,12 @@
   <h1>Projects</h1>
   <div class="project-card-flex-container w3-content"><!-- w3-content --> 
       <!-- MCYAF Project Card -->
-      <div data-aos="fade-up-left" id="mcyaf-project-card" class="projectCard w3-card w3-center w3-padding-32 ">
+      <div data-aos="fade-up-left" id="mcyaf-project-card" class="projectCard w3-card w3-center w3-padding-32" onclick="(evt) => {evt.target.classList.add('projectCardFocused'); console.log('fired');}">
         <div class="project-caption-container w3-black w3-opacity w3-text-white overlay">
           <div class="overlay-text">
             <h2>MCYAF Site Revamp</h2>
             <p>Caption Here</p>
           </div>
-        </div>
-        <div class="project-stack">
-          <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-          </ul>
         </div>
       </div>
 
@@ -254,6 +248,6 @@ function toggleAccordianMenu() {
   src="https://code.jquery.com/jquery-3.3.1.slim.js"
   integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
   crossorigin="anonymous"></script>
-<script src="ui.js"></script>
+<script src="./public/ui.js"></script>
 </body>
 </html>

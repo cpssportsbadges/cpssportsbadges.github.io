@@ -89,6 +89,14 @@ body,h1,h2,h3,h4,h5,h6 {
   visibility: visible;
 }
 
+.projectCardFocused {
+   order: -1;
+   width: 500px;
+   height: 500px;
+   margin-bottom: 20px;
+   margin-right: 20px;
+}
+
 
 .item {
   width: 200px;
