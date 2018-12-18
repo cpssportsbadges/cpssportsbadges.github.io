@@ -189,7 +189,9 @@ AOS.init({
 		elemString += `<br/>`;
 		
 		//Add link To button
-		elemString += `<h4><a href=${dataSet.link}><button class='w3-button w3-text-white w3-black w3-hover-text-black w3-hover-white'>Check it out</button></a></h4>`
+		if (dataSet.link.length > 0) {
+			elemString += `<h4><a href=${dataSet.link}><button class='w3-button w3-text-white w3-black w3-hover-text-black w3-hover-white'>Check it out</button></a></h4>`
+		}
 
 		//close and return element
 		elemString += `<br/></div>`

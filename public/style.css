@@ -99,22 +99,7 @@ body,h1,h2,h3,h4,h5,h6 {
    margin-right: 20px;
 }
 
-@media only screen and (max-width: 500px) {
-  .projectCard {
-    height: 150px;
-    width: 150px;
-    font-size: 20px;
-  }
-   #dynamic-project-data-card  {
-    box-shadow: 0;
-    text-align: left;
-    padding-top: 0;
-    padding-bottom: 100px;
-    margin-bottom: 20%;
-    position: relative;
-    flex-grow: 1
-  }
-}
+
 @media only screen and (max-width: 780px) {
   .projectCardFocused {
     order: -2;
@@ -131,6 +116,34 @@ body,h1,h2,h3,h4,h5,h6 {
   margin-bottom: 10%;
   }
 }
+
+@media only screen and (max-width: 700px) {
+   .projectCard {
+    height: 200px;
+    width: 200px;
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .projectCard {
+    height: 150px;
+    width: 150px;
+    font-size: 20px;
+  }
+   #dynamic-project-data-card  {
+    box-shadow: 0;
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 100px;
+    margin-bottom: 20%;
+    position: relative;
+    flex-grow: 1
+  }
+}
+
+
+
 
 #dynamic-project-data-card  {
   box-shadow: 0;
@@ -203,6 +216,11 @@ body {
 
 
 
+.projectCard {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image-size: 100%;
+}
 #mcyaf-project-card {
   background-image: url('../assets/mcyaf_logo.png');
   background-repeat: no-repeat;
@@ -219,6 +237,7 @@ body {
 
 #alien-ruins-project-card  {
   background-image: url('../assets/alienRuins2.PNG');
+/*  background-image: url('../assets/tshirt-cannon-bot.jpg');*/
 }
 
 .projectCard:hover .overlay {
