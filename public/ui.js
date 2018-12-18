@@ -1,5 +1,6 @@
 AOS.init({
   duration: 1200,
+  once: false,
 });
 
  // tabToCVSectionMap = {
@@ -85,7 +86,7 @@ AOS.init({
 				"Volunteer with the Maine Community Youth Assistance Foundation to create a new content management system website and to train them on data entry and maintenance.",
 			date: "2017",
 			status: "Live- Standby Maintenance",
-			link: "https://www.mcyaf.com",
+			link: "http://www.mcyaf.com",
 			stack: ["HTML", "CSS"],
 			skills: ["Consulting", "Content Managment Systems", "User Training", "Web Design"],
 		},
@@ -113,7 +114,7 @@ AOS.init({
 			date: "2018",
 			status: "Ongoing",
 			link: "https://www.github.com/jvarilla/minecraftAdvanced",
-			stack: ["java"],
+			stack: ["Java"],
 			skills: ["teaching", "OOP"],
 		},
 		"coming-soon-project-card": {
@@ -128,13 +129,57 @@ AOS.init({
 	}
 
 	const projectDataCard = document.getElementById("dynamic-project-data-card");
+	const projectDataCardJ = $("#dynamic-project-data-card");
 	function loadProjectData(elemId) {
+		console.log(projectDataCardJ);
 		const dataSet = projectCardDataSet[elemId];
+		projectDataCardJ.empty();
+		projectDataCardJ.append(`
+			${constructDataCardData(dataSet)}`);
 		projectDataCard.classList.add("projectDataCardActive");
-		document.getElementById("dynamic-project-title").appendChild(document.createTextNode(dataSet.title));
+		// document.getElementById("dynamic-project-title").appendChild(document.createTextNode(dataSet.title));
+	}
+
+	function constructDataCardData(dataSet) {
+		let elemString = `<div>`;
+
+		//Add Title
+		elemString += `<h2>${dataSet.title}</h2>`;
+
+		//Add Date and Status
+		elemString += `<h6>Date: ${dataSet.date} | Status: <span class='status ${dataSet.status}-status'>${dataSet.status} </span></h6>`;
+		
+		//Add Description
+		elemString += `<p>${dataSet.description}</p>`;
+
+
+		//Add Tech Stack
+		elemString += `<h6>Technologies:`;
+
+		dataSet.stack.forEach((item) => {
+			elemString += `<div class='tech-skill-tag'>${item}</div>`;
+		});
+
+		elemString += `</h6>`
+
+		//Add other Skill list
+		elemString += `<ul class='skill-stack'>`;
+		dataSet.skills.forEach((skill) => {
+			elemString += `<li'>${skill}</li>`
+		})
+		elemString += `</ul><br/>`;
+		
+		//Add link To button
+		elemString += `<a href=${dataSet.link}><button class='w3-button w3-text-white w3-black w3-hover-text-black w3-hover-white'>Check it out</button></a>`
+
+		//close and return element
+		elemString += `</div>`
+
+		return elemString;
 	}
 
 	function hideProjectData() {
+		projectDataCardJ.empty();
 		projectDataCard.classList.remove("projectDataCardActive");
 	}
 
