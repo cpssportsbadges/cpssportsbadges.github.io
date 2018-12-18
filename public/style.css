@@ -99,6 +99,22 @@ body,h1,h2,h3,h4,h5,h6 {
    margin-right: 20px;
 }
 
+@media only screen and (max-width: 500px) {
+  .projectCard {
+    height: 150px;
+    width: 150px;
+    font-size: 20px;
+  }
+   #dynamic-project-data-card  {
+    box-shadow: 0;
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 100px;
+    margin-bottom: 20%;
+    position: relative;
+    flex-grow: 1
+  }
+}
 @media only screen and (max-width: 780px) {
   .projectCardFocused {
     order: -2;
@@ -112,13 +128,15 @@ body,h1,h2,h3,h4,h5,h6 {
   box-shadow: 0;
   text-align: left;
   padding-top: 0;
-  margin-bottom: 50px;
+  margin-bottom: 10%;
   }
 }
 
 #dynamic-project-data-card  {
   box-shadow: 0;
   text-align: left;
+  justify-content: center;
+  word-wrap: normal;
 
 }
 
@@ -130,6 +148,13 @@ body,h1,h2,h3,h4,h5,h6 {
 #dynamic-project-data-card h2 {
   box-shadow: 0;
   text-align: center;
+}
+
+#dynamic-project-data-card h4 {
+  box-shadow: 0;
+  text-align: center;
+  align-self: center;
+  align-content: center;
 }
 
 .projectDataCardActive {
