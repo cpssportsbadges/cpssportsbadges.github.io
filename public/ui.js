@@ -117,6 +117,15 @@ AOS.init({
 			stack: ["Java"],
 			skills: ["Teaching", "OOP"],
 		},
+		"alien-ruins-project-card": {
+			title: "Alien Ruins",
+			description: "Created the UI and sprites for a variant of ruinscape that involves uncovering ancient alien structures",
+			date: "2018",
+			status: "Live",
+			link: "http://studentweb.cdm.depaul.edu/~jvarilla/IT238/game/game.html",
+			stack: ["jQuery", "JavaScript", "HTML", "CSS"],
+			skills: ["UI Design"],
+		},
 		"coming-soon-project-card": {
 			title: "Coming Soon",
 			description: "???",
@@ -131,7 +140,7 @@ AOS.init({
 	const projectDataCard = document.getElementById("dynamic-project-data-card");
 	const projectDataCardJ = $("#dynamic-project-data-card");
 	function loadProjectData(elemId) {
-		console.log(projectDataCardJ);
+		projectDataCard.classList.remove("projectDataCardInactive");
 		const dataSet = projectCardDataSet[elemId];
 		projectDataCardJ.empty();
 		projectDataCardJ.append(`
@@ -191,6 +200,7 @@ AOS.init({
 	function hideProjectData() {
 		projectDataCardJ.empty();
 		projectDataCard.classList.remove("projectDataCardActive");
+		projectDataCard.classList.add("projectDataCardInactive");
 	}
 
 	// $(() => {
