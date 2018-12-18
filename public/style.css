@@ -98,7 +98,15 @@ body,h1,h2,h3,h4,h5,h6 {
    margin-bottom: 20px;
    margin-right: 20px;
 }
+#dynamic-project-data-card  {
+  box-shadow: 0;
+  text-align: left;
+}
 
+#dynamic-project-data-card h2 {
+  box-shadow: 0;
+  text-align: center;
+}
 .projectDataCardActive {
   order: -1;
   width: 300px;
@@ -141,13 +149,6 @@ body {
   background-color: black;
 }
 
-.hexagon {
-  position: relative;
-  width: 300px; 
-  height: 173.21px;
-  /*background-color: #64C7CC;*/
-  margin: 86.60px 0;
-}
 
 
 #mcyaf-project-card {
@@ -193,11 +194,23 @@ body {
   text-align: center;
 }
 
+
+/*.tech-skill-tag-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}*/
+
 .tech-skill-tag {
-  border-radius: 30%;
+  border-radius: 40%;
   display: inline-block;
-  margin: 1% 3%;
+  margin: 1% 2%;
   background-color: black;
   color: white;
-  padding: 2%;
+  padding: 1.5%;
+  font-size: 0.75em;
+}
+
+.other-skill-space {
+  font-size: 0.80em;
 }
