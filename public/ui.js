@@ -21,14 +21,11 @@ AOS.init({
 			background: cv_background,
 			education: cv_education,
 			experience: cv_experience,
-			skills: cv_skills
+			skills: cv_skills,
+			honors: cv_honors
 		};
 	
-	function loadTab(event, tabVal) {
-		console.log('tab',selectedItemTab);
-		console.log('section', selectedItemSection);
-		// console.log('proof',tabMap[selectedItem]);
-		
+	function loadTab(event, tabVal) {	
 		//Remove Selected Classes From Tab (Removes Highlighting)
 		selectedItemTab.classList.remove("w3-dark-grey");
 		selectedItemTab.classList.remove("w3-text-white");
