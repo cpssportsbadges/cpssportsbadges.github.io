@@ -1,6 +1,6 @@
 AOS.init({
   duration: 1200,
-  once: false,
+  once: true,
 });
 
  // tabToCVSectionMap = {
@@ -115,7 +115,7 @@ AOS.init({
 			status: "Ongoing",
 			link: "https://www.github.com/jvarilla/minecraftAdvanced",
 			stack: ["Java"],
-			skills: ["teaching", "OOP"],
+			skills: ["Teaching", "OOP"],
 		},
 		"coming-soon-project-card": {
 			title: "Coming Soon",
@@ -154,20 +154,30 @@ AOS.init({
 
 
 		//Add Tech Stack
-		elemString += `<h6>Technologies:`;
+		if (dataSet.stack.length > 0) {
+			elemString += `<h6>Technologies:`;
 
-		dataSet.stack.forEach((item) => {
-			elemString += `<div class='tech-skill-tag'>${item}</div>`;
-		});
+			dataSet.stack.forEach((item) => {
+				elemString += `<div class='tech-skill-tag'>${item}</div>`;
+			});
 
-		elemString += `</h6>`
+			elemString += `</h6>`;
+		}
+		
 
 		//Add other Skill list
-		elemString += `<ul class='skill-stack'>`;
-		dataSet.skills.forEach((skill) => {
-			elemString += `<li'>${skill}</li>`
-		})
-		elemString += `</ul><br/>`;
+		if (dataSet.skills.length > 0) {
+			elemString += `<h6>Skills: <spanclass='other-skill-space'>`;
+			for (let skillIdx=0; skillIdx <dataSet.skills.length; skillIdx++) {
+				if (skillIdx === dataSet.skills.length - 1) {//no trailing comma
+					elemString += `${dataSet.skills[skillIdx]}`
+				} else {
+					elemString += `${dataSet.skills[skillIdx]}, `;
+				}	
+			}	
+			elemString += `</span></h6>`
+		}
+		elemString += `<br/>`;
 		
 		//Add link To button
 		elemString += `<a href=${dataSet.link}><button class='w3-button w3-text-white w3-black w3-hover-text-black w3-hover-white'>Check it out</button></a>`
