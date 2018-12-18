@@ -189,10 +189,10 @@ AOS.init({
 		elemString += `<br/>`;
 		
 		//Add link To button
-		elemString += `<a href=${dataSet.link}><button class='w3-button w3-text-white w3-black w3-hover-text-black w3-hover-white'>Check it out</button></a>`
+		elemString += `<h4><a href=${dataSet.link}><button class='w3-button w3-text-white w3-black w3-hover-text-black w3-hover-white'>Check it out</button></a></h4>`
 
 		//close and return element
-		elemString += `</div>`
+		elemString += `<br/></div>`
 
 		return elemString;
 	}
