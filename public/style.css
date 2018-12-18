@@ -98,19 +98,45 @@ body,h1,h2,h3,h4,h5,h6 {
    margin-bottom: 20px;
    margin-right: 20px;
 }
+
+@media only screen and (max-width: 780px) {
+  .projectCardFocused {
+    order: -2;
+   width: 300px;
+   height: 300px;
+   margin-bottom: 50px;
+   margin-right: 10px;
+  }
+
+  #dynamic-project-data-card  {
+  box-shadow: 0;
+  text-align: left;
+  padding-top: 0;
+  margin-bottom: 50px;
+  }
+}
+
 #dynamic-project-data-card  {
   box-shadow: 0;
   text-align: left;
+
 }
 
+.projectDataCardInactive {
+   height: 0px;
+   width: 0px;
+   visibility: hidden;
+}
 #dynamic-project-data-card h2 {
   box-shadow: 0;
   text-align: center;
 }
+
 .projectDataCardActive {
   order: -1;
   width: 300px;
   height: 500px;
+  visibility: visible;
 }
 
 
@@ -145,6 +171,7 @@ body,h1,h2,h3,h4,h5,h6 {
   background-image: url("../assets/chicago-skyline.jpg");
 }
 
+
 body {
   background-color: black;
 }
@@ -163,6 +190,10 @@ body {
 }
 #advanced-minecraft-project-card  {
   background-image: url('../assets/minecraft.jpg')
+}
+
+#alien-ruins-project-card  {
+  background-image: url('../assets/alienRuins2.PNG');
 }
 
 .projectCard:hover .overlay {
