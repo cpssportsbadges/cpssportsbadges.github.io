@@ -264,6 +264,10 @@ body {
 /*  background-image: url('../assets/tshirt-cannon-bot.jpg');*/
 }
 
+#facedetection-project-card {
+  background-image: url('../assets/facebrain.png');
+}
+
 .projectCard:hover .overlay {
   opacity: 0.75;
 }
