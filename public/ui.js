@@ -3,14 +3,6 @@ AOS.init({
   once: true,
 });
 
- // tabToCVSectionMap = {
-	// 	background: $("#cv_background"),
-	// 	education: $("#cv_education"),
-	// 	experience: $("#cv_experience"),
-	// 	skills: $("#cv_skills")
-	// }
-
-
 
 //---Code for CV Tab Functionality------------------------------------------------
 	let selectedItemTab= document.getElementById("background_cv_tab");
@@ -60,6 +52,8 @@ AOS.init({
 	let focusedCard = null;
 	function focusOnProjectSlide(event, elemId) {
 		const targetCard = document.getElementById(elemId);
+		const top = $('div#projects').position().top;
+		$(window).scrollTop( top );
 		if (targetCard !== focusedCard) {
 			if (focusedCard) {
 				focusedCard.classList.remove('projectCardFocused');
@@ -70,10 +64,7 @@ AOS.init({
 			hideProjectData();
 			focusedCard = null;
 		}
-		console.log(event.target);
-		
 		targetCard.classList.toggle('projectCardFocused');
-		console.log('fired');
 	}
 
 	const projectCardDataSet = {
