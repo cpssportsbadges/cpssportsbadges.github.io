@@ -1,0 +1,26 @@
+body {
+	background-color: white;
+}
+#badgeDisplayGrid {
+	display: grid;
+	grid-template-areas: 'side badge badge'
+						 'side badge badge'
+						 'side badge badge'
+						 'footer footer footer'
+}
+
+#badgeDataSidePanel {
+	background-color: gray;
+	display: grid;
+	grid-area: side;
+}
+
+#badgeImageContainer {
+	grid-area: badge;
+}
+
+#badgeFooter {
+	background-color: gray;
+	display: flex;
+	grid-area: footer;
+}
