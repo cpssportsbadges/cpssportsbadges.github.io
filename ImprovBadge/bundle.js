@@ -2,9 +2,14 @@
 var CryptoJS = require("crypto-js");
 let decryptedText;
 let ciphertext;
+let jsonObj = {
+		recipientName: "Jane Doe" ,
+		badgeName: "Sports Badge",
+		badgeImage: "sports.png"
+	};
 $(() => {
-
-	ciphertext = CryptoJS.AES.encrypt('abv', '123');
+	console.log(JSON.stringify(jsonObj))
+	ciphertext = CryptoJS.AES.encrypt(JSON.stringify(jsonObj), '123');
 	console.log('o')
 	console.log(ciphertext.toString());
 	//Parse for queryString parameter
@@ -17,20 +22,20 @@ $(() => {
 	        results = regex.exec(url);
 	    if (!results) return null;
 	    if (!results[2]) return '';
-	    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	    let returnParam = decodeURIComponent(decodeURIComponent(results[2].replace(/\+/g, " ")))
+	    returnParam = returnParam.replace(/ /g, '+');
+	    console.log(returnParam);
+	    return returnParam;
 	}
-	console.log(parseQueryString('d'));
 	//Decrypt querystring value into its json state - return json object
-	function decryptQueryString (keyVal, hashVal) {
+	function decryptQueryString(hashVal, keyVal) {
 		decryptedText = CryptoJS.AES.decrypt(hashVal, keyVal).toString(CryptoJS.enc.Utf8);
-		console.log('hi');
-		return decryptedText.toString(CryptoJS.enc.Utf8);
+		return JSON.parse(decryptedText);
 		
 	}
 
-	
-		decryptQueryString(ciphertext, '123');
-		console.log(decryptQueryString('U2FsdGVkX1+V4LOoP96GD0d6Fn7yI9sOvqF6lkDWUu0=', '123'));
+	console.log('dyanmic', decryptQueryString(parseQueryString('ebs'),'123'))
+   console.log('static', decryptQueryString('U2FsdGVkX1/L9yvTZROXyALoAA8bjeVSLdgL3rKHd8FGFf3ERoqbRYVVKzYLqepmGfKv0SILSTrftaw9/qLu+4U+LT/Sj5kfuEv0lsUR3B6YhT9Tkx+pBSMbvRgdc5ohFu/VChWK65QRFx9ufUjZfg==', '123'));
 	//Render json values in the view
 	function renderBadge (badgeData){
 		//Render Badge Recipient Name
@@ -45,7 +50,7 @@ $(() => {
 
 
 	$("#unlockBadgeBtn").on('click', function(event) {
-		renderBadge(decryptQueryString($("#keyInput").text(), parseQueryString('ebs')));
+		renderBadge(decryptQueryString(parseQueryString('ebs'), $("#keyInput").val()));
 	});
 
 
