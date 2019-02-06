@@ -6,7 +6,7 @@ $(() => {
 	ciphertext = CryptoJS.AES.encrypt('abv', '123');
 	console.log(ciphertext.toString());
 	//Parse for queryString parameter
-	function parseQueryString(name) { //gets query string parameters
+	function parseQueryString(name, url) { //gets query string parameters
 	    if (!url) url = window.location.href;
 	    name = name.replace(/[\[\]]/g, "\\$&");
 	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
