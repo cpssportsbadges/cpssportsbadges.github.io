@@ -15,7 +15,7 @@ $(() => {
 	    if (!results[2]) return '';
 	    return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
-	console.log(parseQueryString('d'));
+	console.log(parseQueryString('d', window.location.href));
 	//Decrypt querystring value into its json state - return json object
 	// function decryptQueryString (keyVal, hashVal) {
 
