@@ -2,7 +2,7 @@
 let CryptoJS = require("crypto-js");
 
 
-const rendererAppURL = 'https://jvarilla.github.io/ImprovBadge/';
+const rendererAppURL = 'https://jvarilla.github.io/BadgeRenderer/';
 
 //Generate random key
 const keyValArr = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j',
@@ -103,7 +103,7 @@ function handleFileSelect(evt) {
           let jsonArr = CSV_to_JSON(e.target.result, ',');
           let hashBadgeData2 = hashBadgeData(jsonArr);
           let csvData = JSON_to_CSV(hashBadgeData2);
-          jQuery( '#ms_word_filtered_html' ).val(csvData.replace(/['"]+/g, ''));
+          jQuery( '#ms_word_filtered_html' ).val(csvData.toString().replace(/['"]+/g, ''));
         };
       })(f);
 
