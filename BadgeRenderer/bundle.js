@@ -1,24 +1,19 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-var CryptoJS = require("crypto-js");
+let CryptoJS = require("crypto-js");
 let decryptedText;
 let ciphertext;
-let jsonObj = {
-		recipientName: "Jane Doe" ,
-		badgeName: "Sports Badge",
-		badgeImage: "sports.png"
-	};
+// let jsonObj = {//Sample Unencrypted Object
+// 		recipientName: "Jane Doe" ,
+// 		badgeName: "Sports Badge",
+// 		badgeImage: "sports.png"
+// 	};
 $(() => {
-	console.log(JSON.stringify(jsonObj))
-	ciphertext = CryptoJS.AES.encrypt(JSON.stringify(jsonObj), '123');
-	console.log('o')
-	console.log(ciphertext.toString());
 	//Parse for queryString parameter
-	console.log('hi')
 	function parseQueryString(name) { //gets query string parameters
 	    const url = window.location.href;
 	    if (!url) url = window.location.href;
 	    name = name.replace(/[\[\]]/g, "\\$&");
-	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
 	        results = regex.exec(url);
 	    if (!results) return null;
 	    if (!results[2]) return '';
@@ -34,8 +29,7 @@ $(() => {
 		
 	}
 
-	console.log('dyanmic', decryptQueryString(parseQueryString('ebs'),'123'))
-   console.log('static', decryptQueryString('U2FsdGVkX1/L9yvTZROXyALoAA8bjeVSLdgL3rKHd8FGFf3ERoqbRYVVKzYLqepmGfKv0SILSTrftaw9/qLu+4U+LT/Sj5kfuEv0lsUR3B6YhT9Tkx+pBSMbvRgdc5ohFu/VChWK65QRFx9ufUjZfg==', '123'));
+	
 	//Render json values in the view
 	function renderBadge (badgeData){
 		//Render Badge Recipient Name
