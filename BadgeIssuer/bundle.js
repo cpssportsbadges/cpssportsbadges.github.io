@@ -48,7 +48,7 @@ const hashBadgeData = (arrOfBadgeData) => {
         
         
         let currentBadge = arrOfBadgeData[badgeIdx];
-        
+        let recipientEmail = currentBadge.email;
         //Generate Random Key
         let badgeKey = generateRandomKey(4);
         
