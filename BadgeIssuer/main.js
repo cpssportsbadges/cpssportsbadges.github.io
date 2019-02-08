@@ -88,6 +88,29 @@ const JSON_to_CSV = (arrOfJSONData) => {
   return csv;
 }
 
+function download(filename, text) {
+    console.log('downloading');
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+// Start file download.
+// document.getElementById("dwn-btn").addEventListener("click", function(){
+//     // Generate download of hello.txt file with some content
+//     var text = document.getElementById("text-val").value;
+//     var filename = "hello.txt";
+    
+//     download(filename, text);
+// }, false);
+
 function handleFileSelect(evt) {
     const files = evt.target.files; // FileList object
 
@@ -102,7 +125,9 @@ function handleFileSelect(evt) {
           let jsonArr = CSV_to_JSON(e.target.result, ',');
           let hashBadgeData2 = hashBadgeData(jsonArr);
           let csvData = JSON_to_CSV(hashBadgeData2);
-          jQuery( '#ms_word_filtered_html' ).val(csvData.toString().replace(/['"]+/g, ''));
+          let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');
+          jQuery( '#ms_word_filtered_html' ).val(reformattedCSVData);
+          download('output.csv', reformattedCSVData);
         };
       })(f);
 
