@@ -125,6 +125,7 @@ body,h1,h2,h3,h4,h5,h6 {
    height: 300px;
    margin-bottom: 50px;
    margin-right: 10px;
+   background-size: all;
   }
 
   #dynamic-project-data-card  {
@@ -258,7 +259,9 @@ body {
 .projectCard {
   background-repeat: no-repeat;
   background-position: center;
-  background-image-size: 100%;
+  background-image-size: auto;
+  background-clip: all;
+  background-size: auto 100%;
 }
 #mcyaf-project-card {
   background-image: url('../assets/mcyaf_logo.png');
