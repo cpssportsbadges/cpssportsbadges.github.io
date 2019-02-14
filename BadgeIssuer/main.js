@@ -77,15 +77,26 @@ const hashBadgeData = (arrOfBadgeData) => {
 const JSON_to_CSV = (arrOfJSONData) => {
   const json = arrOfJSONData;
   const fields = Object.keys(json[0])
+  //replaces all empty entries with null
   const replacer = function(key, value) { return value === null ? '' : value } 
+  
   let csv = json.map(function(row){
-    return fields.map(function(fieldName){
-      return JSON.stringify(row[fieldName], replacer)
-    }).join(',')
+    return fields.map(
+      function(fieldName){
+        return JSON.stringify(row[fieldName], replacer)
+    }).join(',').concat(['\n'])
 })
-  csv.unshift(fields.join(',')) // add header column
-  csv.join('\r\n');
-  return csv;
+  //csv.unshift(fields.join('\n')); //join via a new line character so it renders properly in excel
+  csv.unshift(fields.join(',').concat(['\n'])) // add header column makes header columns horizontal
+  // csv.join('\r\n');
+
+  // Inject new line characters between entries
+ 
+
+
+  //Make string and remove quotes
+  let reformattedCSVData = csv.toString().replace(/['"]+/g, '').replace(/\n,+/g, "\n");//gets rid of quote marks
+  return reformattedCSVData;//csv is an array
 }
 
 function download(filename, text) {
@@ -125,9 +136,9 @@ function handleFileSelect(evt) {
           let jsonArr = CSV_to_JSON(e.target.result, ',');
           let hashBadgeData2 = hashBadgeData(jsonArr);
           let csvData = JSON_to_CSV(hashBadgeData2);
-          let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');
-          jQuery( '#ms_word_filtered_html' ).val(reformattedCSVData);
-          download('output.csv', reformattedCSVData);
+          //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
+          jQuery( '#ms_word_filtered_html' ).val(csvData);
+          download('output.csv', csvData);
         };
       })(f);
 
