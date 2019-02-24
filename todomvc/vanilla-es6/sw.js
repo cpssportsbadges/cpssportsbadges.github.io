@@ -3,10 +3,10 @@ let urlsToCache = [
 	'index.html',
 	'icon.png',
 	'manifest.json',
-	'/dist/bundle.js',
-	'/node_modules/todomvc-common/base.js',
-	'/node_modules/todomvc-common/base.css',
-	'/node_modules/todomvc-app-css/index.css'
+	'dist/bundle.js',
+	'node_modules/todomvc-common/base.js',
+	'node_modules/todomvc-common/base.css',
+	'node_modules/todomvc-app-css/index.css'
 ];
 
 self.addEventListener('install', function(event) {
