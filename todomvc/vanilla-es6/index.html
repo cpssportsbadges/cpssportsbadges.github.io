@@ -7,6 +7,19 @@
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
 	</head>
 	<body>
+		<script>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', function() {
+				navigator.serviceWorker.register('/sw.js').then((registration) {
+				//Registration was successful
+				console.log('ServiceWorker registaion succeeded')
+			}, function(err) {
+				//registration failed :(
+				console.log('ServiceWorker regisration failed')
+			});
+		});
+		}
+		</script>
 		<section class="todoapp">
 			<header class="header">
 				<h1>todos</h1>
