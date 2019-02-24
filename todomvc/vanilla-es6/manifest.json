@@ -3,7 +3,7 @@
   "name": "To Do App",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "icon.png",
       "type": "image/png",
       "sizes": "144x144"
     }
@@ -11,6 +11,6 @@
   "start_url": "/",
   "background_color": "#3367D6",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/todomvc/vanilla-es6/",
   "theme_color": "#3367D6"
 }
