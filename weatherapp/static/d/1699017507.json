@@ -1,0 +1,1 @@
+{"data":{"openWeather":{"name":"Chicago","sys":{"country":"US","message":0.0037},"coord":{"lon":-87.62,"lat":41.88},"weather":[{"main":"Rain","description":"shower rain"}]},"weatherData":{"currently":{"summary":"Mostly Cloudy","time":1550356036,"temperature":26.63}}}}
