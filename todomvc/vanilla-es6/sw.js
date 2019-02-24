@@ -2,6 +2,8 @@ let CACHE_NAME = 'vanilla-es6';
 let urlsToCache = [
 	'index.html',
 	'icon.png',
+	'icons/icon192.png',
+	'icons/icon512.png',
 	'learn.json',
 	'manifest.webmanifest',
 	'dist/bundle.js',
