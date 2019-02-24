@@ -12,9 +12,9 @@ if ('serviceWorker' in navigator) {
 
 let CACHE_NAME = 'vanilla-es6';
 let urlsToCache = [
-	'/index.html',
-	'/icon.png',
-	'/manifest.json',
+	'index.html',
+	'icon.png',
+	'manifest.json',
 	'/dist/bundle.js',
 	'/node_modules/todomvc-common/base.js',
 	'/node_modules/todomvc-common/base.css',
