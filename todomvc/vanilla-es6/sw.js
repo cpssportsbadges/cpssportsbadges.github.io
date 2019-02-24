@@ -2,7 +2,8 @@ let CACHE_NAME = 'vanilla-es6';
 let urlsToCache = [
 	'index.html',
 	'icon.png',
-	'manifest.json',
+	'learn.json',
+	'manifest.webmanifest',
 	'dist/bundle.js',
 	'node_modules/todomvc-common/base.js',
 	'node_modules/todomvc-common/base.css',
