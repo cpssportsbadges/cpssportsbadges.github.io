@@ -3,17 +3,17 @@
   "name": "To Do App",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "/todomvc/vanilla-es6/icon.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "/icons/icon192.png",
+      "src": "/todomvc/vanilla-es6/icons/icon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/icons/icon512.png",
+      "src": "/todomvc/vanilla-es6/icons/icon512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
