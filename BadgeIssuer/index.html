@@ -2,18 +2,28 @@
 <html>
 <head>
 	<title>Badge Issuer</title>
-<!-- 	<link type="text/css" rel="stylesheet" href="styles.css"></link> -->
+
+	<link type="text/css" rel="stylesheet" href="styles.css"></link>
 	<script
 		  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
 		  crossorigin="anonymous"></script>
 </head>
 <body>
-	<form enctype="multipart/form-data">
-<input id="upload" type=file   accept="text/html" name="files[]" size=30>
-</form>
-
-<textarea class="form-control" rows=35 cols=120 id="ms_word_filtered_html"></textarea>
+  <div class="main">
+    <div class="main-content">
+    <img id="cps-sports-logo" width="1000px" src="./assets/cps-sports-logo.bmp"/>
+    <div class="browse-for-file-container">
+      <span id="filename">File Name</span>
+      <button id="faux-file-upload-btn">Browse</button>
+      <input hidden id="upload" type=file    accept="text/csv" name="files[]" size=30/>
+    </div>
+  	<!-- <form enctype="multipart/form-data">
+      <input id="upload" type=file    accept="text/html" name="files[]" size=30>
+    </form>
+    <textarea class="form-control" rows=5 cols=5 id="ms_word_filtered_html"></textarea> -->
+    </div>
+  </div>
 
 <script>
 function handleFileSelect(evt) {

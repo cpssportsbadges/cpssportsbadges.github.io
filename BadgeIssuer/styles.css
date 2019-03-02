@@ -1,0 +1,48 @@
+body {
+	background-color: rgb(243,250,254);
+}
+
+.main {
+	max-width: 700px;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	/*/align-content: center;*/
+	padding: 20px;
+	border-radius: 5%;
+	/*box-shadow: 5px 5px rgba(0,0,0,0.3);*/
+}
+
+.main-content {
+	margin: 0 auto;
+	/*width: 100%;*/
+	/*margin: auto;*/
+	width: 500px;
+	height: auto; 
+
+}
+#cps-sports-logo {
+	display: block;
+	max-width: 500px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.browse-for-file-container {
+	border-color: rgb(206, 206, 206);
+	border-radius: 50% 50% 50% 50%;
+	border-width: 2px;
+	border-style: solid;
+	background-color: white;
+	max-width: 200px;
+	padding: 5px;
+	align-self: center;
+}
+
+#faux-file-upload-btn {
+	background-color:blue;
+	text-decoration: none;
+	border-style: none;
+}
+
