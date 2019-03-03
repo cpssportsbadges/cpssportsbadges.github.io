@@ -30,19 +30,30 @@ body {
 }
 
 .browse-for-file-container {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	border-color: rgb(206, 206, 206);
-	border-radius: 50% 50% 50% 50%;
+	border-radius: 22px;
 	border-width: 2px;
 	border-style: solid;
 	background-color: white;
 	max-width: 200px;
-	padding: 5px;
+	height: auto;
+/*	padding: 5px;*/
+	/*padding: 2px 0px 2px 0px;*/
 	align-self: center;
 }
 
 #faux-file-upload-btn {
+	float: right;
 	background-color:blue;
+	border-radius: 22px;
 	text-decoration: none;
 	border-style: none;
+	color: white;
+	margin:0;
+	padding: 4px;
+	background-color: #0d6ca2/*#0b679d*/; /*Dark Blue*/
 }
 
