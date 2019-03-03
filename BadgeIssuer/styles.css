@@ -1,5 +1,6 @@
 body {
 	background-color: rgb(243,250,254);
+	font-family: sans-serif;
 }
 
 .main {
@@ -31,29 +32,60 @@ body {
 
 .browse-for-file-container {
 	display: block;
+	background-color: white;
+	color: black;
+	text-align: right;
+	border-color: rgb(206, 206, 206);
+	border-radius: 33px;
+	border-width: 3px;
+	border-style: solid;
 	margin-left: auto;
 	margin-right: auto;
-	border-color: rgb(206, 206, 206);
-	border-radius: 22px;
-	border-width: 2px;
-	border-style: solid;
-	background-color: white;
-	max-width: 200px;
-	height: auto;
-/*	padding: 5px;*/
-	/*padding: 2px 0px 2px 0px;*/
-	align-self: center;
+	max-width: 400px;
+	padding: 2px;
+	font-size: 20px;
+	
 }
 
 #faux-file-upload-btn {
-	float: right;
+	min-width: 125px;
+	position: inherit;
+	margin-left:auto; 
+	font-size: 16px;
+	margin-right:0;
+	align-self: flex-end;
 	background-color:blue;
 	border-radius: 22px;
+	height: 100%;
+	padding: 12px;
 	text-decoration: none;
 	border-style: none;
 	color: white;
-	margin:0;
-	padding: 4px;
-	background-color: #0d6ca2/*#0b679d*/; /*Dark Blue*/
+	background-color:rgb(0,42,92);
 }
 
+#filename  {
+	text-align: left;
+	margin-right: 40%;
+	margin-left: 0;
+}
+
+#generate-csv-btn {
+	height: 52.4px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+	min-width: 400px;
+	position: inherit;
+	font-size: 16px;
+	align-self: flex-end;
+	background-color:rgb(0,42,92);
+	border-radius: 33px;
+	height: 100%;
+	padding: 12px;
+	text-decoration: none;
+	border-style: none;
+	color: white;
+
+}
