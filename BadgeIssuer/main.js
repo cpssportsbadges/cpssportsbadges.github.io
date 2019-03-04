@@ -145,13 +145,19 @@ $(() => {
           return function(e) {
              fileNameDisplay.text("Please upload a CSV file");
              generateCSVBtn.attr('disabled', true);
+             instructions.step2.hide();
+             instructions.step3.hide();
+             instructions.step1.show()
              return;
           }
         } else {
           return function(e) {
           let jsonArr = CSV_to_JSON(e.target.result, ',');
-          console.log(e.target);
+          
           //let hashBadgeData2 = hashBadgeData(jsonArr);
+          instructions.step1.hide();
+          instructions.step2.show();
+          instructions.step3.hide();
           fileNameDisplay.text(theFile.name);
           generateCSVBtn.attr('disabled', false);
           generateCSVBtn.on('click', function() {
@@ -160,6 +166,9 @@ $(() => {
             //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
             jQuery( '#ms_word_filtered_html' ).val(csvData);
             download(generateFileName(), csvData);
+            instructions.step1.hide();
+            instructions.step2.hide();
+            instructions.step3.show();
           })
         };
       }

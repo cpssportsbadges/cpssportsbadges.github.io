@@ -3,7 +3,7 @@ class BadgeLinkGenerator {
 	constructor(linkBase) {
 		this.CryptoJS = require("crypto-js");
 		this.linkBase = linkBase;
-		this.keyValChars ="0123456789abcdefghijklmnopqrstuvwxyz"
+		this.keyValChars =["0123456789","abcdefghijklmnopqrstuvwxyz"]
 	}
 
 	getRandomInt(arrLength) {//generates random int between 0 and one below the arr length
@@ -17,7 +17,7 @@ class BadgeLinkGenerator {
   		}
 		
 		for(let keyIdx = 0; keyIdx < keyLength; keyIdx++) {
-   		 key += this.keyValChars[this.getRandomInt(this.keyValChars.length)]
+   		 key += this.keyValChars[keyIdx % 2][this.getRandomInt(this.keyValChars[keyIdx % 2].length)]
   		}
   		return key;
   	}
@@ -28,17 +28,20 @@ class BadgeLinkGenerator {
 
 	getBadgeLinks(arrOfBadgeData, keyLength) {
 		let arrOfOutput = [];
-  		console.log(arrOfBadgeData);
   		
 
   		return arrOfBadgeData.map((badge) => {
   			let recipientEmail = badge.email;
   			let badgeKey = this.getRandomKey(keyLength);
-  			let badgeData = {
-	          recipientName: badge.recipientName,
-	          badgeName: badge.badgeName,
-	          badgeImage: badge.badgeImage
-	        }
+  			
+
+	        let badgeData = {};
+
+	        for (var key in badge) {
+   				 if (badge.hasOwnProperty(key) && key !== "email") {
+       			 	badgeData[key] = badge[key];
+    			}
+			}
 
 	        let badgeDataString = JSON.stringify(badgeData);
 	        let bytes = this.CryptoJS.AES.encrypt(badgeDataString, badgeKey);
@@ -200,13 +203,19 @@ $(() => {
           return function(e) {
              fileNameDisplay.text("Please upload a CSV file");
              generateCSVBtn.attr('disabled', true);
+             instructions.step2.hide();
+             instructions.step3.hide();
+             instructions.step1.show()
              return;
           }
         } else {
           return function(e) {
           let jsonArr = CSV_to_JSON(e.target.result, ',');
-          console.log(e.target);
+          
           //let hashBadgeData2 = hashBadgeData(jsonArr);
+          instructions.step1.hide();
+          instructions.step2.show();
+          instructions.step3.hide();
           fileNameDisplay.text(theFile.name);
           generateCSVBtn.attr('disabled', false);
           generateCSVBtn.on('click', function() {
@@ -215,6 +224,9 @@ $(() => {
             //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
             jQuery( '#ms_word_filtered_html' ).val(csvData);
             download(generateFileName(), csvData);
+            instructions.step1.hide();
+            instructions.step2.hide();
+            instructions.step3.show();
           })
         };
       }
