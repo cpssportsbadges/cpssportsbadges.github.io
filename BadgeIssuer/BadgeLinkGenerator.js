@@ -2,7 +2,7 @@ class BadgeLinkGenerator {
 	constructor(linkBase) {
 		this.CryptoJS = require("crypto-js");
 		this.linkBase = linkBase;
-		this.keyValChars ="0123456789abcdefghijklmnopqrstuvwxyz"
+		this.keyValChars =["0123456789","abcdefghijklmnopqrstuvwxyz"]
 	}
 
 	getRandomInt(arrLength) {//generates random int between 0 and one below the arr length
@@ -16,7 +16,7 @@ class BadgeLinkGenerator {
   		}
 		
 		for(let keyIdx = 0; keyIdx < keyLength; keyIdx++) {
-   		 key += this.keyValChars[this.getRandomInt(this.keyValChars.length)]
+   		 key += this.keyValChars[keyIdx % 2][this.getRandomInt(this.keyValChars[keyIdx % 2].length)]
   		}
   		return key;
   	}
@@ -27,17 +27,20 @@ class BadgeLinkGenerator {
 
 	getBadgeLinks(arrOfBadgeData, keyLength) {
 		let arrOfOutput = [];
-  		console.log(arrOfBadgeData);
   		
 
   		return arrOfBadgeData.map((badge) => {
   			let recipientEmail = badge.email;
   			let badgeKey = this.getRandomKey(keyLength);
-  			let badgeData = {
-	          recipientName: badge.recipientName,
-	          badgeName: badge.badgeName,
-	          badgeImage: badge.badgeImage
-	        }
+  			
+
+	        let badgeData = {};
+
+	        for (var key in badge) {
+   				 if (badge.hasOwnProperty(key) && key !== "email") {
+       			 	badgeData[key] = badge[key];
+    			}
+			}
 
 	        let badgeDataString = JSON.stringify(badgeData);
 	        let bytes = this.CryptoJS.AES.encrypt(badgeDataString, badgeKey);
