@@ -67,7 +67,7 @@ body {
 
 #filename  {
 	text-align: left;
-	margin-right: 25%;
+	margin-right: 20%;
 	margin-left: 0;
 }
 
@@ -97,4 +97,14 @@ body {
 	border-width: 1.5px;
 	border-style: solid;
 	background-color: white;
+}
+
+#instructions {
+	display: block;
+	margin-top: 8%;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
+	text-align: center;
+	justify-content: center;
 }
