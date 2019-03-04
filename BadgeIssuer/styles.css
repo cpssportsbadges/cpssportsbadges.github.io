@@ -24,7 +24,7 @@ body {
 }
 #cps-sports-logo {
 	display: block;
-	max-width: 400px;
+	max-width: 500px;
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
@@ -42,9 +42,9 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2%;
-	max-width: 300px;
+	max-width: 430px;
 	padding: 2px;
-	font-size: 20px;
+	font-size: 18px;
 	
 }
 
@@ -60,15 +60,37 @@ body {
 	height: 100%;
 	padding: 12px;
 	text-decoration: none;
-	border-style: none;
+	border-style: solid;
+	border-color: white;
 	color: white;
 	background-color:rgb(0,42,92);
 }
 
+#faux-file-upload-btn:hover {
+	border-style: solid;
+	border-color: rgb(0,42,92);
+	color: rgb(0,42,92);
+	background-color: white;
+}
+
 #filename  {
+	/*max-width: 132px;
 	text-align: left;
-	margin-right: 20%;
+	margin-right: 10%;
 	margin-left: 0;
+	text-overflow: ellipsis;*/
+	/*height: 32.4px;*/
+/*	padding-bottom: 12px;*/
+	vertical-align: middle;
+	bottom: 5px;
+	text-align: left;
+	margin-right: 8%;
+	margin-left: 0;
+	display: inline-block;
+  	text-overflow: ellipsis;
+  	width: 250px;
+  	white-space: nowrap;
+  	overflow: hidden;
 }
 
 #generate-csv-btn {
@@ -79,7 +101,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 5%;
-	min-width: 310px;
+	min-width: 310px; /* 410 510*/
 	position: inherit;
 	font-size: 16px;
 	align-self: flex-end;
@@ -96,6 +118,13 @@ body {
 	border-color: rgb(206, 206, 206);
 	border-width: 1.5px;
 	border-style: solid;
+	background-color: white;
+}
+
+#generate-csv-btn:enabled:hover {
+	border-style: solid;
+	border-color: rgb(0,42,92);
+	color: rgb(0,42,92);
 	background-color: white;
 }
 
