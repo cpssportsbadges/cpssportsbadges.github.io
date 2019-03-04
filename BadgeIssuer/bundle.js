@@ -1,8 +1,64 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-let CryptoJS = require("crypto-js");
+class BadgeLinkGenerator {
+	constructor(linkBase) {
+		this.CryptoJS = require("crypto-js");
+		this.linkBase = linkBase;
+		this.keyValChars ="0123456789abcdefghijklmnopqrstuvwxyz"
+	}
 
+	getRandomInt(arrLength) {//generates random int between 0 and one below the arr length
+ 	 	return Math.floor(Math.random() * arrLength); 
+  	}
+
+	getRandomKey(keyLength = 3)  {//Min of 3 char key
+ 		let key = '';
+  		if (keyLength < 3) {
+  		  keyLength = 3;
+  		}
+		
+		for(let keyIdx = 0; keyIdx < keyLength; keyIdx++) {
+   		 key += this.keyValChars[this.getRandomInt(this.keyValChars.length)]
+  		}
+  		return key;
+  	}
+
+  	getBadgeURL(hash, baseWebsiteURL) {
+  		return `${baseWebsiteURL}?ebs=${hash}`;
+ 	 }
+
+	getBadgeLinks(arrOfBadgeData, keyLength) {
+		let arrOfOutput = [];
+  		console.log(arrOfBadgeData);
+  		
+
+  		return arrOfBadgeData.map((badge) => {
+  			let recipientEmail = badge.email;
+  			let badgeKey = this.getRandomKey(keyLength);
+  			let badgeData = {
+	          recipientName: badge.recipientName,
+	          badgeName: badge.badgeName,
+	          badgeImage: badge.badgeImage
+	        }
+
+	        let badgeDataString = JSON.stringify(badgeData);
+	        let bytes = this.CryptoJS.AES.encrypt(badgeDataString, badgeKey);
+	        let badgeHash = bytes.toString();
+	        let badgeURL = this.getBadgeURL(badgeHash, this.linkBase);
+
+	        return {email: recipientEmail, url: badgeURL, key: badgeKey}
+  		});		
+	}
+
+}
+module.exports = BadgeLinkGenerator;
+
+},{"crypto-js":11}],2:[function(require,module,exports){
+let CryptoJS = require("crypto-js");
+//import BadgeLinkGenerator from './BadgeLinkGenerator.js';
+let BadgeLinkGenerator = require("./BadgeLinkGenerator.js");
 
 const rendererAppURL = 'https://jvarilla.github.io/BadgeRenderer/';
+let badgeLinkGenerator = new BadgeLinkGenerator(rendererAppURL);
 
 //Generate random key
 const keyValArr = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j',
@@ -10,7 +66,7 @@ const keyValArr = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','
 
 const generateRandomInt = (arrLength) => {//generates random int between 0 and one below the arr length
   return Math.floor(Math.random() * arrLength); 
-}
+  }
 const generateRandomKey = (keyLength = 3) => {//Min of 3 char key
   let key = '';
   if (keyLength < 3) {
@@ -21,7 +77,7 @@ const generateRandomKey = (keyLength = 3) => {//Min of 3 char key
     key += keyValArr[generateRandomInt(keyValArr.length)]
   }
   return key;
-}
+  }
 
 //Convert CSV to JSON
 const CSV_to_JSON = (data, delimiter = ',') => {
@@ -33,12 +89,12 @@ const CSV_to_JSON = (data, delimiter = ',') => {
       const values = v.split(delimiter);
       return titles.reduce((obj, title, index) => ((obj[title] = values[index]), obj), {});
     });
-};
+  };
 
 //Make URL to Badge
 const makeBadgeURL = (hash, baseWebsiteURL) => {
   return `${baseWebsiteURL}?ebs=${hash}`;
-}
+  }
 
 //Encrypt the JSON String
 const hashBadgeData = (arrOfBadgeData) => {
@@ -71,7 +127,7 @@ const hashBadgeData = (arrOfBadgeData) => {
         arrOfOutput.push({email: recipientEmail, url: badgeURL, key: badgeKey});
     }
       return arrOfOutput;
-}
+  }
 
 
 //Create output csv file by converting JSON to CSV
@@ -86,7 +142,7 @@ const JSON_to_CSV = (arrOfJSONData) => {
       function(fieldName){
         return JSON.stringify(row[fieldName], replacer)
     }).join(',').concat(['\n'])
-})
+  })
   //csv.unshift(fields.join('\n')); //join via a new line character so it renders properly in excel
   csv.unshift(fields.join(',').concat(['\n'])) // add header column makes header columns horizontal
   // csv.join('\r\n');
@@ -96,9 +152,9 @@ const JSON_to_CSV = (arrOfJSONData) => {
 
 
   //Make string and remove quotes
-  let reformattedCSVData = csv.toString().replace(/['"]+/g, '').replace(/\n,+/g, "\n");//gets rid of quote marks
-  return reformattedCSVData;//csv is an array
-}
+   let reformattedCSVData = csv.toString().replace(/['"]+/g, '').replace(/\n,+/g, "\n");//gets rid of quote marks
+   return reformattedCSVData;//csv is an array
+  }
 
 function download(filename, text) {
     console.log('downloading');
@@ -135,7 +191,8 @@ function handleFileSelect(evt) {
     reader.onload = (function(theFile) {
         return function(e) {
           let jsonArr = CSV_to_JSON(e.target.result, ',');
-          let hashBadgeData2 = hashBadgeData(jsonArr);
+          //let hashBadgeData2 = hashBadgeData(jsonArr);
+          let hashBadgeData2 = badgeLinkGenerator.getBadgeLinks(jsonArr, 4);
           let csvData = JSON_to_CSV(hashBadgeData2);
           //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
           jQuery( '#ms_word_filtered_html' ).val(csvData);
@@ -149,7 +206,8 @@ function handleFileSelect(evt) {
 
   document.getElementById('upload').addEventListener('change', handleFileSelect, false);
 
-},{"crypto-js":10}],2:[function(require,module,exports){
+
+},{"./BadgeLinkGenerator.js":1,"crypto-js":11}],3:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -382,7 +440,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.AES;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],3:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],4:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -1263,7 +1321,7 @@ function handleFileSelect(evt) {
 
 
 }));
-},{"./core":4,"./evpkdf":7}],4:[function(require,module,exports){
+},{"./core":5,"./evpkdf":8}],5:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2024,7 +2082,7 @@ function handleFileSelect(evt) {
 	return CryptoJS;
 
 }));
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2160,7 +2218,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.enc.Base64;
 
 }));
-},{"./core":4}],6:[function(require,module,exports){
+},{"./core":5}],7:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2310,7 +2368,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.enc.Utf16;
 
 }));
-},{"./core":4}],7:[function(require,module,exports){
+},{"./core":5}],8:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2443,7 +2501,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.EvpKDF;
 
 }));
-},{"./core":4,"./hmac":9,"./sha1":28}],8:[function(require,module,exports){
+},{"./core":5,"./hmac":10,"./sha1":29}],9:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2510,7 +2568,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.format.Hex;
 
 }));
-},{"./cipher-core":3,"./core":4}],9:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],10:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2654,7 +2712,7 @@ function handleFileSelect(evt) {
 
 
 }));
-},{"./core":4}],10:[function(require,module,exports){
+},{"./core":5}],11:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2673,7 +2731,7 @@ function handleFileSelect(evt) {
 	return CryptoJS;
 
 }));
-},{"./aes":2,"./cipher-core":3,"./core":4,"./enc-base64":5,"./enc-utf16":6,"./evpkdf":7,"./format-hex":8,"./hmac":9,"./lib-typedarrays":11,"./md5":12,"./mode-cfb":13,"./mode-ctr":15,"./mode-ctr-gladman":14,"./mode-ecb":16,"./mode-ofb":17,"./pad-ansix923":18,"./pad-iso10126":19,"./pad-iso97971":20,"./pad-nopadding":21,"./pad-zeropadding":22,"./pbkdf2":23,"./rabbit":25,"./rabbit-legacy":24,"./rc4":26,"./ripemd160":27,"./sha1":28,"./sha224":29,"./sha256":30,"./sha3":31,"./sha384":32,"./sha512":33,"./tripledes":34,"./x64-core":35}],11:[function(require,module,exports){
+},{"./aes":3,"./cipher-core":4,"./core":5,"./enc-base64":6,"./enc-utf16":7,"./evpkdf":8,"./format-hex":9,"./hmac":10,"./lib-typedarrays":12,"./md5":13,"./mode-cfb":14,"./mode-ctr":16,"./mode-ctr-gladman":15,"./mode-ecb":17,"./mode-ofb":18,"./pad-ansix923":19,"./pad-iso10126":20,"./pad-iso97971":21,"./pad-nopadding":22,"./pad-zeropadding":23,"./pbkdf2":24,"./rabbit":26,"./rabbit-legacy":25,"./rc4":27,"./ripemd160":28,"./sha1":29,"./sha224":30,"./sha256":31,"./sha3":32,"./sha384":33,"./sha512":34,"./tripledes":35,"./x64-core":36}],12:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2750,7 +2808,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.lib.WordArray;
 
 }));
-},{"./core":4}],12:[function(require,module,exports){
+},{"./core":5}],13:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3019,7 +3077,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.MD5;
 
 }));
-},{"./core":4}],13:[function(require,module,exports){
+},{"./core":5}],14:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3098,7 +3156,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.mode.CFB;
 
 }));
-},{"./cipher-core":3,"./core":4}],14:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],15:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3215,7 +3273,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.mode.CTRGladman;
 
 }));
-},{"./cipher-core":3,"./core":4}],15:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],16:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3274,7 +3332,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.mode.CTR;
 
 }));
-},{"./cipher-core":3,"./core":4}],16:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],17:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3315,7 +3373,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.mode.ECB;
 
 }));
-},{"./cipher-core":3,"./core":4}],17:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],18:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3370,7 +3428,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.mode.OFB;
 
 }));
-},{"./cipher-core":3,"./core":4}],18:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],19:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3420,7 +3478,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.pad.Ansix923;
 
 }));
-},{"./cipher-core":3,"./core":4}],19:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],20:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3465,7 +3523,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.pad.Iso10126;
 
 }));
-},{"./cipher-core":3,"./core":4}],20:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],21:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3506,7 +3564,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.pad.Iso97971;
 
 }));
-},{"./cipher-core":3,"./core":4}],21:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],22:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3537,7 +3595,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.pad.NoPadding;
 
 }));
-},{"./cipher-core":3,"./core":4}],22:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],23:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3583,7 +3641,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.pad.ZeroPadding;
 
 }));
-},{"./cipher-core":3,"./core":4}],23:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],24:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3729,7 +3787,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.PBKDF2;
 
 }));
-},{"./core":4,"./hmac":9,"./sha1":28}],24:[function(require,module,exports){
+},{"./core":5,"./hmac":10,"./sha1":29}],25:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3920,7 +3978,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.RabbitLegacy;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],25:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],26:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4113,7 +4171,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.Rabbit;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],26:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],27:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4253,7 +4311,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.RC4;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],27:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],28:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4521,7 +4579,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.RIPEMD160;
 
 }));
-},{"./core":4}],28:[function(require,module,exports){
+},{"./core":5}],29:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4672,7 +4730,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.SHA1;
 
 }));
-},{"./core":4}],29:[function(require,module,exports){
+},{"./core":5}],30:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4753,7 +4811,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.SHA224;
 
 }));
-},{"./core":4,"./sha256":30}],30:[function(require,module,exports){
+},{"./core":5,"./sha256":31}],31:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4953,7 +5011,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.SHA256;
 
 }));
-},{"./core":4}],31:[function(require,module,exports){
+},{"./core":5}],32:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5277,7 +5335,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.SHA3;
 
 }));
-},{"./core":4,"./x64-core":35}],32:[function(require,module,exports){
+},{"./core":5,"./x64-core":36}],33:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5361,7 +5419,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.SHA384;
 
 }));
-},{"./core":4,"./sha512":33,"./x64-core":35}],33:[function(require,module,exports){
+},{"./core":5,"./sha512":34,"./x64-core":36}],34:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5685,7 +5743,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.SHA512;
 
 }));
-},{"./core":4,"./x64-core":35}],34:[function(require,module,exports){
+},{"./core":5,"./x64-core":36}],35:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -6456,7 +6514,7 @@ function handleFileSelect(evt) {
 	return CryptoJS.TripleDES;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],35:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],36:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -6761,4 +6819,4 @@ function handleFileSelect(evt) {
 	return CryptoJS;
 
 }));
-},{"./core":4}]},{},[1]);
+},{"./core":5}]},{},[2]);

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Badge Issuer</title>
+
+	<link type="text/css" rel="stylesheet" href="styles.css"></link>
+	<script
+		  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+		  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="main">
+    <div class="main-content">
+    <img id="cps-sports-logo" width="1000px" src="./assets/cps-sports-logo.bmp"/>
+    <div class="browse-for-file-container">
+      <span id="filename">File Name</span>
+      <button id="faux-file-upload-btn"><strong>BROWSE</strong></button>
+      <input hidden id="upload" type=file    accept="text/csv" name="files[]" size=30/>
+    </div>
+    <button disabled id="generate-csv-btn"><strong>GENERATE BADGE CSV</strong></button>
+    <div id="instructions">
+      <div id="step1">Upload a CSV file of badges</div>
+      <div hidden id="step2">Generate a return CSV of issuable badges</div>
+      <div hidden id="step3">
+        <ol style="text-align: left;">
+          <li>Retrieve your generated CSV from your downloads folder</li>
+          <li>Import the generated CSV file into a Google Sheet</li>
+          <li>Distribute the badges utitilizing YAMM</li>
+        </ol>
+      </div>
+    </div>
+  	<!-- <form enctype="multipart/form-data">
+      <input id="upload" type=file    accept="text/html" name="files[]" size=30>
+    </form>
+    <textarea class="form-control" rows=5 cols=5 id="ms_word_filtered_html"></textarea> -->
+    </div>
+  </div>
+
+<script>
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // use the 1st file from the list
+    f = files[0];
+
+    var reader = new FileReader();
+
+    // Closure to capture the file information.
+    reader.onload = (function(theFile) {
+        return function(e) {
+
+          jQuery( '#ms_word_filtered_html' ).val( e.target.result );
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsText(f);
+  }
+
+  document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+</script>
+<script src="bundle.js"></script>
+</body>
+</html> 
