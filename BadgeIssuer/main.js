@@ -1,7 +1,9 @@
 let CryptoJS = require("crypto-js");
-
+//import BadgeLinkGenerator from './BadgeLinkGenerator.js';
+let BadgeLinkGenerator = require("./BadgeLinkGenerator.js");
 
 const rendererAppURL = 'https://jvarilla.github.io/BadgeRenderer/';
+let badgeLinkGenerator = new BadgeLinkGenerator(rendererAppURL);
 
 //Generate random key
 const keyValArr = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j',
@@ -9,7 +11,7 @@ const keyValArr = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','
 
 const generateRandomInt = (arrLength) => {//generates random int between 0 and one below the arr length
   return Math.floor(Math.random() * arrLength); 
-}
+  }
 const generateRandomKey = (keyLength = 3) => {//Min of 3 char key
   let key = '';
   if (keyLength < 3) {
@@ -20,7 +22,7 @@ const generateRandomKey = (keyLength = 3) => {//Min of 3 char key
     key += keyValArr[generateRandomInt(keyValArr.length)]
   }
   return key;
-}
+  }
 
 //Convert CSV to JSON
 const CSV_to_JSON = (data, delimiter = ',') => {
@@ -32,12 +34,12 @@ const CSV_to_JSON = (data, delimiter = ',') => {
       const values = v.split(delimiter);
       return titles.reduce((obj, title, index) => ((obj[title] = values[index]), obj), {});
     });
-};
+  };
 
 //Make URL to Badge
 const makeBadgeURL = (hash, baseWebsiteURL) => {
   return `${baseWebsiteURL}?ebs=${hash}`;
-}
+  }
 
 //Encrypt the JSON String
 const hashBadgeData = (arrOfBadgeData) => {
@@ -70,7 +72,7 @@ const hashBadgeData = (arrOfBadgeData) => {
         arrOfOutput.push({email: recipientEmail, url: badgeURL, key: badgeKey});
     }
       return arrOfOutput;
-}
+  }
 
 
 //Create output csv file by converting JSON to CSV
@@ -85,7 +87,7 @@ const JSON_to_CSV = (arrOfJSONData) => {
       function(fieldName){
         return JSON.stringify(row[fieldName], replacer)
     }).join(',').concat(['\n'])
-})
+  })
   //csv.unshift(fields.join('\n')); //join via a new line character so it renders properly in excel
   csv.unshift(fields.join(',').concat(['\n'])) // add header column makes header columns horizontal
   // csv.join('\r\n');
@@ -95,9 +97,9 @@ const JSON_to_CSV = (arrOfJSONData) => {
 
 
   //Make string and remove quotes
-  let reformattedCSVData = csv.toString().replace(/['"]+/g, '').replace(/\n,+/g, "\n");//gets rid of quote marks
-  return reformattedCSVData;//csv is an array
-}
+   let reformattedCSVData = csv.toString().replace(/['"]+/g, '').replace(/\n,+/g, "\n");//gets rid of quote marks
+   return reformattedCSVData;//csv is an array
+  }
 
 function download(filename, text) {
     console.log('downloading');
@@ -134,7 +136,8 @@ function handleFileSelect(evt) {
     reader.onload = (function(theFile) {
         return function(e) {
           let jsonArr = CSV_to_JSON(e.target.result, ',');
-          let hashBadgeData2 = hashBadgeData(jsonArr);
+          //let hashBadgeData2 = hashBadgeData(jsonArr);
+          let hashBadgeData2 = badgeLinkGenerator.getBadgeLinks(jsonArr, 4);
           let csvData = JSON_to_CSV(hashBadgeData2);
           //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
           jQuery( '#ms_word_filtered_html' ).val(csvData);
@@ -147,3 +150,4 @@ function handleFileSelect(evt) {
   }
 
   document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+
