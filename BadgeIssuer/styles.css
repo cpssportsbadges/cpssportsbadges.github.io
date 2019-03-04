@@ -1,0 +1,139 @@
+body {
+	background-color: rgb(243,250,254);
+	font-family: sans-serif;
+}
+
+.main {
+	max-width: 700px;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	/*/align-content: center;*/
+	padding: 20px;
+	border-radius: 5%;
+	/*box-shadow: 5px 5px rgba(0,0,0,0.3);*/
+}
+
+.main-content {
+	margin: 0 auto;
+	/*width: 100%;*/
+	/*margin: auto;*/
+	width: 500px;
+	height: auto; 
+
+}
+#cps-sports-logo {
+	display: block;
+	max-width: 500px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.browse-for-file-container {
+	display: block;
+	background-color: white;
+	color: black;
+	text-align: right;
+	border-color: rgb(206, 206, 206);
+	border-radius: 33px;
+	border-width: 3px;
+	border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2%;
+	max-width: 430px;
+	padding: 2px;
+	font-size: 18px;
+	
+}
+
+#faux-file-upload-btn {
+	min-width: 125px;
+	position: inherit;
+	margin-left:auto; 
+	font-size: 16px;
+	margin-right:0;
+	align-self: flex-end;
+	background-color:blue;
+	border-radius: 22px;
+	height: 100%;
+	padding: 12px;
+	text-decoration: none;
+	border-style: solid;
+	border-color: white;
+	color: white;
+	background-color:rgb(0,42,92);
+}
+
+#faux-file-upload-btn:hover {
+	border-style: solid;
+	border-color: rgb(0,42,92);
+	color: rgb(0,42,92);
+	background-color: white;
+}
+
+#filename  {
+	/*max-width: 132px;
+	text-align: left;
+	margin-right: 10%;
+	margin-left: 0;
+	text-overflow: ellipsis;*/
+	/*height: 32.4px;*/
+/*	padding-bottom: 12px;*/
+	vertical-align: middle;
+	bottom: 5px;
+	text-align: left;
+	margin-right: 8%;
+	margin-left: 0;
+	display: inline-block;
+  	text-overflow: ellipsis;
+  	width: 250px;
+  	white-space: nowrap;
+  	overflow: hidden;
+}
+
+#generate-csv-btn {
+	height: 52.4px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	min-width: 310px; /* 410 510*/
+	position: inherit;
+	font-size: 16px;
+	align-self: flex-end;
+	background-color:rgb(0,42,92);
+	border-radius: 33px;
+	padding: 12px;
+	text-decoration: none;
+	border-style: none;
+	color: white;
+}
+
+#generate-csv-btn:disabled {
+	color: rgb(206, 206, 206);
+	border-color: rgb(206, 206, 206);
+	border-width: 1.5px;
+	border-style: solid;
+	background-color: white;
+}
+
+#generate-csv-btn:enabled:hover {
+	border-style: solid;
+	border-color: rgb(0,42,92);
+	color: rgb(0,42,92);
+	background-color: white;
+}
+
+#instructions {
+	display: block;
+	margin-top: 8%;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
+	text-align: center;
+	justify-content: center;
+}
