@@ -29,6 +29,21 @@ $(() => {
 		
 	}
 
+	function getBadgesFromLocalStorage() {
+		let badges = [];
+		for (element in window.localStorage) {
+			if (element.includes("Badge")) {
+				badges.push(JSON.parse(window.localStorage[element]));
+			}
+		}
+		return badges;
+	}
+
+	// function renderBadgesFromLocalStorage() {
+		
+
+	// }
+
 	
 	//Render json values in the view
 	function renderBadge (badgeData){
@@ -44,9 +59,32 @@ $(() => {
 
 
 	$("#unlockBadgeBtn").on('click', function(event) {
-		renderBadge(decryptQueryString(parseQueryString('ebs'), $("#keyInput").val()));
+		let key = $("#keyInput").val();
+		let feedback = $("#feedback");
+		let hash = parseQueryString('ebs');
+		//console.log(localStorage[hash]);
+		//let badgeData = decryptQueryString(hash, key);
+		if (!window.localStorage['Badge' + hash]) {
+			try {
+				let badgeData = decryptQueryString(hash, key);
+				window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
+				renderBadge(badgeData);
+			} catch(err) {
+				feedback.text("Wrong key... Please try again");
+			}
+		} else {
+			feedback.text("You already have this badge")
+		}
+		
+
+
+		// let badgeData dec
+		// decrypt
+		// renderBadge(decryptQueryString(parseQueryString('ebs'), $("#keyInput").val()));
+		// localStorage.set($("#keyInput").val(), )
 	});
 
+	console.log(getBadgesFromLocalStorage());
 
 })
 
