@@ -87,38 +87,64 @@ $(() => {
 	    let ctx = canvas.getContext("2d");
 
 	    async function drawBackground() {
-	    	let background = new Image();
+	    	setTimeout(async function() {
+	    		let background = new Image();
 				background.onload = function () {
    				 ctx.drawImage(background, 0, 0);
-			}
-			await background.onload();
-			background.src =  BadgeImageConfig['background'][badgeData['conference']];
+				}
+				background.onload();
+				background.src =  BadgeImageConfig['background'][badgeData['conference']];
+	  	    	return;
+	  	    	}, 50);
+	    	
 	    	return;
 	    }
 
 	    async function drawSport() {
 	    	await drawBackground();
-	    	let sport = new Image();
+	    	setTimeout(async function() {
+	    		let sport = new Image();
 				sport.onload = function () {
    				 ctx.drawImage(sport, 0, 0);
-			}
-			await sport.onload();
-			sport.src =  BadgeImageConfig['sport'][badgeData['sport']];
-	    	return;
+				}
+				await sport.onload();
+				sport.src =  BadgeImageConfig['sport'][badgeData['sport']];
+		    	return;
+		    }, 100);
+		    return; 
+	    	
 	    }
 
 	     async function drawOverlay() {
 	    	await drawSport();
-	    	let overlay = new Image();
+	    	setTimeout(async function() {
+	    		let overlay = new Image();
 				overlay.onload = function () {
-   				 ctx.drawImage(overlay, 0, 0);
+   				ctx.drawImage(overlay, 0, 0);
 			}
-
 			await overlay.onload();
 			overlay.src =  BadgeImageConfig['overlay'][badgeData['overlay']];
+	    	return;
+	    	}, 150)
+	    	
 	    	return;//canvas.toDataURL("image/png");
 	    }
-	    drawOverlay();
+
+	    async function drawText() {
+	    	await drawOverlay();
+	    	setTimeout(async function(){
+	    		ctx.textAlign = "center"; 
+	    		ctx.font = "36px Helvetica";
+	    		ctx.fillStyle = "#ffffff"; 
+				ctx.fillText(badgeData.badgeName, 400, 400);	//220
+				ctx.font = "20px Helvetica"; 
+	    		ctx.fillText(`Awarded to ${badgeData.recipientName}`, 400, 475);
+	    		return;//canvas.toDataURL("image/png");
+	    	}, 200)	    	
+	    }
+
+
+	    drawText();
 	    return;
 	}
 
@@ -166,7 +192,10 @@ $(() => {
 				//renderBadge(badgeData);
 				console.log(badgeData);
 				// $("#badgeImage").attr('src', drawBadge(decryptQueryString(hash, key)));
-				console.log(drawBadge(decryptQueryString(hash, key)));
+				//console.log(drawBadge(decryptQueryString(hash, key)));
+				let canvasId = `Badge-${key}`;
+				$("#badges").prepend(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+				drawBadge(badgeData, canvasId);
 			} catch(err) {
 				console.log(err);
 				feedback.text("Wrong key... Please try again");
