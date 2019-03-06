@@ -1,0 +1,9 @@
+canvas {
+	border-radius: 22px;
+	border-color: white;
+	border-width: 3px;
+	border-style: solid;
+}
+canvas:hover {
+	border-color: blue;
+}
