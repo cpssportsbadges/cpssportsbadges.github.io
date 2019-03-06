@@ -1,0 +1,26 @@
+{
+  "short_name": "Conduit",
+  "name": "Conduit React",
+  "icons": [
+    {
+      "src": "/conduitReact/logo-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/conduitReact/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/conduitReact/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/conduitReact/",
+  "background_color": "#5cb85c",
+  "display": "standalone",
+  "scope": "/conduitReact/",
+  "theme_color": "#5cb85c"
+}
