@@ -196,12 +196,15 @@ $(() => {
 				let canvasId = `Badge-${key}`;
 				$("#badges").prepend(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
 				drawBadge(badgeData, canvasId);
+				$("#badgeUnlockStatus").text("Congratulations! Your has been unlocked!");
 			} catch(err) {
 				console.log(err);
+				$("#badgeUnlockStatus").text("");
 				feedback.text("Wrong key... Please try again");
 			}
 		} else {
 			feedback.text("You already have this badge")
+			$("#badgeUnlockStatus").text("");
 		}
 		
 
