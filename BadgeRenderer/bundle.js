@@ -1,5 +1,26 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+
+const badgeLayersConfig = {//paths relative to BadgeRenderer
+	background: {
+		green: './BadgeAssets/badge-background/badge-base-hexagon-green.png' ,
+		purple: './BadgeAssets/badge-background/badge-base-hexagon-purple.png',
+		red: './BadgeAssets/badge-background/badge-base-hexagon-red.png'
+	},
+	overlay: {
+		skyline: './BadgeAssets/badge-overlay/badge-overlay-skyline-1.png'
+	},
+	sport: {
+		baseball: './BadgeAssets/badge-sport/sport-logo-baseball.png',
+		football: './BadgeAssets/badge-sport/sport-logo-football.png',
+		soccer: './BadgeAssets/badge-sport/sport-logo-soccer.png',
+	}
+}
+
+module.exports = badgeLayersConfig;
+},{}],2:[function(require,module,exports){
 let CryptoJS = require("crypto-js");
+let BadgeImageConfig = require("./badgeLayersConfig.js");
+console.log(BadgeImageConfig);
 let decryptedText;
 let ciphertext;
 // let jsonObj = {//Sample Unencrypted Object
@@ -7,6 +28,25 @@ let ciphertext;
 // 		badgeName: "Sports Badge",
 // 		badgeImage: "sports.png"
 // 	};
+
+window.onLoad = function() {
+	let canvas = document.getElementById("drawCanvas");
+	console.log('canvas', canvas);
+	let ctx = canvas.getContext("2d");
+	function paintBadge(back, over, sport) {
+		console.log('b', back);
+		console.log('o', over);
+		ctx.drawImage(back, 0, 0);
+		ctx.drawImage(over, 0, 0);
+		ctx.drawImage(sport, 0, 0);
+		ctx.fillText("Hello World", 10, 50);
+}
+}
+
+
+
+	
+
 $(() => {
 	//Parse for queryString parameter
 	function parseQueryString(name) { //gets query string parameters
@@ -39,6 +79,87 @@ $(() => {
 		return badges;
 	}
 
+
+
+	function drawBadge(badgeData, canvasId) {//, canvasId
+		let canvas = document.getElementById(canvasId); //document.getElementById("drawCanvas");
+		//
+	    let ctx = canvas.getContext("2d");
+
+	    async function drawBackground() {
+	    	setTimeout(async function() {
+	    		let background = new Image();
+				background.onload = function () {
+   				 ctx.drawImage(background, 0, 0);
+				}
+				background.onload();
+				background.src =  BadgeImageConfig['background'][badgeData['conference']];
+	  	    	return;
+	  	    	}, 50);
+	    	
+	    	return;
+	    }
+
+	    async function drawSport() {
+	    	await drawBackground();
+	    	setTimeout(async function() {
+	    		let sport = new Image();
+				sport.onload = function () {
+   				 ctx.drawImage(sport, 0, 0);
+				}
+				await sport.onload();
+				sport.src =  BadgeImageConfig['sport'][badgeData['sport']];
+		    	return;
+		    }, 100);
+		    return; 
+	    	
+	    }
+
+	     async function drawOverlay() {
+	    	await drawSport();
+	    	setTimeout(async function() {
+	    		let overlay = new Image();
+				overlay.onload = function () {
+   				ctx.drawImage(overlay, 0, 0);
+			}
+			await overlay.onload();
+			overlay.src =  BadgeImageConfig['overlay'][badgeData['overlay']];
+	    	return;
+	    	}, 150)
+	    	
+	    	return;//canvas.toDataURL("image/png");
+	    }
+
+	    async function drawText() {
+	    	await drawOverlay();
+	    	setTimeout(async function(){
+	    		ctx.textAlign = "center"; 
+	    		ctx.font = "36px Helvetica";
+	    		ctx.fillStyle = "#ffffff"; 
+				ctx.fillText(badgeData.badgeName, 400, 400);	//220
+				ctx.font = "20px Helvetica"; 
+	    		ctx.fillText(`Awarded to ${badgeData.recipientName}`, 400, 475);
+	    		return;//canvas.toDataURL("image/png");
+	    	}, 200)	    	
+	    }
+
+
+	    drawText();
+	    return;
+	}
+
+	async function renderMultipleBadges() {
+		let badges = await getBadgesFromLocalStorage();
+		badges.map((badge, index) => {
+			let canvasId = `Badge-${index}`;
+			$("#badges").append(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+			drawBadge(badge, canvasId);
+			return;
+		});
+		return;
+	}
+	renderMultipleBadges();
+
 	// function renderBadgesFromLocalStorage() {
 		
 
@@ -68,8 +189,15 @@ $(() => {
 			try {
 				let badgeData = decryptQueryString(hash, key);
 				window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
-				renderBadge(badgeData);
+				//renderBadge(badgeData);
+				console.log(badgeData);
+				// $("#badgeImage").attr('src', drawBadge(decryptQueryString(hash, key)));
+				//console.log(drawBadge(decryptQueryString(hash, key)));
+				let canvasId = `Badge-${key}`;
+				$("#badges").prepend(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+				drawBadge(badgeData, canvasId);
 			} catch(err) {
+				console.log(err);
 				feedback.text("Wrong key... Please try again");
 			}
 		} else {
@@ -89,7 +217,7 @@ $(() => {
 })
 
 
-},{"crypto-js":10}],2:[function(require,module,exports){
+},{"./badgeLayersConfig.js":1,"crypto-js":11}],3:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -322,7 +450,7 @@ $(() => {
 	return CryptoJS.AES;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],3:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],4:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -1203,7 +1331,7 @@ $(() => {
 
 
 }));
-},{"./core":4,"./evpkdf":7}],4:[function(require,module,exports){
+},{"./core":5,"./evpkdf":8}],5:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -1964,7 +2092,7 @@ $(() => {
 	return CryptoJS;
 
 }));
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2100,7 +2228,7 @@ $(() => {
 	return CryptoJS.enc.Base64;
 
 }));
-},{"./core":4}],6:[function(require,module,exports){
+},{"./core":5}],7:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2250,7 +2378,7 @@ $(() => {
 	return CryptoJS.enc.Utf16;
 
 }));
-},{"./core":4}],7:[function(require,module,exports){
+},{"./core":5}],8:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2383,7 +2511,7 @@ $(() => {
 	return CryptoJS.EvpKDF;
 
 }));
-},{"./core":4,"./hmac":9,"./sha1":28}],8:[function(require,module,exports){
+},{"./core":5,"./hmac":10,"./sha1":29}],9:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2450,7 +2578,7 @@ $(() => {
 	return CryptoJS.format.Hex;
 
 }));
-},{"./cipher-core":3,"./core":4}],9:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],10:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2594,7 +2722,7 @@ $(() => {
 
 
 }));
-},{"./core":4}],10:[function(require,module,exports){
+},{"./core":5}],11:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2613,7 +2741,7 @@ $(() => {
 	return CryptoJS;
 
 }));
-},{"./aes":2,"./cipher-core":3,"./core":4,"./enc-base64":5,"./enc-utf16":6,"./evpkdf":7,"./format-hex":8,"./hmac":9,"./lib-typedarrays":11,"./md5":12,"./mode-cfb":13,"./mode-ctr":15,"./mode-ctr-gladman":14,"./mode-ecb":16,"./mode-ofb":17,"./pad-ansix923":18,"./pad-iso10126":19,"./pad-iso97971":20,"./pad-nopadding":21,"./pad-zeropadding":22,"./pbkdf2":23,"./rabbit":25,"./rabbit-legacy":24,"./rc4":26,"./ripemd160":27,"./sha1":28,"./sha224":29,"./sha256":30,"./sha3":31,"./sha384":32,"./sha512":33,"./tripledes":34,"./x64-core":35}],11:[function(require,module,exports){
+},{"./aes":3,"./cipher-core":4,"./core":5,"./enc-base64":6,"./enc-utf16":7,"./evpkdf":8,"./format-hex":9,"./hmac":10,"./lib-typedarrays":12,"./md5":13,"./mode-cfb":14,"./mode-ctr":16,"./mode-ctr-gladman":15,"./mode-ecb":17,"./mode-ofb":18,"./pad-ansix923":19,"./pad-iso10126":20,"./pad-iso97971":21,"./pad-nopadding":22,"./pad-zeropadding":23,"./pbkdf2":24,"./rabbit":26,"./rabbit-legacy":25,"./rc4":27,"./ripemd160":28,"./sha1":29,"./sha224":30,"./sha256":31,"./sha3":32,"./sha384":33,"./sha512":34,"./tripledes":35,"./x64-core":36}],12:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2690,7 +2818,7 @@ $(() => {
 	return CryptoJS.lib.WordArray;
 
 }));
-},{"./core":4}],12:[function(require,module,exports){
+},{"./core":5}],13:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2959,7 +3087,7 @@ $(() => {
 	return CryptoJS.MD5;
 
 }));
-},{"./core":4}],13:[function(require,module,exports){
+},{"./core":5}],14:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3038,7 +3166,7 @@ $(() => {
 	return CryptoJS.mode.CFB;
 
 }));
-},{"./cipher-core":3,"./core":4}],14:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],15:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3155,7 +3283,7 @@ $(() => {
 	return CryptoJS.mode.CTRGladman;
 
 }));
-},{"./cipher-core":3,"./core":4}],15:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],16:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3214,7 +3342,7 @@ $(() => {
 	return CryptoJS.mode.CTR;
 
 }));
-},{"./cipher-core":3,"./core":4}],16:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],17:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3255,7 +3383,7 @@ $(() => {
 	return CryptoJS.mode.ECB;
 
 }));
-},{"./cipher-core":3,"./core":4}],17:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],18:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3310,7 +3438,7 @@ $(() => {
 	return CryptoJS.mode.OFB;
 
 }));
-},{"./cipher-core":3,"./core":4}],18:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],19:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3360,7 +3488,7 @@ $(() => {
 	return CryptoJS.pad.Ansix923;
 
 }));
-},{"./cipher-core":3,"./core":4}],19:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],20:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3405,7 +3533,7 @@ $(() => {
 	return CryptoJS.pad.Iso10126;
 
 }));
-},{"./cipher-core":3,"./core":4}],20:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],21:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3446,7 +3574,7 @@ $(() => {
 	return CryptoJS.pad.Iso97971;
 
 }));
-},{"./cipher-core":3,"./core":4}],21:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],22:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3477,7 +3605,7 @@ $(() => {
 	return CryptoJS.pad.NoPadding;
 
 }));
-},{"./cipher-core":3,"./core":4}],22:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],23:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3523,7 +3651,7 @@ $(() => {
 	return CryptoJS.pad.ZeroPadding;
 
 }));
-},{"./cipher-core":3,"./core":4}],23:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5}],24:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3669,7 +3797,7 @@ $(() => {
 	return CryptoJS.PBKDF2;
 
 }));
-},{"./core":4,"./hmac":9,"./sha1":28}],24:[function(require,module,exports){
+},{"./core":5,"./hmac":10,"./sha1":29}],25:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3860,7 +3988,7 @@ $(() => {
 	return CryptoJS.RabbitLegacy;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],25:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],26:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4053,7 +4181,7 @@ $(() => {
 	return CryptoJS.Rabbit;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],26:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],27:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4193,7 +4321,7 @@ $(() => {
 	return CryptoJS.RC4;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],27:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],28:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4461,7 +4589,7 @@ $(() => {
 	return CryptoJS.RIPEMD160;
 
 }));
-},{"./core":4}],28:[function(require,module,exports){
+},{"./core":5}],29:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4612,7 +4740,7 @@ $(() => {
 	return CryptoJS.SHA1;
 
 }));
-},{"./core":4}],29:[function(require,module,exports){
+},{"./core":5}],30:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4693,7 +4821,7 @@ $(() => {
 	return CryptoJS.SHA224;
 
 }));
-},{"./core":4,"./sha256":30}],30:[function(require,module,exports){
+},{"./core":5,"./sha256":31}],31:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4893,7 +5021,7 @@ $(() => {
 	return CryptoJS.SHA256;
 
 }));
-},{"./core":4}],31:[function(require,module,exports){
+},{"./core":5}],32:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5217,7 +5345,7 @@ $(() => {
 	return CryptoJS.SHA3;
 
 }));
-},{"./core":4,"./x64-core":35}],32:[function(require,module,exports){
+},{"./core":5,"./x64-core":36}],33:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5301,7 +5429,7 @@ $(() => {
 	return CryptoJS.SHA384;
 
 }));
-},{"./core":4,"./sha512":33,"./x64-core":35}],33:[function(require,module,exports){
+},{"./core":5,"./sha512":34,"./x64-core":36}],34:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5625,7 +5753,7 @@ $(() => {
 	return CryptoJS.SHA512;
 
 }));
-},{"./core":4,"./x64-core":35}],34:[function(require,module,exports){
+},{"./core":5,"./x64-core":36}],35:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -6396,7 +6524,7 @@ $(() => {
 	return CryptoJS.TripleDES;
 
 }));
-},{"./cipher-core":3,"./core":4,"./enc-base64":5,"./evpkdf":7,"./md5":12}],35:[function(require,module,exports){
+},{"./cipher-core":4,"./core":5,"./enc-base64":6,"./evpkdf":8,"./md5":13}],36:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -6701,4 +6829,4 @@ $(() => {
 	return CryptoJS;
 
 }));
-},{"./core":4}]},{},[1]);
+},{"./core":5}]},{},[2]);
