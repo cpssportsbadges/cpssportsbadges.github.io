@@ -1,4 +1,6 @@
 let CryptoJS = require("crypto-js");
+let BadgeImageConfig = require("./badgeLayersConfig.js");
+console.log(BadgeImageConfig);
 let decryptedText;
 let ciphertext;
 // let jsonObj = {//Sample Unencrypted Object
@@ -6,6 +8,25 @@ let ciphertext;
 // 		badgeName: "Sports Badge",
 // 		badgeImage: "sports.png"
 // 	};
+
+window.onLoad = function() {
+	let canvas = document.getElementById("drawCanvas");
+	console.log('canvas', canvas);
+	let ctx = canvas.getContext("2d");
+	function paintBadge(back, over, sport) {
+		console.log('b', back);
+		console.log('o', over);
+		ctx.drawImage(back, 0, 0);
+		ctx.drawImage(over, 0, 0);
+		ctx.drawImage(sport, 0, 0);
+		ctx.fillText("Hello World", 10, 50);
+}
+}
+
+
+
+	
+
 $(() => {
 	//Parse for queryString parameter
 	function parseQueryString(name) { //gets query string parameters
@@ -38,6 +59,43 @@ $(() => {
 		return badges;
 	}
 
+	function drawBadge(badgeData) {
+		let canvas = document.getElementById("drawCanvas");
+	    let ctx = canvas.getContext("2d");
+
+	    async function drawBackground() {
+	    	let background = new Image();
+				background.onload = function () {
+   				 ctx.drawImage(background, 0, 0);
+			}
+			background.src =  BadgeImageConfig['background'][badgeData['conference']];
+	    	return;
+	    }
+
+	    async function drawSport() {
+	    	await drawBackground();
+	    	let sport = new Image();
+				sport.onload = function () {
+   				 ctx.drawImage(sport, 0, 0);
+			}
+			sport.src =  BadgeImageConfig['sport'][badgeData['sport']];
+	    	return;
+	    }
+
+	     async function drawOverlay() {
+	    	await drawSport();
+	    	let overlay = new Image();
+				overlay.onload = function () {
+   				 ctx.drawImage(overlay, 0, 0);
+			}
+			overlay.src =  BadgeImageConfig['overlay'][badgeData['overlay']];
+	    	return;//canvas.toDataURL("image/png");
+	    }
+	    drawOverlay();
+	    return;
+	}
+
+
 	// function renderBadgesFromLocalStorage() {
 		
 
@@ -67,8 +125,12 @@ $(() => {
 			try {
 				let badgeData = decryptQueryString(hash, key);
 				window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
-				renderBadge(badgeData);
+				//renderBadge(badgeData);
+				console.log(badgeData);
+				// $("#badgeImage").attr('src', drawBadge(decryptQueryString(hash, key)));
+				console.log(drawBadge(decryptQueryString(hash, key)));
 			} catch(err) {
+				console.log(err);
 				feedback.text("Wrong key... Please try again");
 			}
 		} else {
