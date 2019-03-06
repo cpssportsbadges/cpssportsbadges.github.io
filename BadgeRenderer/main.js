@@ -1,4 +1,6 @@
 let CryptoJS = require("crypto-js");
+let BadgeImageConfig = require("./badgeLayersConfig.js");
+console.log(BadgeImageConfig);
 let decryptedText;
 let ciphertext;
 // let jsonObj = {//Sample Unencrypted Object
@@ -6,6 +8,25 @@ let ciphertext;
 // 		badgeName: "Sports Badge",
 // 		badgeImage: "sports.png"
 // 	};
+
+window.onLoad = function() {
+	let canvas = document.getElementById("drawCanvas");
+	console.log('canvas', canvas);
+	let ctx = canvas.getContext("2d");
+	function paintBadge(back, over, sport) {
+		console.log('b', back);
+		console.log('o', over);
+		ctx.drawImage(back, 0, 0);
+		ctx.drawImage(over, 0, 0);
+		ctx.drawImage(sport, 0, 0);
+		ctx.fillText("Hello World", 10, 50);
+}
+}
+
+
+
+	
+
 $(() => {
 	//Parse for queryString parameter
 	function parseQueryString(name) { //gets query string parameters
@@ -38,6 +59,87 @@ $(() => {
 		return badges;
 	}
 
+
+
+	function drawBadge(badgeData, canvasId) {//, canvasId
+		let canvas = document.getElementById(canvasId); //document.getElementById("drawCanvas");
+		//
+	    let ctx = canvas.getContext("2d");
+
+	    async function drawBackground() {
+	    	setTimeout(async function() {
+	    		let background = new Image();
+				background.onload = function () {
+   				 ctx.drawImage(background, 0, 0);
+				}
+				background.onload();
+				background.src =  BadgeImageConfig['background'][badgeData['conference']];
+	  	    	return;
+	  	    	}, 50);
+	    	
+	    	return;
+	    }
+
+	    async function drawSport() {
+	    	await drawBackground();
+	    	setTimeout(async function() {
+	    		let sport = new Image();
+				sport.onload = function () {
+   				 ctx.drawImage(sport, 0, 0);
+				}
+				await sport.onload();
+				sport.src =  BadgeImageConfig['sport'][badgeData['sport']];
+		    	return;
+		    }, 100);
+		    return; 
+	    	
+	    }
+
+	     async function drawOverlay() {
+	    	await drawSport();
+	    	setTimeout(async function() {
+	    		let overlay = new Image();
+				overlay.onload = function () {
+   				ctx.drawImage(overlay, 0, 0);
+			}
+			await overlay.onload();
+			overlay.src =  BadgeImageConfig['overlay'][badgeData['overlay']];
+	    	return;
+	    	}, 150)
+	    	
+	    	return;//canvas.toDataURL("image/png");
+	    }
+
+	    async function drawText() {
+	    	await drawOverlay();
+	    	setTimeout(async function(){
+	    		ctx.textAlign = "center"; 
+	    		ctx.font = "36px Helvetica";
+	    		ctx.fillStyle = "#ffffff"; 
+				ctx.fillText(badgeData.badgeName, 400, 400);	//220
+				ctx.font = "20px Helvetica"; 
+	    		ctx.fillText(`Awarded to ${badgeData.recipientName}`, 400, 475);
+	    		return;//canvas.toDataURL("image/png");
+	    	}, 200)	    	
+	    }
+
+
+	    drawText();
+	    return;
+	}
+
+	async function renderMultipleBadges() {
+		let badges = await getBadgesFromLocalStorage();
+		badges.map((badge, index) => {
+			let canvasId = `Badge-${index}`;
+			$("#badges").append(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+			drawBadge(badge, canvasId);
+			return;
+		});
+		return;
+	}
+	renderMultipleBadges();
+
 	// function renderBadgesFromLocalStorage() {
 		
 
@@ -67,8 +169,15 @@ $(() => {
 			try {
 				let badgeData = decryptQueryString(hash, key);
 				window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
-				renderBadge(badgeData);
+				//renderBadge(badgeData);
+				console.log(badgeData);
+				// $("#badgeImage").attr('src', drawBadge(decryptQueryString(hash, key)));
+				//console.log(drawBadge(decryptQueryString(hash, key)));
+				let canvasId = `Badge-${key}`;
+				$("#badges").prepend(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+				drawBadge(badgeData, canvasId);
 			} catch(err) {
+				console.log(err);
 				feedback.text("Wrong key... Please try again");
 			}
 		} else {
