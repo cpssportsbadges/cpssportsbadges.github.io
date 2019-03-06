@@ -59,8 +59,11 @@ $(() => {
 		return badges;
 	}
 
-	function drawBadge(badgeData) {
-		let canvas = document.getElementById("drawCanvas");
+
+
+	function drawBadge(badgeData, canvasId) {//, canvasId
+		let canvas = document.getElementById(canvasId); //document.getElementById("drawCanvas");
+		//
 	    let ctx = canvas.getContext("2d");
 
 	    async function drawBackground() {
@@ -68,6 +71,7 @@ $(() => {
 				background.onload = function () {
    				 ctx.drawImage(background, 0, 0);
 			}
+			await background.onload();
 			background.src =  BadgeImageConfig['background'][badgeData['conference']];
 	    	return;
 	    }
@@ -78,6 +82,7 @@ $(() => {
 				sport.onload = function () {
    				 ctx.drawImage(sport, 0, 0);
 			}
+			await sport.onload();
 			sport.src =  BadgeImageConfig['sport'][badgeData['sport']];
 	    	return;
 	    }
@@ -88,6 +93,8 @@ $(() => {
 				overlay.onload = function () {
    				 ctx.drawImage(overlay, 0, 0);
 			}
+
+			await overlay.onload();
 			overlay.src =  BadgeImageConfig['overlay'][badgeData['overlay']];
 	    	return;//canvas.toDataURL("image/png");
 	    }
@@ -95,6 +102,17 @@ $(() => {
 	    return;
 	}
 
+	async function renderMultipleBadges() {
+		let badges = await getBadgesFromLocalStorage();
+		badges.map((badge, index) => {
+			let canvasId = `Badge-${index}`;
+			$("#badges").append(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+			drawBadge(badge, canvasId);
+			return;
+		});
+		return;
+	}
+	renderMultipleBadges();
 
 	// function renderBadgesFromLocalStorage() {
 		
