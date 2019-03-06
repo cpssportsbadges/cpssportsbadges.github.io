@@ -79,9 +79,11 @@ $(() => {
 		return badges;
 	}
 
-	function drawBadge(badgeData) {
-		let canvas = document.getElementById("drawCanvas");
-		// console.log('canvas', canvas);
+
+
+	function drawBadge(badgeData, canvasId) {//, canvasId
+		let canvas = document.getElementById(canvasId); //document.getElementById("drawCanvas");
+		//
 	    let ctx = canvas.getContext("2d");
 
 	    async function drawBackground() {
@@ -89,6 +91,7 @@ $(() => {
 				background.onload = function () {
    				 ctx.drawImage(background, 0, 0);
 			}
+			await background.onload();
 			background.src =  BadgeImageConfig['background'][badgeData['conference']];
 	    	return;
 	    }
@@ -99,6 +102,7 @@ $(() => {
 				sport.onload = function () {
    				 ctx.drawImage(sport, 0, 0);
 			}
+			await sport.onload();
 			sport.src =  BadgeImageConfig['sport'][badgeData['sport']];
 	    	return;
 	    }
@@ -109,62 +113,26 @@ $(() => {
 				overlay.onload = function () {
    				 ctx.drawImage(overlay, 0, 0);
 			}
+
+			await overlay.onload();
 			overlay.src =  BadgeImageConfig['overlay'][badgeData['overlay']];
-	    	return canvas.toDataURL("image/png");
+	    	return;//canvas.toDataURL("image/png");
 	    }
-	    //let c =  drawOverlay();
-	    $("#x").css("background-image", `url(${drawOverlay()})`);
+	    drawOverlay();
 	    return;
-	    //"./BadgeAssets/badge-overlay/badge-overlay-skyline-1.png";
-
-
-
-		// async function f1() {
-		// 	console.log('drawing');
-		// 	console.log(badgeData);
-		// 	console.log(BadgeImageConfig);
-		// 	console.log(badgeData['conference']);
-		// 	$("#badgeBackground").attr('src', BadgeImageConfig['background'][badgeData['conference']]);
-		// 	$("#badgeOverlay").attr('src', BadgeImageConfig['overlay'][badgeData['overlay']]);
-		// 	$("#badgeSport").attr('src', BadgeImageConfig['sport'][badgeData['sport']]);
-		// 	return;
-		// }
-		
-		// async function f2() {
-		// 	await f1();
-		// 	background = document.getElementById("badgeBackground");
-		// 	console.log('canvas', background);
-		// 	overlay = document.getElementById("badgeOverlay");
-		// 	console.log('canvas', overlay);
-		// 	sport = document.getElementById("badgeSport");
-		// 	console.log('canvas', sport);
-		// 	return;
-		// }
-		
-		
-
-		// // return paintBadge(background, overlay, sport);
-		// async function f3 () {
-		// 	await f2();
-		// 	await console.log(background);
-		// 	await ctx.drawImage(document.getElementById("badgeBackground"), 0, 0);
-		// 	var img = new Image();
-		// 		img.onload = function () {
-  //  				 ctx.drawImage(img, 0, 0);
-		// 	}
-		// 	img.src = "./BadgeAssets/badge-overlay/badge-overlay-skyline-1.png";
-		// 	await ctx.drawImage(background, 10, 10);
-		// 	await ctx.drawImage(overlay, 50, 50);
-		// 	await ctx.drawImage(sport, 500, 200);
-		// 	return
-		// }
-		
-		// f3();
-
-
-		// return canvas.toDataURL("image/png");
 	}
 
+	async function renderMultipleBadges() {
+		let badges = await getBadgesFromLocalStorage();
+		badges.map((badge, index) => {
+			let canvasId = `Badge-${index}`;
+			$("#badges").append(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+			drawBadge(badge, canvasId);
+			return;
+		});
+		return;
+	}
+	renderMultipleBadges();
 
 	// function renderBadgesFromLocalStorage() {
 		
