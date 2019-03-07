@@ -4,6 +4,6 @@ canvas {
 	border-width: 3px;
 	border-style: solid;
 }
-canvas:hover {
+canvas:active {
 	border-color: blue;
 }
