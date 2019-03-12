@@ -3,12 +3,13 @@
 <head>
 	<link rel="stylesheet" href="./styles.css" type="text/css">
 	 <meta property="og:url"           content="https://jvarilla.github.io/BadgeRenderer/" />
- 	<meta property="og:type"          content="website" />
+ 	 <meta property="og:type"          content="website" />
  	 <meta property="og:title"         content="My Badges" />
  	 <meta property="og:description"   content="See my CPS Awards" />
  	 <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
 </head>
 <body>
+	<div id="modal"></div>
 	<button>
 	<div class="fb-share-button" data-href="https://jvarilla.github.io/BadgeRenderer/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://jvarilla.github.io/BadgeRenderer/" class="fb-xfbml-parse-ignore">Share</a></div>
 	<div id="fb-root"></div></button>
@@ -21,8 +22,53 @@
 		<h2 id="badgeUnlockStatus"></h2>
 		<div id="badges"></div>
 	</div>
+	<input type="text" hidden id="embedText"/>
 
-	
+	<script>
+	function generateBadgeHTML(badgeCanvasId) {
+		return `<div><img src="${document.getElementById(badgeCanvasId).toDataURL('image/png', 1.0)}"/></div>`;
+		}
+
+	function handleCopyHTML(evt) {
+		console.log(evt);
+				
+		let canvasId = evt.getAttribute("data-canvas");
+		let html = generateBadgeHTML(canvasId);
+		
+		try {
+			var txt;
+			var data = new DataTransfer();
+			data.items.add("text/plain", html);
+			navigator.clipboard.writeText(data.items[0].type).then(function() {
+			console.log("Copied to clipboard successfully!", data);
+			alert("HTML Copied");
+			}, function() {
+			  console.error("Unable to write to clipboard. :-(");
+			});
+		} catch (err) {
+			try {
+				var copyText = document.getElementById("embedText");
+				copyText.value = html;
+
+				console.log(copyText.value);
+				//var copyText = document.getElementById("embedText");
+				
+			 	/* Select the text field */
+			 	copyText.select();
+
+				/* Copy the text inside the text field */
+				document.execCommand("copy");
+
+			 	/* Alert the copied text */
+			 	alert("Copied the text: " + copyText.value);
+			} catch (err) {
+				alert(err)
+			}
+		}
+			
+		return;
+	}
+	</script>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="

@@ -23,7 +23,48 @@ window.onLoad = function() {
 }
 }
 
+function generateBadgeHTML(badgeCanvasId) {
+		return `<div><img src="${document.getElementById(badgeCanvasId).toDataURL('image/png', 1.0)}"/></div>`;
+	}
 
+function handleCopyHTML(evt) {
+		console.log(evt.target);
+		// let html = generateBadgeHTML($(this).siblings(".badgeCanvas").attr('id'));
+		
+		// //alert(html);
+
+		// try {
+		// 	var txt;
+		// 	var data = new DataTransfer();
+		// 	data.items.add("text/plain", html);
+		// 	navigator.clipboard.writeText(data.items[0].type).then(function() {
+		// 	console.log("Copied to clipboard successfully!", data);
+		// 	alert("HTML Copied");
+		// 	}, function() {
+		// 	  console.error("Unable to write to clipboard. :-(");
+		// 	});
+		// } catch (err) {
+		// 	try {
+		// 		var copyText = document.getElementById("embedText");
+		// 		copyText.value = html;
+		// 		console.log(copyText.value);
+		// 		//var copyText = document.getElementById("embedText");
+				
+		// 	 	/* Select the text field */
+		// 	 	copyText.select();
+
+		// 		/* Copy the text inside the text field */
+		// 		document.execCommand("copy");
+
+		// 	 	/* Alert the copied text */
+		// 	 	alert("Copied the text: " + copyText.value);
+		// 	} catch (err) {
+		// 		alert(err)
+		// 	}
+		// }
+			
+		// return;
+	}
 
 	
 
@@ -128,16 +169,23 @@ $(() => {
 	    return;
 	}
 
+	
+		
 	async function renderMultipleBadges() {
 		let badges = await getBadgesFromLocalStorage();
 		badges.map((badge, index) => {
 			let canvasId = `Badge-${index}`;
-			$("#badges").append(`<canvas id=${canvasId} height="600" width="800"></canvas>`);
+			$("#badges").append(`<div class="badgeContainer">
+								 <button class="getBadgeHTMLBtn" data-canvas=${canvasId} onClick="handleCopyHTML(this)">Get Badge HTML</button>
+								 <canvas id=${canvasId} class="badgeCanvas" height="600" width="800"></canvas>
+								 </div>`);
 			drawBadge(badge, canvasId);
 			return;
 		});
-		return;
 	}
+
+
+	
 	renderMultipleBadges();
 
 	// function renderBadgesFromLocalStorage() {
@@ -186,16 +234,9 @@ $(() => {
 			feedback.text("You already have this badge")
 			$("#badgeUnlockStatus").text("");
 		}
-		
-
-
-		// let badgeData dec
-		// decrypt
-		// renderBadge(decryptQueryString(parseQueryString('ebs'), $("#keyInput").val()));
-		// localStorage.set($("#keyInput").val(), )
 	});
 
 	console.log(getBadgesFromLocalStorage());
-
+	
 })
 
