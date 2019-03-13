@@ -177,6 +177,8 @@ $(() => {
 			let canvasId = `Badge-${index}`;
 			$("#badges").append(`<div class="badgeContainer">
 								 <button class="getBadgeHTMLBtn" data-canvas=${canvasId} onClick="handleCopyHTML(this)">Get Badge HTML</button>
+								 <div><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I earned the ${badge.badgeName} Badge!">Tweet</a></div>
+								 <div class="fb-share-button" data-href="https://jvarilla.github.io/BadgeRenderer/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://jvarilla.github.io/BadgeRenderer/" class="fb-xfbml-parse-ignore">Share</a></div>
 								 <canvas id=${canvasId} class="badgeCanvas" height="600" width="800"></canvas>
 								 </div>`);
 			drawBadge(badge, canvasId);
