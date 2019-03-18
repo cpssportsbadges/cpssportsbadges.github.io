@@ -1,12 +1,12 @@
 let CACHE_NAME = 'glitch-e-sketch';
 let urlsToCache = [
-	'index.html',
-	'icon/icon144.png',
-	'icons/icon192.png',
-	'icons/icon512.png',
-	'manifest.webmanifest',
-	'styles.css',
-	'controls.js'
+	// 'index.html',
+	// 'icon/icon144.png',
+	// 'icons/icon192.png',
+	// 'icons/icon512.png',
+	// 'manifest.webmanifest',
+	// 'styles.css',
+	// 'controls.js'
 ];
 
 self.addEventListener('install', function(event) {
