@@ -3,17 +3,17 @@
   "name": "CPS BDGS",
   "icons": [
     {
-      "src": "/assets/icon-144.png",
+      "src": "/BadgeRenderer/assets/icon-144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "/assets/icon-192.png",
+      "src": "/BadgeRenderer/assets/icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/assets/icon-512.png",
+      "src": "/BadgeRenderer/assets/icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
