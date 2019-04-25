@@ -3,6 +3,12 @@ class Badge {
 	constructor(badgeHash, badgeData) {
 		this.hash = badgeHash;
 		this.data = JSON.parse(badgeData);
+		this.properties = {
+			shareable {
+
+			},
+			
+		}
 	}
 
 	get(prop) {
