@@ -6,7 +6,189 @@
 	width: 100%;
 }*/
 
+/*body {
+    height: 150%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+html {
+    height: 100%;
+}*/
+#app {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+/*#upperHalf {
+    display: block;
+    width: 100%;
+    height: 60%;
+    background-color: gray;
+    padding: 32px 32px 32px 32px;
+}*/
 
+#badgeDisplayed {
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+/*#unlockBadge {
+    display: flex;
+    flex-flow: row;
+    background-color: white;
+    width: 300px;
+    height: 450px;
+    border-radius: 33px;
+    align-content: center;
+    text-align: center;
+}*/
+
+#needsToBeUnlocked {
+   /* background-color: red;*/
+    max-width: 500px;
+    display: flex;
+    flex-flow: column;
+    background-color: white;
+ /*   width: 300px;
+    height: 450px;*/
+    border-radius: 33px;
+    align-content: center;
+    text-align: center;
+    padding: 32px;
+}
+
+#unlockBadge {
+    display: block;
+    border-radius: 33px;
+    background-color: white;
+    width: auto;
+    /*width: 100%;*/
+    height: auto;
+    /*width: 300px;
+    height: 450px;*/
+    padding: 5%;
+    margin-bottom: 5%;
+    /*align-content: center;*/
+}
+
+#leftDsp {
+    width: 50%;
+    min-width: 400px;
+    display: flex;
+    flex-direction: row;
+}
+#sideText {
+    display: block;
+    /*width: 100px;*/
+    /*height: 100%;*/
+    position: inherit;
+    padding-right: 10%;
+}
+#badgeStage {
+    /*float: right;*/
+    display: block;
+    height: 100%;
+    width: 50%;
+    min-width: 400px;
+    /*float:right;*/
+   /* width: 50%;*/
+    position: inherit;
+}
+
+#badge {
+    object-fit: cover;
+    /*max-height: 500px;*/
+    width: 100%;
+    /*position: inherit;
+    width: auto;
+    height: 480px;*/
+}
+#keyInput {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    width: 80%;
+    position: inherit;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 33px;
+}
+#unlockBadgeBtn {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    width: 80%;
+    position: inherit;
+    padding: 5px;
+    font-size: 14px;
+    background-color:rgb(0,42,92);
+    border-radius: 33px;
+    /*padding: 1px 12px 1px 12px;*/
+    text-decoration: none;
+    border-style: none;
+    color: white;
+}
+#imgContainer {
+    display: block;
+    /*height: 40%;*/
+    width: 200px;
+    background-image: url('./assets/cps-sports-logo.bmp');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#detailsContainer {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    flex-flow: column;
+    padding: auto 10% auto 2%;
+}
+#lowerHalf {
+    display: block;
+    width: 100%;
+    min-height: 50%;
+    height: auto;
+    padding: 10px 32px 10px 32px;
+    background-color: rgb(243,250,254); 
+}
+
+.badgeCard {
+    margin: 10px 20px;
+    border-radius: 5px;
+    display: inline-flex;
+    flex-flow: column;
+    padding: 0px;
+    align-content: center;
+    height: 300px;
+    width: 200px;
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+   /* box-shadow: 2px 2px rgba(0,0,0,0.3);*/
+}
+
+.badgeImgContainer {
+    background-color: white;
+    padding: 0;
+}
+
+.badgeImgContainer img {
+    height: 180px;
+    width: 200px;
+    align-self: center;
+}
+
+.cardInfo {
+    height: 60px;
+    padding: 0px 10px 0px 10px;
+    background-color: rgb(243,250,254)
+}
 .modal {
         position: fixed;
         left: 0;
@@ -48,8 +230,30 @@
         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
     }
 
+/*canvas {
+    height: 180px;
+    width: 200px;
+}*/
 
-canvas {
+#badges {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+  /*  width: 500px;*/
+    padding: 5%;
+}
+
+
+/*#sideText {
+
+}
+
+#badgeStage {
+    display: block
+    float: left;
+
+}*/
+/*canvas {
 	border-radius: 22px;
 	border-color: white;
 	border-width: 3px;
@@ -57,4 +261,4 @@ canvas {
 }
 canvas:active {
 	border-color: blue;
-}
+}*/
