@@ -130,18 +130,6 @@ $(() => {
 		if (!window.localStorage['Badge' + hash]) {
 			try {
 				let badgeData = decryptQueryString(hash, key);
-
-				// CONVERT BETWEEN BADGE VERSIONS 5/2/2019 TEMPORARY
-				badgeData.recipientName = 
-					badgeData.recipientFirstName + " " + badgeData.recipientLastName;
-
-				badgeData.issuerName = 
-					badgeData.issuerFirstName + " " + badgeData.issuerLastName;
-
-				badgeData.email = badgeData.recipientEmail;
-
-				badgeData.badgeName = badgeData.awardName;
-				
 				//renderBadge(badgeData);
 				console.log(badgeData);
 				// $("#badgeImage").attr('src', drawBadge(decryptQueryString(hash, key)));
@@ -150,7 +138,7 @@ $(() => {
 				$("#badges").append(`<canvas id=${canvasId} height="600" width="800" hidden></canvas>`);
 				// drawBadge(badgeData, canvasId);
 				let canvas = document.getElementById(canvasId);
-				let oldBadgeConfiguration = [
+				let renderEngine = new RenderEngine(canvas, [
 					{
 						type: "image",
 						name: "background",
@@ -191,49 +179,7 @@ $(() => {
 						y: 475,
 						text: badgeData.recipientName
 					}
-				]
-
-				let backgroundImgPath = BadgeImageConfig['background']['distinction'][badgeData.distinction];
-				console.log("Distinction", backgroundImgPath);
-				let sportImgPath = BadgeImageConfig['sport'][badgeData['sport']][(new Date(badgeData['awardDate'])).getFullYear() % 2];
-				console.log("Sport", sportImgPath);
-
-				let renderEngine = new RenderEngine(canvas, [
-					{
-						type: "image",
-						name: "background",
-						imagePath: backgroundImgPath,
-						x: 125,
-						y: 0
-					},
-					{
-						type: "image",
-						name: "sport",
-						imagePath: sportImgPath,
-						x: 325,
-						y: 455
-					},
-					{
-						type: "text",
-						name: "badge name",
-						fontSize: "45px",
-						fontFamily: "Helvetica",
-						fontColor: "white",
-						x: 380,
-						y: 435,
-						text: badgeData.awardName
-					},
-					{
-						type: "text",
-						name: "recpient name",
-						fontSize: "28px",
-						fontColor: "black",
-						fontFamily: "Helvetica",
-						x: 380,
-						y: 160,
-						text: badgeData.recipientName
-					}
-				] )
+				])
 
 				renderEngine.drawImage()
 				.then((output) => {

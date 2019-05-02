@@ -13,7 +13,7 @@ class RenderEngine {
 		this.canvas = canvas;
 		this.ctx = this.canvas.getContext("2d");
 		this.ctx.safeDraw = (img, x, y, callback) => {
-			this.ctx.drawImage(img, x, y);
+			this.ctx.drawImage(img, x, y, img.width * 1.8, img.height * 1.8);
 			callback();
 		}
 		this.layers = layers.map((layer, index) => {
