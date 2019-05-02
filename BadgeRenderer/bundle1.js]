@@ -14,7 +14,7 @@ class RenderEngine {
 		this.canvas = canvas;
 		this.ctx = this.canvas.getContext("2d");
 		this.ctx.safeDraw = (img, x, y, callback) => {
-			this.ctx.drawImage(img, x, y, img.width * 1.8, img.height * 1.8);
+			this.ctx.drawImage(img, x, y, img.width * 2, img.height * 2);
 			callback();
 		}
 		this.layers = layers.map((layer, index) => {
@@ -126,10 +126,6 @@ const badgeLayersConfig = {//paths relative to BadgeRenderer
 	},
 	sport: {
 		x: {
-			0: './BadgeV3/SportIcons/sport-icon-none-wob.png',
-			1: './BadgeV3/SportIcons/sport-icon-none-bow.png'
-		},
-		academic: {
 			0: './BadgeV3/SportIcons/sport-icon-none-wob.png',
 			1: './BadgeV3/SportIcons/sport-icon-none-bow.png'
 		},
@@ -298,9 +294,7 @@ $(() => {
 				badgeData.issuerName = 
 					badgeData.issuerFirstName + " " + badgeData.issuerLastName;
 
-				badgeData.email = badgeData.recipientEmail;
-
-				badgeData.badgeName = badgeData.awardName;
+				badgeData.email = badgeData.recipientEmail
 				
 				//renderBadge(badgeData);
 				console.log(badgeData);
@@ -363,34 +357,33 @@ $(() => {
 						type: "image",
 						name: "background",
 						imagePath: backgroundImgPath,
-						x: 125,
+						x: 0,
 						y: 0
 					},
 					{
 						type: "image",
 						name: "sport",
 						imagePath: sportImgPath,
-						x: 325,
-						y: 455
+						x: 600,
+						y: 800
 					},
 					{
 						type: "text",
 						name: "badge name",
-						fontSize: "45px",
+						fontSize: "36px",
 						fontFamily: "Helvetica",
-						fontColor: "white",
-						x: 380,
-						y: 435,
-						text: badgeData.awardName
+						fontColor: "#ffffff",
+						x: 0,
+						y: 0,
+						text: badgeData.badgeName
 					},
 					{
 						type: "text",
 						name: "recpient name",
-						fontSize: "28px",
-						fontColor: "black",
+						fontSize: "20px",
 						fontFamily: "Helvetica",
-						x: 380,
-						y: 160,
+						x: 0,
+						y: 0,
 						text: badgeData.recipientName
 					}
 				] )
