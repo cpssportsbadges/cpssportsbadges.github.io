@@ -31,14 +31,14 @@ class BadgeLinkGenerator {
   		
 
   		return arrOfBadgeData.map((badge) => {
-  			let recipientEmail = badge.email;
+  			let recipientEmail = badge.recipientEmail;
   			let badgeKey = this.getRandomKey(keyLength);
   			
 
 	        let badgeData = {};
 
 	        for (var key in badge) {
-   				 if (badge.hasOwnProperty(key) && key !== "email") {
+   				 if (badge.hasOwnProperty(key) && key !== "recipientEmail") {
        			 	badgeData[key] = badge[key];
     			}
 			}
