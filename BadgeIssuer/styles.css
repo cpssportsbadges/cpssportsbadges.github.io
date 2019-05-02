@@ -61,7 +61,7 @@ body {
 	
 }
 
-#faux-file-upload-btn {
+#faux-file-upload-btn{
 	font-family: "OpenSans-Bold";
 	min-width: 125px;
 	position: inherit;
@@ -91,6 +91,31 @@ body {
 	background-color: white;
 }
 
+#getTemplateBtn {
+	align-self: center;
+}
+
+#getTemplateBtn {
+	font-family: "OpenSans-Bold";
+	min-width: 125px;
+	margin-left:auto; 
+	font-size: 14px;
+	margin-right:0;
+	background-color:blue;
+	border-radius: 22px;
+	/*height: 100%;*/
+	min-height: 36px;
+	padding: 1px 12px 1px 12px;
+	text-decoration: none;
+	border-style: none;
+	border-color: white;
+	border-width: 2px;
+	color: white;
+	background-color:rgb(0,42,92);
+}
+#btnTemplateContainer {
+	align-content: center;
+}
 #filename  {
 	/*max-width: 132px;
 	text-align: left;
