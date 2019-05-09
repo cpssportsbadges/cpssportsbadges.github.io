@@ -1,3 +1,20 @@
+/* Cursive Font For Certificate Signature
+*/
+@font-face{
+font-family: SignatureScript;
+src: url('./CertificateAssets/alsscrp.ttf'), url('reef-webfont.woff') format('ttf');
+}
+
+@font-face{
+font-family: RobotoLight;
+src: url('./CertificateAssets/Roboto-Light.ttf') format('ttf');
+}
+
+@font-face{
+font-family: RobotoMedium;
+src: url('./CertificateAssets/Roboto-Medium.ttf') format('ttf');
+}
+
 /*#modal {
 	display: none;
 	position: absolute;

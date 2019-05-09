@@ -1,6 +1,8 @@
 let CryptoJS = require("crypto-js");
 let BadgeImageConfig = require("./badgeLayersConfig.js");
 const RenderEngine = require("./RenderEngine.js");
+const RenderEngineV2 = require("./RenderEngineV2.js");
+
 let jsPDF = require("jspdf");
 console.log(BadgeImageConfig);
 let decryptedText;
@@ -198,6 +200,45 @@ $(() => {
 				let sportImgPath = BadgeImageConfig['sport'][badgeData['sport']][(new Date(badgeData['awardDate'])).getFullYear() % 2];
 				console.log("Sport", sportImgPath);
 
+				// let renderEngineV2 = new RenderEngineV2(canvas, [
+				// 	{
+				// 		type: "image",
+				// 		name: "background",
+				// 		imagePath: backgroundImgPath,
+				// 		x: 125,
+				// 		y: 0
+				// 	},
+				// 	{
+				// 		type: "image",
+				// 		name: "sport",
+				// 		imagePath: sportImgPath,
+				// 		x: 325,
+				// 		y: 455
+				// 	},
+				// 	{
+				// 		type: "text",
+				// 		name: "badge name",
+				// 		fontSize: "45px",
+				// 		fontFamily: "Helvetica",
+				// 		fontColor: "white",
+				// 		x: 380,
+				// 		y: 435,
+				// 		text: badgeData.awardName
+				// 	},
+				// 	{
+				// 		type: "text",
+				// 		name: "recpient name",
+				// 		fontSize: "28px",
+				// 		fontColor: "black",
+				// 		fontFamily: "Helvetica",
+				// 		x: 380,
+				// 		y: 160,
+				// 		text: badgeData.recipientName
+				// 	}
+				// ] )
+				// renderEngineV2.setScaleFactor(1.8, 1.8);
+				// renderEngineV2.drawLayersMethodConditional()
+
 				let renderEngine = new RenderEngine(canvas, [
 					{
 						type: "image",
@@ -234,7 +275,7 @@ $(() => {
 						text: badgeData.recipientName
 					}
 				] )
-
+				renderEngine.setScaleFactor(1.8, 1.8);
 				renderEngine.drawImage()
 				.then((output) => {
 					let imageURI = canvas.toDataURL("imageURI/png");
@@ -308,16 +349,50 @@ $(() => {
 		let certRender = new RenderEngine(certificateCanvas, [
 				{
 					type: "image",
-					name: "badge",
-					imagePath: imageURI,
-					x: 100,
-					y: 100
+					name: "certBase",
+					imagePath: './CertificateAssets/Certificate_Blank.PNG',
+					x: 0,
+					y: 0
+				},
+				// {
+				// 	type: "image",
+				// 	name: "badge",
+				// 	imagePath: imageURI,
+				// 	x: 100,
+				// 	y: 100
+				// },
+				{
+					type: "image",
+					name: "sport",
+					scalex: 2.5,
+					scaley: 2.5,
+					x: 130,
+					y: 140,
+					imagePath: BadgeImageConfig['sport'][badgeData.sport][1]
+				},
+				{
+					type: "text",
+					name: "date",
+					fontSize: "30px",
+					fontFamily: "SignatureScript",
+					x: 540,//440,
+					y: 720, // 690,
+					text: `May 8th, 2019`
+				},
+				{
+					type: "text",
+					name: "recipientName",
+					fontSize: "54px",
+					fontFamily: "RobotoLight",
+					x: 675,//440,
+					y: 320, // 690,
+					text: badgeData.recipientName
 				},
 				{
 					type: "text",
 					name: "title",
 					fontSize: "45px",
-					fontFamily: "Serif",
+					fontFamily: "SignatureScript",
 					x: 500,
 					y: 50,
 					text: `${badgeData.badgeName} Awarded To ${badgeData.recipientName}`
@@ -332,7 +407,7 @@ $(() => {
 					text: `Awarded by ${badgeData.issuerName}, Director of Sports Administration on ${badgeData.awardDate}.`
 				}
 			]);
-
+		certRender.setScaleFactor(1.11510031679, 1.11627906977);
 		certRender.drawImage();
 	}
 
@@ -342,7 +417,7 @@ $(() => {
 			var imgData = certCanvas.toDataURL("image/png");
 			//certCanvas.style.display = "block";
 	  		var pdf = new jsPDF('l');
-
+	  		//pdf.addImage(imgData, 'JPEG', 15, 40, 180, 160)
 	  		pdf.addImage(imgData, 'JPEG', 0, 0);
 	  		pdf.save("download.pdf");
 	  	}, false);	

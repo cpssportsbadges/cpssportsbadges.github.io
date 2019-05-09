@@ -6,7 +6,7 @@
 				layers into a canvas to produce a superimposed image
 */
 
-class RenderEngine {
+class RenderEngineV2 {
 	// Context is the canvas context
 	// imageLayers is an array of file paths to the images
 	constructor(canvas, layers) {
@@ -53,6 +53,56 @@ class RenderEngine {
 		this.scaleFactor.x = xScale;
 		this.scaleFactor.y = yScale;
 	}
+
+	drawLayersMethodConditional() {
+		return new Promise((resolve, reject) => {
+			try {
+				// Make counter for number of images that have to load
+				let imageLayers = this.layers.filter((layer, index) => {
+					layer.ogIdx = index;
+					return layer.type === "image";
+				});
+
+				let numberOfImagesToLoad = imageLayers.length;
+				let imagesLoaded = 0;
+
+				let singleImgOnLoad = () => {
+					imagesLoaded++;
+					// Try To Draw All
+					drawAllLayers()
+				}
+
+				imageLayers.forEach((layer, index) => {
+					this.layers[layer.ogIdx].imageBuffer = new Image();
+					// Set Layer Image Path
+					this.layers[layer.ogIdx].imageBuffer.src = layer.imagePath;
+					this.layers[layer.ogIdx].imageBuffer.onload = singleImgOnLoad;
+				})
+				
+
+				let drawAllLayers = (imgsLoaded, imgsToLoad) => {
+					if (imgsLoaded === imgsToLoad) {
+						this.layers.forEach((layer, index) => {
+							if (layer.type === "image") {
+								this.ctx.drawImage(layer.imageBuffer, layer.x, layer.y, layer.width * layer.scalex * this.scaleFactor.x, layer.height * layer.scaley * this.scaleFactor.y);
+							} else if (layer.type === "text") {
+								this.ctx.textAlign = layer.textAlign;
+			    				this.ctx.font = `${layer.fontSize} ${layer.fontFamily}`;
+			    				this.ctx.fillStyle = layer.fontColor;
+								this.ctx.fillText(layer.text, layer.x, layer.y);
+							}
+						})
+						resolve({layerOrder: [],
+								imageURI: this.canvas.toDataURL("image/png")
+								});
+					}
+				}
+			} catch(err) {
+				reject(err);
+			}
+		});
+	}
+
 	drawLayer(layer) { // Draws a single layer
 		return new Promise((resolve, reject) => {
 			try {
@@ -117,4 +167,4 @@ class RenderEngine {
 	}
 }
 
-module.exports = RenderEngine;
+module.exports = RenderEngineV2;
