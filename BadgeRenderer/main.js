@@ -149,7 +149,7 @@ $(() => {
 				// $("#badgeImage").attr('src', drawBadge(decryptQueryString(hash, key)));
 				//console.log(drawBadge(decryptQueryString(hash, key)));
 				let canvasId = `Badge-${key}`;
-				$("#badges").append(`<canvas id=${canvasId} height="600" width="800" hidden></canvas>`);
+				$("#badges").append(`<canvas id=${canvasId} height="800" width="1000" hidden></canvas>`);
 				// drawBadge(badgeData, canvasId);
 				let canvas = document.getElementById(canvasId);
 				let oldBadgeConfiguration = [
@@ -195,9 +195,9 @@ $(() => {
 					}
 				]
 
-				let backgroundImgPath = BadgeImageConfig['background']['distinction'][badgeData.distinction];
+				let backgroundImgPath = BadgeImageConfig['background']['distinction']['v4'][badgeData.distinction];
 				console.log("Distinction", backgroundImgPath);
-				let sportImgPath = BadgeImageConfig['sport'][badgeData['sport']][(new Date(badgeData['awardDate'])).getFullYear() % 2];
+				let sportImgPath = BadgeImageConfig['sport']['v4'][badgeData['sport']][(new Date(badgeData['awardDate'])).getFullYear() % 2];
 				console.log("Sport", sportImgPath);
 
 				// let renderEngineV2 = new RenderEngineV2(canvas, [
@@ -251,17 +251,17 @@ $(() => {
 						type: "image",
 						name: "sport",
 						imagePath: sportImgPath,
-						x: 325,
-						y: 455
+						x: 330,
+						y: 600
 					},
 					{
 						type: "text",
 						name: "badge name",
-						fontSize: "45px",
+						fontSize: "50px",
 						fontFamily: "Helvetica",
 						fontColor: "white",
-						x: 380,
-						y: 435,
+						x: 400,
+						y: 565,
 						text: badgeData.awardName
 					},
 					{
@@ -270,12 +270,12 @@ $(() => {
 						fontSize: "28px",
 						fontColor: "black",
 						fontFamily: "Helvetica",
-						x: 380,
-						y: 160,
+						x: 410,
+						y: 220,
 						text: badgeData.recipientName
 					}
 				] )
-				renderEngine.setScaleFactor(1.8, 1.8);
+				//renderEngine.setScaleFactor(1.8, 1.8);
 				renderEngine.drawImage()
 				.then((output) => {
 					let imageURI = canvas.toDataURL("imageURI/png");

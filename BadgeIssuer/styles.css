@@ -1,39 +1,50 @@
-@font-face{
-font-family: OpenSans-Bold;
-src: url('OpenSans-Bold.ttf'), url('reef-webfont.woff') format('ttf');
+/*
+	Stylesheet for the Badge Issuer Application
+	About: CSS Selectors are ordered (roughly) to 
+	map with how the elements appear on the screen
+	in vertical order
+
+	Created By: Joseph Varilla
+	Last Edited: 5/15/2019
+*/
+
+/* Custom Downloaded Fonts Linked To .ttf files in assets*/
+@font-face {
+	font-family: OpenSans-Bold;
+	src: url('./assets/OpenSans-Bold.ttf'), url('reef-webfont.woff') format('ttf');
 }
 
 @font-face{
-font-family: OpenSans-Regular;
-src: url('OpenSans-Regular.ttf'), url('reef-webfont.woff') format('ttf');
+	font-family: OpenSans-Regular;
+	src: url('./assets/OpenSans-Regular.ttf'), url('reef-webfont.woff') format('ttf');
 }
 
 body {
+	/* Light Blue */
 	background-color: rgb(243,250,254);
 	font-family: "OpenSans-Regular";
 	font-weight: normal;
 	padding-top: 100px;
 }
 
+/* The white box in the center of the screen */
 .main {
 	max-width: 500px;
 	background-color: white;
 	margin-left: auto;
 	margin-right: auto;
-	/*/align-content: center;*/
-	padding: 20px 20px 40px 20px;
-	border-radius: 5%;
-	/*box-shadow: 5px 5px rgba(0,0,0,0.3);*/
+	padding: 20px 20px 40px 20px;	
 }
 
+/* A sub div within the white box that contains the contents */
 .main-content {
 	margin: 0 auto;
-	/*width: 100%;*/
-	/*margin: auto;*/
 	width: 500px;
 	height: auto; 
 
 }
+
+/*The cps sports logo img */
 #cps-sports-logo {
 	display: block;
 	max-width: 328px;
@@ -42,6 +53,68 @@ body {
 	margin-right: auto;
 }
 
+
+/* A sub div that contains only the "Get Template Sheet Button" */
+#btnTemplateContainer {
+	padding-left: 35%;
+}
+
+/* Blue button in the center 
+	that says "Get Template Sheet" */
+#getTemplateBtn {
+	font-family: "OpenSans-Bold";
+	min-width: 125px;
+	margin-left:auto; 
+	font-size: 14px;
+	margin-right:0;
+	background-color:blue;
+	border-radius: 22px;
+	min-height: 36px;
+	padding: 1px 12px 1px 12px;
+	text-decoration: none;
+	border-style: none;
+	border-color: white;
+	border-width: 2px;
+	color: white;
+	background-color:rgb(0,42,92);
+}
+
+
+/* Makes the "BROWSE" and "Get Template Sheet" buttons
+	white on hover */
+#faux-file-upload-btn:hover, #getTemplateBtn:hover {
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgb(0,42,92);
+	color: rgb(0,42,92);
+	padding: 3px 12px 3px 12px;
+	background-color: white;
+}
+
+/* The blue oval button that says
+	 "BROWSE" */
+#faux-file-upload-btn{
+	font-family: "OpenSans-Bold";
+	min-width: 125px;
+	position: inherit;
+	margin-left:auto; 
+	font-size: 14px;
+	margin-right:0;
+	align-self: flex-end;
+	background-color:blue;
+	border-radius: 22px;
+	min-height: 36px;
+	padding: 1px 12px 1px 12px;
+	text-decoration: none;
+	border-style: none;
+	border-color: white;
+	border-width: 2px;
+	color: white;
+	background-color:rgb(0,42,92);
+}
+
+/* The oval containing the browse for file button
+	and the text that displays "no file selected" */
 .browse-for-file-container {
 	display: block;
 	background-color: white;
@@ -55,75 +128,15 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2%;
-	max-width: 318px;/*430px;*/
+	max-width: 318px;
 	padding: 4px;
 	font-size: 15px;
 	
 }
 
-#faux-file-upload-btn{
-	font-family: "OpenSans-Bold";
-	min-width: 125px;
-	position: inherit;
-	margin-left:auto; 
-	font-size: 14px;
-	margin-right:0;
-	align-self: flex-end;
-	background-color:blue;
-	border-radius: 22px;
-	/*height: 100%;*/
-	min-height: 36px;
-	padding: 1px 12px 1px 12px;
-	text-decoration: none;
-	border-style: none;
-	border-color: white;
-	border-width: 2px;
-	color: white;
-	background-color:rgb(0,42,92);
-}
-
-#faux-file-upload-btn:hover {
-	border-style: solid;
-	border-width: 2px;
-	border-color: rgb(0,42,92);
-	color: rgb(0,42,92);
-	padding: 3px 12px 3px 12px;
-	background-color: white;
-}
-
-#getTemplateBtn {
-	align-self: center;
-}
-
-#getTemplateBtn {
-	font-family: "OpenSans-Bold";
-	min-width: 125px;
-	margin-left:auto; 
-	font-size: 14px;
-	margin-right:0;
-	background-color:blue;
-	border-radius: 22px;
-	/*height: 100%;*/
-	min-height: 36px;
-	padding: 1px 12px 1px 12px;
-	text-decoration: none;
-	border-style: none;
-	border-color: white;
-	border-width: 2px;
-	color: white;
-	background-color:rgb(0,42,92);
-}
-#btnTemplateContainer {
-	align-content: center;
-}
+/* Inside of the dark gray oval that displays "No File Selected"
+	or the name of the file uploaded */
 #filename  {
-	/*max-width: 132px;
-	text-align: left;
-	margin-right: 10%;
-	margin-left: 0;
-	text-overflow: ellipsis;*/
-	/*height: 32.4px;*/
-/*	padding-bottom: 12px;*/
 	vertical-align: middle;
 	bottom: 5px;
 	text-align: left;
@@ -136,13 +149,14 @@ body {
   	overflow: hidden;
 }
 
+/* The bottom button that says "Generate Badge CSV" */
 #generate-csv-btn {
 	font-family: "OpenSans-Bold";
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 5%;
-	min-width: 328px; /* 410 510*/
+	min-width: 328px;
 	min-height: 36px;
 	position: inherit;
 	font-size: 14px;
@@ -170,6 +184,7 @@ body {
 	background-color: white;
 }
 
+/* Instructions at the bottom of the screen */
 #instructions {
 	color: #313131;
 	max-width: 328px;

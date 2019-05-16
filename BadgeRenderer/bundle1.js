@@ -339,6 +339,81 @@ const badgeLayersConfig = {//paths relative to BadgeRenderer
 		wrestling: {
 			0: './BadgeV3/SportIcons/sport-icon-wrestling-wob.png',
 			1: './BadgeV3/SportIcons/sport-icon-wrestling-bow.png'
+		},
+
+		v4: {
+			academic: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Academic.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Academic.png'
+			},
+			badminton: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Badminton.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Badminton.png'
+			},
+			baseball: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Baseball.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Baseball.png'
+			},
+			basketball: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Basketball.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Basketball.png'
+			},
+			bowling: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Bowling.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Bowling.png'
+			},
+			cross_country: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-CrossCountry.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-CrossCountry.png'
+			},
+			football: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Football.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Football.png'
+			},
+			golf: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Golf.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Golf.png'
+			},
+			lacrosse: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Lacrosse.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Lacrosse.png'
+			},
+			soccer: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Soccer.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Soccer.png'
+			},
+			softball: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Softball.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Softball.png'
+			},
+			spirit: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Spirit.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Spirit.png'
+			},
+			swimming: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Swimming.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Swimming.png'
+			},
+			tennis: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Tennis.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Tennis.png'
+			},
+			track_and_field: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Track.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Track.png'
+			},
+			volleyball: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Volleyball.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Volleyball.png'
+			},
+			water_polo: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-WaterPolo.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-WaterPolo.png'
+			},
+			wrestling: {
+				0: './BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Wrestling.png',
+				1: './BadgeV4/SportsIconsWHITE/White-Sports-Icons-Wrestling.png'
+			}
 		}
 		// baseball: './BadgeAssets/badge-sport/sport-logo-baseball.png',
 		// football: './BadgeAssets/badge-sport/sport-logo-football.png',
@@ -500,7 +575,7 @@ $(() => {
 				// $("#badgeImage").attr('src', drawBadge(decryptQueryString(hash, key)));
 				//console.log(drawBadge(decryptQueryString(hash, key)));
 				let canvasId = `Badge-${key}`;
-				$("#badges").append(`<canvas id=${canvasId} height="600" width="800" hidden></canvas>`);
+				$("#badges").append(`<canvas id=${canvasId} height="800" width="1000" hidden></canvas>`);
 				// drawBadge(badgeData, canvasId);
 				let canvas = document.getElementById(canvasId);
 				let oldBadgeConfiguration = [
@@ -546,9 +621,9 @@ $(() => {
 					}
 				]
 
-				let backgroundImgPath = BadgeImageConfig['background']['distinction'][badgeData.distinction];
+				let backgroundImgPath = BadgeImageConfig['background']['distinction']['v4'][badgeData.distinction];
 				console.log("Distinction", backgroundImgPath);
-				let sportImgPath = BadgeImageConfig['sport'][badgeData['sport']][(new Date(badgeData['awardDate'])).getFullYear() % 2];
+				let sportImgPath = BadgeImageConfig['sport']['v4'][badgeData['sport']][(new Date(badgeData['awardDate'])).getFullYear() % 2];
 				console.log("Sport", sportImgPath);
 
 				// let renderEngineV2 = new RenderEngineV2(canvas, [
@@ -602,17 +677,17 @@ $(() => {
 						type: "image",
 						name: "sport",
 						imagePath: sportImgPath,
-						x: 325,
-						y: 455
+						x: 330,
+						y: 600
 					},
 					{
 						type: "text",
 						name: "badge name",
-						fontSize: "45px",
+						fontSize: "50px",
 						fontFamily: "Helvetica",
 						fontColor: "white",
-						x: 380,
-						y: 435,
+						x: 400,
+						y: 565,
 						text: badgeData.awardName
 					},
 					{
@@ -621,12 +696,12 @@ $(() => {
 						fontSize: "28px",
 						fontColor: "black",
 						fontFamily: "Helvetica",
-						x: 380,
-						y: 160,
+						x: 410,
+						y: 220,
 						text: badgeData.recipientName
 					}
 				] )
-				renderEngine.setScaleFactor(1.8, 1.8);
+				//renderEngine.setScaleFactor(1.8, 1.8);
 				renderEngine.drawImage()
 				.then((output) => {
 					let imageURI = canvas.toDataURL("imageURI/png");

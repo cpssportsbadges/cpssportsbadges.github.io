@@ -1,25 +1,34 @@
 <!DOCTYPE html>
+<!-- CPS Sports Badge Issuer
+    Application used for generating badge links and keys
+    Created By: Joseph Varilla
+    Last Edited: 5/15/2019
+-->
 <html>
 <head>
 	<title>Badge Issuer</title>
-
 	<link type="text/css" rel="stylesheet" href="styles.css"/>
-	<script
-		  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-		  crossorigin="anonymous"></script>
+  <script src="jQuery.js"></script>
 </head>
 <body>
   <div class="main">
     <div class="main-content">
     <img id="cps-sports-logo" width="1000px" src="./assets/cps-sports-logo.bmp"/>
-    <div id="btnTemplateContainer"><a href="badgeIssuerTemplate.xlsx" download><button id="getTemplateBtn">Get Template Sheet</button></a></div>
+    <div id="btnTemplateContainer">
+      <a href="./assets/badgeIssuerTemplate.xlsx" download>
+        <button id="getTemplateBtn">Get Template Sheet</button>
+      </a>
+    </div>
     <div class="browse-for-file-container">
       <span id="filename">File Name</span>
-      <button id="faux-file-upload-btn"><strong>BROWSE</strong></button>
+      <button id="faux-file-upload-btn">
+        <strong>BROWSE</strong>
+      </button>
       <input hidden id="upload" type=file  accept=".csv"  accept="text/csv" name="files[]" size=30/>
     </div>
-    <button id="generate-csv-btn"><strong>GENERATE BADGE CSV</strong></button>
+    <button id="generate-csv-btn">
+      <strong>GENERATE BADGE CSV</strong>
+    </button>
     <div id="instructions">
       <div id="step1">Upload a CSV file of badges</div>
       <div hidden id="step2">Generate a return CSV of issuable badges</div>
@@ -31,36 +40,10 @@
         </ol>
       </div>
     </div>
-  	<!-- <form enctype="multipart/form-data">
-      <input id="upload" type=file    accept="text/html" name="files[]" size=30>
-    </form>
-    <textarea class="form-control" rows=5 cols=5 id="ms_word_filtered_html"></textarea> -->
-    </div>
   </div>
+</div>
 
-<script>
-function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
-
-    // use the 1st file from the list
-    f = files[0];
-
-    var reader = new FileReader();
-
-    // Closure to capture the file information.
-    reader.onload = (function(theFile) {
-        return function(e) {
-
-          jQuery( '#ms_word_filtered_html' ).val( e.target.result );
-        };
-      })(f);
-
-      // Read in the image file as a data URL.
-      reader.readAsText(f);
-  }
-
-  document.getElementById('upload').addEventListener('change', handleFileSelect, false);
-</script>
+<!-- Contains the code for the UI and makes use of jQuery.js -->
 <script src="bundle.js"></script>
 </body>
 </html> 

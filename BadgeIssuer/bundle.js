@@ -1,4 +1,13 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+/* 
+	Badge Link Generator
+	About: Used to create badge
+	links and keys
+
+	Created By: Joseph Varilla
+	Last EditedL 5/15/2019
+*/
+
 class BadgeLinkGenerator {
 	constructor(linkBase) {
 		this.CryptoJS = require("crypto-js");
@@ -6,30 +15,39 @@ class BadgeLinkGenerator {
 		this.keyValChars =["0123456789","abcdefghijklmnopqrstuvwxyz"]
 	}
 
-	getRandomInt(arrLength) {//generates random int between 0 and one below the arr length
+	/* generates random int between 
+	  0 and one below the arr length */
+	getRandomInt(arrLength) {
  	 	return Math.floor(Math.random() * arrLength); 
   	}
 
-	getRandomKey(keyLength = 3)  {//Min of 3 char key
+  	/* Create a random key with a length
+  	   of at least 3 */
+	getRandomKey(keyLength = 3)  { //Min of 3 char key
  		let key = '';
   		if (keyLength < 3) {
   		  keyLength = 3;
   		}
 		
 		for(let keyIdx = 0; keyIdx < keyLength; keyIdx++) {
+		 /* Alternate between digits and letters to prevent creation
+		 	of  keys that contain profanity */
    		 key += this.keyValChars[keyIdx % 2][this.getRandomInt(this.keyValChars[keyIdx % 2].length)]
   		}
   		return key;
   	}
 
+  	// Merges the bash hash with the base url
   	getBadgeURL(hash, baseWebsiteURL) {
   		return `${baseWebsiteURL}?ebs=${hash}`;
  	 }
 
+ 	// Returnts the badge links and the keys
 	getBadgeLinks(arrOfBadgeData, keyLength) {
 		let arrOfOutput = [];
   		
 
+		// Returns an array of badge links and keys
   		return arrOfBadgeData.map((badge) => {
   			let recipientEmail = badge.recipientEmail;
   			let badgeKey = this.getRandomKey(keyLength);
@@ -38,6 +56,7 @@ class BadgeLinkGenerator {
 	        let badgeData = {};
 
 	        for (var key in badge) {
+	        	//	Do Not include the recipient's email in the badge hash
    				 if (badge.hasOwnProperty(key) && key !== "recipientEmail") {
        			 	badgeData[key] = badge[key];
     			}
@@ -48,6 +67,7 @@ class BadgeLinkGenerator {
 	        let badgeHash = bytes.toString();
 	        let badgeURL = this.getBadgeURL(badgeHash, this.linkBase);
 
+	        // CSV fields in the final output file
 	        return {email: recipientEmail, url: badgeURL, key: badgeKey}
   		});		
 	}
@@ -56,32 +76,54 @@ class BadgeLinkGenerator {
 module.exports = BadgeLinkGenerator;
 
 },{"crypto-js":11}],2:[function(require,module,exports){
+/* 
+  main.js
+  About: 
+  Powers the user interface
+  of the BadgeIssuer. This file makes
+  use of jQuery and some NPM packages.
+
+  main.js does not actually get sent to
+  the user's browser, you need to build all
+  the dependencies into bundle.js which get sent over.
+
+  Created by: Joseph Varilla
+  Last Edited: 5/15/2019
+*/
+
+// PLEASE REPLACE WITH THE NEW URL OF THE BADGE RENDERER APPLICATION
+const rendererAppURL = 'https://jvarilla.github.io/BadgeRenderer/';
+
+/* Import CryptoJS - Used for creating hashes of badges
+  to be appended to badge links */
+
 let CryptoJS = require("crypto-js");
-//import BadgeLinkGenerator from './BadgeLinkGenerator.js';
+
+/* Custom JavaScript object used to make badge links and keys */
 let BadgeLinkGenerator = require("./BadgeLinkGenerator.js");
 
-const rendererAppURL = 'https://jvarilla.github.io/BadgeRenderer/';
+// use base link for creating badge links
 let badgeLinkGenerator = new BadgeLinkGenerator(rendererAppURL);
 
-//Create output csv file by converting JSON to CSV
 
-//Traverse DOM and cache the locations of important elements
-  
-  //File Input Elements
-  let fileNameDisplay = $("#filename");
-  let fauxFileUploadBtn = $("#faux-file-upload-btn");
-  let realFileUploadBtn = $("#upload");
+// Traverse DOM and cache the locations of important elements
 
-  //Generate Badge Links Button
-  let generateCSVBtn = $("#generate-csv-btn");
+// File Input Elements
+let fileNameDisplay = $("#filename");
+let fauxFileUploadBtn = $("#faux-file-upload-btn");
+let realFileUploadBtn = $("#upload");
 
-  //Instructions
-  let instructions = {
-    step1: $("#step1"),
-    step2: $("#step2"),
-    step3: $("#step3")
-  }
+// Generate Badge Links Button
+let generateCSVBtn = $("#generate-csv-btn");
 
+// Instructions Loaded at the bottom of the screen
+let instructions = {
+  step1: $("#step1"),
+  step2: $("#step2"),
+  step3: $("#step3")
+}
+
+// Resets the screen to how looked before interacting with it
 function resetScreen() {
   //Reset File Display Text To No File Selected
   fileNameDisplay.text("No File Selected");
@@ -90,14 +132,14 @@ function resetScreen() {
   realFileUploadBtn.hide();
   //Disable Generate CSV File Button
   generateCSVBtn.attr("disabled", true);
-  //Reset Steps
+  //Reset Instruction Steps
   instructions.step1.attr("hidden", false);
   instructions.step2.hide();
   instructions.step3.hide();
 
 }
 
-//Convert CSV to JSON
+// Convert CSV to JSON (Converts the user uploaded csv file)
 const CSV_to_JSON = (data, delimiter = ',') => {
   const titles = data.slice(0, data.indexOf('\n')).split(delimiter);
   return data
@@ -109,6 +151,7 @@ const CSV_to_JSON = (data, delimiter = ',') => {
     });
   };
 
+// Create output csv file by converting JSON to CSV
 const JSON_to_CSV = (arrOfJSONData) => {
   const json = arrOfJSONData;
   const fields = Object.keys(json[0])
@@ -134,11 +177,13 @@ const JSON_to_CSV = (arrOfJSONData) => {
    return reformattedCSVData;//csv is an array
   }
 
+// Creates the name of the output file based on the date of creation
 const generateFileName = () => {
   let date = new Date(Date.now());
   return 'BadgeOutput' + (date.toISOString()).replace(/:/g, "-").replace(/\./g, "-") + ".csv";
 }
 
+// Turns text into a csv file and downloads it onto the user's browser
 function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
@@ -152,44 +197,25 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
-// function handleFileSelect(evt) {
-//     const files = evt.target.files; // FileList object
-
-//     // use the 1st file from the list
-//     f = files[0];
-
-//     let reader = new FileReader();
-
-//     // Closure to capture the file information.
-//     reader.onload = (function(theFile) {
-//         return function(e) {
-//           let jsonArr = CSV_to_JSON(e.target.result, ',');
-//           //let hashBadgeData2 = hashBadgeData(jsonArr);
-//           let hashBadgeData2 = badgeLinkGenerator.getBadgeLinks(jsonArr, 4);
-//           let csvData = JSON_to_CSV(hashBadgeData2);
-//           //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
-//           jQuery( '#ms_word_filtered_html' ).val(csvData);
-//           download('output.csv', csvData);
-//         };
-//       })(f);
-
-//       // Read in the image file as a data URL.
-//       reader.readAsText(f);
-//   }
-
-function setupLoadScreen() { // hides and disables elements at start
-
-  }
+/* After all elements are loaded onto the 
+    screen attach these event handlers */
 $(() => {
   let fileUploaded = '';
 
-  //Setup initial loading screen
+  // Setup initial loading screen
   resetScreen();
+
+  /* The original file button input type
+    style was incosistent accross browsers
+    so we have it hidden and created a fauxfilebtn
+    that we styled with css and linked the click event handler
+    for the faux button to the real btn */
   fauxFileUploadBtn.on('click', function(){
     realFileUploadBtn.click();
    });
 
-
+  
+  // Handle the file selection
   function handleFileSelect(evt) {
     const files = evt.target.files; // FileList object
 
@@ -200,7 +226,7 @@ $(() => {
     // Closure to capture the file information.
      reader.onload = (function(theFile) {
         if (!theFile.name.includes(".csv")) {
-          return function(e) {
+          return function(e) { // Handle if the file was not a csv file
              fileNameDisplay.text("Please upload a CSV file");
              generateCSVBtn.attr('disabled', true);
              instructions.step2.hide();
@@ -208,25 +234,33 @@ $(() => {
              instructions.step1.show()
              return;
           }
-        } else {
+        } else { // Handle the csv file upload
           return function(e) {
-          let jsonArr = CSV_to_JSON(e.target.result, ',');
-          
-          //let hashBadgeData2 = hashBadgeData(jsonArr);
-          instructions.step1.hide();
-          instructions.step2.show();
-          instructions.step3.hide();
-          fileNameDisplay.text(theFile.name);
-          generateCSVBtn.attr('disabled', false);
-          generateCSVBtn.on('click', function() {
-            let hashBadgeData2 = badgeLinkGenerator.getBadgeLinks(jsonArr, 4);
-            let csvData = JSON_to_CSV(hashBadgeData2);
-            //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
-            jQuery( '#ms_word_filtered_html' ).val(csvData);
-            download(generateFileName(), csvData);
+            // Convert CSV to JSON
+            let jsonArr = CSV_to_JSON(e.target.result, ',');
+            
+            // Advance Instructions to step 2
             instructions.step1.hide();
-            instructions.step2.hide();
-            instructions.step3.show();
+            instructions.step2.show();
+            instructions.step3.hide();
+
+            // Change file name in upload file button span
+            fileNameDisplay.text(theFile.name);
+            generateCSVBtn.attr('disabled', false);
+
+            // Handle the generate CSV Button Click
+            generateCSVBtn.on('click', function() {
+              let hashBadgeData2 = badgeLinkGenerator.getBadgeLinks(jsonArr, 4);
+              let csvData = JSON_to_CSV(hashBadgeData2);
+              
+              // Create and download the csv file
+              jQuery( '#ms_word_filtered_html' ).val(csvData);
+              download(generateFileName(), csvData);
+              
+              // Advance to Instruction Step 3
+              instructions.step1.hide();
+              instructions.step2.hide();
+              instructions.step3.show();
           })
         };
       }
@@ -238,11 +272,12 @@ $(() => {
       fileUploaded = reader.readAsText(f);
   }
    document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+  
   //Generate output csv file
   function generateOutputCSV() {
+          // Create the get links and keys to the badges
           let hashBadgeData2 = badgeLinkGenerator.getBadgeLinks(fileUploaded, 4);
           let csvData = JSON_to_CSV(hashBadgeData2);
-          //let reformattedCSVData = csvData.toString().replace(/['"]+/g, '');//gets rid of quote marks
           jQuery( '#ms_word_filtered_html' ).val(csvData);
           download(generateFileName(), csvData);
   }
