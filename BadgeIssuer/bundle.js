@@ -167,7 +167,7 @@ const JSON_to_CSV = (arrOfJSONData) => {
   //csv.unshift(fields.join('\n')); //join via a new line character so it renders properly in excel
   csv.unshift(fields.join(',').concat(['\n'])) // add header column makes header columns horizontal
   // csv.join('\r\n');
-
+  csv.pop();
   // Inject new line characters between entries
  
 
@@ -235,9 +235,14 @@ $(() => {
              return;
           }
         } else { // Handle the csv file upload
-          return function(e) {
-            // Convert CSV to JSON
-            let jsonArr = CSV_to_JSON(e.target.result, ',');
+          return function(e) { // Convert CSV to JSON
+            let csvText = e.target.result;
+            console.log(csvText);
+            // Remove excess commas (empty rows)
+            csvText = csvText.replace(/\n\,{3,}/gm, "")
+            console.log(csvText);
+
+            let jsonArr = CSV_to_JSON(csvText, ',');
             
             // Advance Instructions to step 2
             instructions.step1.hide();
