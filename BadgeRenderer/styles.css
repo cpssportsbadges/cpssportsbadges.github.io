@@ -5,6 +5,11 @@ font-family: SignatureScript;
 src: url('./CertificateAssets/alsscrp.ttf'), url('reef-webfont.woff') format('ttf');
 }
 
+@font-face {
+font-family: OpenSansBold;
+src: url('/CertificateAssets/OpenSans-Bold.ttf') format('ttf');
+}
+
 @font-face{
 font-family: RobotoLight;
 src: url('./CertificateAssets/Roboto-Light.ttf') format('ttf');

@@ -69,7 +69,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<div id="imgContainer"></div>
 					<img width="100%" height="auto" src="./assets/cps-sports-logo.bmp" style="align-self: center;max-width: 300px;"/>
 					<div><p>Congratulations!<p></div>
-					<p>On behalf of Chicago Public Schools Sports Administration, we would like to congratulate you on your athletic achievements. <strong> Enter the four-digit key you received in your email below to unlock your award</strong></p>
+					<p>On behalf of Chicago Public Schools Sports Administration, we would like to congratulate you on your athletic achievements. <strong> Enter the four-digit key you received in your email below to unlock your award</strong>
+						<br/><span id="feedback"></span></p>
 					<p id="badgeUnlockStatus"></p>
 					<input type="text" id="keyInput" />
 					<input type="button" id="unlockBadgeBtn" value="Unlock Badge"/>
@@ -221,6 +222,13 @@ function myFunction() {
   }
 }
 </script>
+<!-- Preload the fonts -->
+<div style="background-color: #0c0c7a">
+	<div style="font-family: OpenSansBold; color: #1f0f66">abc</div>
+	<div style="font-family: SignatureScript; color: #1f0f66">abc</div>
+	<div style="font-family: RobotoMedium; color: #1f0f66;">abc</div>
+	<div style="font-family: RobotoLight; color: #1f0f66;">abc</div>
+</div>
 <canvas id="myCertificate" style="background-color:white;display:none" height="816px" width="1056px"></canvas>
 	<!-- <canvas id="myCertificate" style="background-color:white;display:none" height="800px" width="1150px"></canvas>
  -->
