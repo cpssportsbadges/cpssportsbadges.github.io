@@ -1,5 +1,5 @@
 
-Works fine for me with that image and the following code in the latest Firefox and Chrome beta on Mac. (Except the image itself has a few white non-transparent pixels, which you can see by opening on a dark background e.g. in Firefox.)
+//Works fine for me with that image and the following code in the latest Firefox and Chrome beta on Mac. (Except the image itself has a few white non-transparent pixels, which you can see by opening on a dark background e.g. in Firefox.)
 
 <!DOCTYPE HTML> 
 <html>
