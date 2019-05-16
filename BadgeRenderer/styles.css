@@ -32,6 +32,8 @@ src: url('./CertificateAssets/Roboto-Medium.ttf') format('ttf');
 html {
     height: 100%;
 }*/
+
+/* 
 #app {
     display: flex;
     flex-flow: column;
@@ -45,6 +47,7 @@ html {
     padding: 32px 32px 32px 32px;
 }*/
 
+/* Display if there is not badge to be unlocked */
 #badgeDisplayed {
     display: flex;
     flex-flow: wrap;
@@ -64,6 +67,7 @@ html {
     text-align: center;
 }*/
 
+/* Display if there is a badge to be unlocked */
 #needsToBeUnlocked {
    /* background-color: red;*/
     max-width: 500px;
@@ -83,10 +87,7 @@ html {
     border-radius: 33px;
     background-color: white;
     width: auto;
-    /*width: 100%;*/
     height: auto;
-    /*width: 300px;
-    height: 450px;*/
     padding: 5%;
     margin-bottom: 5%;
     /*align-content: center;*/
@@ -247,16 +248,11 @@ html {
         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
     }
 
-/*canvas {
-    height: 180px;
-    width: 200px;
-}*/
 
 #badges {
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
-  /*  width: 500px;*/
     padding: 5%;
 }
 

@@ -1,27 +1,37 @@
 /*
 	Name: RenderEngine
 	Author: Joseph Varilla
-	Date: 4/12/2019
-	Description: A class to be used to load multiple image 
-				layers into a canvas to produce a superimposed image
+	Date: 4/12/2019 | Last Edited 5/16/2019
+	Description: A class to be used to 
+				load multiple image 
+				layers into a canvas to 
+				produce a superimposed image
+				(i.e. badge image, certificate)
 */
 
 class RenderEngine {
 	// Context is the canvas context
 	// imageLayers is an array of file paths to the images
 	constructor(canvas, layers) {
+		// The canvas to be drawn on
 		this.canvas = canvas;
+
+		// The context to used to draw on canvas
 		this.ctx = this.canvas.getContext("2d");
+
+		// Alters the size of the whole image (all layers)
 		this.scaleFactor = {};
 		this.scaleFactor.x = 1;
 		this.scaleFactor.y = 1;
-		this.ctx.safeDraw = (img, x, y, scalex, scaley, callback) => {
-			console.log("img.scalex", scalex);
-			console.log("img.scalex", scaley);
 
+		/* Draw an image layer provided the coords, 
+			img buffer, and indidual scale factors */
+		this.ctx.safeDraw = (img, x, y, scalex, scaley, callback) => {
 			this.ctx.drawImage(img, x, y, img.width * scalex * this.scaleFactor.x, img.height * scaley * this.scaleFactor.y);
 			callback();
 		}
+
+		// Turns the input layers into an array of layers with specific properties
 		this.layers = layers.map((layer, index) => {
 			let layerObj = {
 				order: index,
