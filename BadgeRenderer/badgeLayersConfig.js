@@ -92,8 +92,8 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 			},
 			track_and_field: {
 				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-TrackAndField.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Track.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Track.png'
+				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-TrackAndField.png',
+				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-TrackAndField.png'
 			},
 			volleyball: {
 				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Volleyball.png',

@@ -86,6 +86,7 @@ class RenderEngine {
 					window.setTimeout(() => {
 						this.ctx.textAlign = layer.textAlign;
 	    				this.ctx.font = `${layer.fontSize} ${layer.fontFamily}`;
+	    				console.log(layer.fontFamily);
 	    				this.ctx.fillStyle = layer.fontColor;
 						this.ctx.fillText(layer.text, layer.x, layer.y);
 						resolve(`${layer.name}`);
