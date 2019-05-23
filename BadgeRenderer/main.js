@@ -293,7 +293,7 @@ $(() => {
 				{
 					type: "image",
 					name: "certBase",
-					imagePath: './CertificateAssets/Certificate-template.png',
+					imagePath: './CertificateAssets/CERTIFICATE_FINAL_BLANK.png',
 					x: 0,
 					y: 0
 				},
@@ -311,42 +311,66 @@ $(() => {
 					type: "text",
 					name: "date",
 					fontSize: "30px",
-					fontColor: "#1f0f66",
+					fontColor: "#012c5e",
 					fontFamily: "SignatureScript",
 					x: 540,//440,
-					y: 720, // 690,
-					text: `May 8th, 2019`
+					y: 740,//720, // 690,
+					text: "May 16th, 2019"//badgeData.awardDate.to
 				},
 				{
 					type: "text",
 					name: "issuer",
 					fontSize: "30px",
-					fontColor: "#1f0f66",
+					fontColor: "#012c5e",
 					fontFamily: "SignatureScript",
 					x: 850,//440,
-					y: 720, // 690,
+					y: 740, // 690,
 					text: badgeData.issuerName
 				},
 				{
 					type: "text",
 					name: "recipientName",
-					fontSize: "48px",
-					fontColor: "#1f0f66",
-					fontFamily: "Arial",
+					textAlign: "center",
+					fontSize: "60px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Arial",
 					x: 675,//440,
-					y: 350, // 690,
+					y: 380, // 690,
 					text: badgeData.recipientName
 				},
 				{
 					type: "text",
 					name: "awardName",
-					fontSize: "54px",
-					fontColor: "#1f0f66",
-					fontFamily: "Helvetica",
+					fontSize: "42px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Helvetica",
 					x: 675,//440,
 					y: 450, // 690,
 					text: badgeData.awardName
+				},
+				{
+					type: "text",
+					name: "date-label",
+					textAlign: "center",
+					fontSize: "24px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Arial",
+					x: 440,//440,
+					y: 765,
+					text: "Date"
+				},
+				{
+					type: "text",
+					name: "issuerTitle",
+					textAlign: "start",
+					fontSize: "24px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Arial",
+					x: 760,
+					y: 765,
+					text: badgeData.issuerTitle
 				}
+
 			]);
 		certRender.drawImage();
 	}
@@ -358,7 +382,123 @@ $(() => {
 			var imgData = certCanvas.toDataURL("image/png");
 	  		var pdf = new jsPDF('l');
 	  		pdf.addImage(imgData, 'JPEG', 0, 0);
-	  		pdf.save("download.pdf");
+	  		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+	  		// Uses Badge Data in the Downloaded File Name
+	  		pdf.save(`${badgeData.recipientName}-${badgeData.awardName}-${badgeData.awardDate}.pdf`);
 	  	}, false);	
+
+
+	// Download Badge Image
+	function downloadURI(uri, name) {
+	  var link = document.createElement("a");
+	  link.download = name;
+	  link.href = uri;
+	  document.body.appendChild(link);
+	  link.click();
+	  document.body.removeChild(link);
+	  delete link;
+	}
+
+	function generateBadgeFileName(badgeData) {
+		let awardDate = badgeData.awardDate.replace(/\//ig, "_")
+		return `${badgeData.awardName}-${badgeData.recipientName}-${awardDate}-badge.png`;
+	}
+	function downloadBadgeImage(badgeData, fileName) {
+		downloadURI(badgeData.imageURI, fileName);
+	}
+
+	// Close Button Event Handler
+	var closeButton = document.querySelector(".close-button");
+	closeButton.addEventListener("click", function() {
+			var modal = document.querySelector(".modal");
+			modal.classList.toggle("show-modal");
+		});
+
+	function showModal(stepsArr, linkToSocialURL="0", socialLocation="0") {
+		$("#howToSteps").empty();
+		var modal = document.querySelector(".modal");
+		modal.classList.toggle("show-modal");
+		stepsArr.forEach((step, idx) => {
+			$("#howToSteps").append(`<li id="step-${idx}">${step.text}</li>`);
+		})
+
+		let proceedToSocialBtn = $("#proceedToSocialBtn");
+		if (linkToSocial != "0" && socialLocation != "0") {
+			proceedToSocialBtn.show();
+			proceedToSocialBtn.text(`Go To: ${socialLocation}`);
+			$("#linkToSocial").attr("href", linkToSocialURL);
+		} else {
+			proceedToSocialBtn.hide();
+			proceedToSocialBtn.text(``);
+		}
+	}
+
+	// Social Media Buttons Event Handlers
+	$("#facebookBtn").on('click', function() {
+		// Download Badge Image
+		//window.open('https://www.facebook.com', '_blank');
+		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+		let fileName = generateBadgeFileName(badgeData);
+
+		let facebookSteps = [
+			{
+				stepNumber: 1,
+				text: `Upload ${fileName} To Post (being downloaded right now)`
+			},
+			{
+				stepNumber: 2,
+				text: "Hit Share"
+			}
+		];
+		
+		
+		showModal(facebookSteps, "https://www.facebook.com", "Facebook");
+		downloadBadgeImage(badgeData, fileName);
+	});
+
+	$("#twitterBtn").on('click', function() {
+		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+		let fileName = generateBadgeFileName(badgeData);
+		let twitterSteps = [
+			{
+				stepNumber: 1,
+				text: `Upload ${fileName} To Post (being downloaded right now)`
+			},
+			{
+				stepNumber: 2,
+				text: "Hit Tweet"
+			}
+		];
+		
+		showModal(twitterSteps, "https://www.twitter.com", "Twitter");
+		// Download Badge Image
+		downloadBadgeImage(badgeData, fileName);
+	});
+
+	$("#embedHTMLBtn").on('click', function() {
+		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+		let fileName = generateBadgeFileName(badgeData);
+		let embedHTMLSteps = [
+			{
+				stepNumber: 1,
+				text: "Upload the image to the a folder in your site"
+			},
+			{
+				stepNumber: 2,
+				text: `Copy the following into the HTML file\n
+					   &lt;img src="{PATH}/${fileName} /&gt;`
+			},
+			{
+				stepNumber: 3,
+				text:  `Replace {PATH} with the file path of folders you stored the picture in.\n
+					   (remove the curly braces too {} but keep the quotes and the <>) \n
+					   HINT: A file path looks like ./site/assets`
+			}
+		];
+		showModal(embedHTMLSteps);
+		// Download Badge Image
+		downloadBadgeImage(badgeData, fileName);
+	});
+
 });
 

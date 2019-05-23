@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>CPS Badges</title>
 	<style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -62,9 +63,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- https://bit.ly/2T1Gp1M -->
 
 <!-- First Grid -->
-<div class="w3-row-padding w3-padding-64" style="background-image: url('/BadgeRenderer/assets/chicago-background.png');background-repeat: no-repeat;background-size: cover;">
+<div id="upperHalfContainer" class="w3-row-padding w3-padding-64">
   <!-- <div class="w3-content"> -->
-    <div class="w3-twothird">
+    <div><!--class="w3-twothird"-->
     	<div id="needsToBeUnlocked">
 					<div id="imgContainer"></div>
 					<img width="100%" height="auto" src="./assets/cps-sports-logo.bmp" style="align-self: center;max-width: 300px;"/>
@@ -84,10 +85,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<div id="sideText">
 						<div id="detailsContainer">
 							<img height="200px" width="auto" src="./assets/cps-sports-logo.bmp"/>
-							<h1>Congratulations on your Achievement</h1>
-							<p>On behalf of Chicago Public Schools Sports Administration we would like to congratulate you on your athletic achievements. A collecttion of you awards are displayed below. Select one to view and use the links to share with your friends and family.</p>
-							<div id="socialMediaBtns"></div>
-							<button id="pdfBtn">Print Badge</button>
+							<h1>Congratulations on Your Achievement!</h1>
+							<p>On behalf of Chicago Public Schools Sports Administration, we would like to congratulate you on your athletic achievements. A collection of your awards are displayed below. Select one to view and use the links to
+							   share with your friends and family.</p>
+							<div id="socialMediaBtns">
+								<div id="facebookBtn" class="smbtn"><img height="50px" width="50px" src="./assets/social-media-icons/facebookicon.png"/></div>
+								<div id="twitterBtn"class="smbtn"><img height="50px" width="50px" src="./assets/social-media-icons/twittericon.png"/></div>
+								<div id="embedHTMLBtn"class="smbtn" onClick="handleCopyHTML(this)"><img height="50px" width="50px" src="./assets/social-media-icons/embedhtmlicon.png"/></div>
+							</div>
+							<button id="pdfBtn">Print Badge Certificate</button>
 						</div>
 					</div>
 					</div>
@@ -131,28 +137,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	<div class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h2>ctrl + a and ctrl + c to copy all of the html </h2>
-            <textarea id="embedHTMLText"></textarea>
+            <ol id="howToSteps">
+
+            </ol>
+            <a id="linkToSocial" target="_blank" href=""><button id="proceedToSocialBtn" value="" hidden></button></a>
         </div>
 
     </div>
 
-	<button>
-		<div class="fb-share-button" data-href="https://jvarilla.github.io/BadgeRenderer/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://jvarilla.github.io/BadgeRenderer/" class="fb-xfbml-parse-ignore">Share</a></div>
-		<div id="fb-root"></div>
-	</button>
-	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/	sdk.js#xfbml=1&version=v3.2"></script>
-	<div>
-		
-		<!-- <span id="feedback">Unlock A Badge</span>
-		<br/>
-		<h2 id="badgeUnlockStatus"></h2>
-		<div id="badges"></div> -->
-	</div>
-	<a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?text=Badge&url=https://jvarilla.github.io/BadgeRenderer/?a=123
-">
-	Tweet</a>
+
 	<div id="scratchSpace"></div>
 	<input type="text" hidden id="embedText"/>
 	<script
@@ -163,53 +156,53 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			return `<div><img src="${document.getElementById(badgeCanvasId).toDataURL('image/png', 1.0)}"/></div>`;
 			}
 
-		function handleCopyHTML(evt) {
-			console.log(evt);
+		// function handleCopyHTML(evt) {
+		// 	console.log(evt);
 					
-			let canvasId = evt.getAttribute("data-canvas");
-			let html = generateBadgeHTML(canvasId);
+		// 	let canvasId = evt.getAttribute("data-canvas");
+		// 	let html = generateBadgeHTML(canvasId);
 			
-			try {
-				var txt;
-				var data = new DataTransfer();
-				data.items.add("text/plain", html);
-				navigator.clipboard.writeText(data.items[0].type).then(function() {
-				console.log("Copied to clipboard successfully!", data);
-				alert("HTML Copied");
-				}, function() {
-				  console.error("Unable to write to clipboard. :-(");
-				});
-			} catch (err) {
-				try {
-					var copyText = document.getElementById("embedText");
-					copyText.value = html;
-					// $("#modal").css("display", "block");
-					var modal = document.querySelector(".modal");
-					modal.classList.toggle("show-modal");
-					$("#embedHTMLText").val(html);
-					console.log(copyText.value);
-					var closeButton = document.querySelector(".close-button");
-					closeButton.addEventListener("click", function() {
-						modal.classList.toggle("show-modal");
-					});
+		// 	try {
+		// 		var txt;
+		// 		var data = new DataTransfer();
+		// 		data.items.add("text/plain", html);
+		// 		navigator.clipboard.writeText(data.items[0].type).then(function() {
+		// 		console.log("Copied to clipboard successfully!", data);
+		// 		alert("HTML Copied");
+		// 		}, function() {
+		// 		  console.error("Unable to write to clipboard. :-(");
+		// 		});
+		// 	} catch (err) {
+		// 		try {
+		// 			var copyText = document.getElementById("embedText");
+		// 			copyText.value = html;
+		// 			// $("#modal").css("display", "block");
+		// 			var modal = document.querySelector(".modal");
+		// 			modal.classList.toggle("show-modal");
+		// 			$("#embedHTMLText").val(html);
+		// 			console.log(copyText.value);
+		// 			var closeButton = document.querySelector(".close-button");
+		// 			closeButton.addEventListener("click", function() {
+		// 				modal.classList.toggle("show-modal");
+		// 			});
 
-					//var copyText = document.getElementById("embedText");
+		// 			//var copyText = document.getElementById("embedText");
 					
-				 	/* Select the text field */
-				 	copyText.select();
+		// 		 	/* Select the text field */
+		// 		 	copyText.select();
 
-					/* Copy the text inside the text field */
-					document.execCommand("copy");
+		// 			/* Copy the text inside the text field */
+		// 			document.execCommand("copy");
 
-				 	/* Alert the copied text */
-				 	//alert("Copied the text: " + copyText.value);
-				} catch (err) {
-					alert(err)
-				}
-			}
+		// 		 	/* Alert the copied text */
+		// 		 	//alert("Copied the text: " + copyText.value);
+		// 		} catch (err) {
+		// 			alert(err)
+		// 		}
+		// 	}
 				
-			return;
-		}
+		// 	return;
+		// }
 	</script>
 	<script>
 // Used to toggle the menu on small screens when clicking on the menu button
