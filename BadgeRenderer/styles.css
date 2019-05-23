@@ -20,6 +20,21 @@ font-family: RobotoMedium;
 src: url('./CertificateAssets/Roboto-Medium.ttf') format('ttf');
 }
 
+
+@media only screen (max-width: 700px) {
+    #upperHalfContainer {
+        background-color: white;
+        background-image: url('./assets/chicago-background.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media only screen (max-width: 10000px) {
+    #upperHalfContainer {
+        background-color: white;
+    }
+}
 /*#modal {
 	display: none;
 	position: absolute;
@@ -60,6 +75,9 @@ html {
     width: 100%;
 }
 
+a { 
+    text-decoration: none;
+}
 
 /*#unlockBadge {
     display: flex;
@@ -94,7 +112,8 @@ html {
     width: auto;
     height: auto;
     padding: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 0;
+    padding-bottom: 0;
     /*align-content: center;*/
 }
 
@@ -168,7 +187,7 @@ html {
 #detailsContainer {
     display: flex;
     align-items: center;
-    text-align: left;
+    text-align: center;
     flex-flow: column;
     padding: auto 10% auto 2%;
 }
@@ -186,13 +205,20 @@ html {
     border-radius: 5px;
     display: inline-flex;
     flex-flow: column;
-    padding: 0px;
+    padding: 5px 0px 0px 0px;
     align-content: center;
-    height: 300px;
-    width: 200px;
+    height: auto; /* 300px*/
+    width: 300px;
     background-color: white;
+    font-size: 0.7em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   /* box-shadow: 2px 2px rgba(0,0,0,0.3);*/
+}
+
+.badgeCard:hover {
     border-color: black;
     border-style: solid;
+    box-shadow: none;/*0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
    /* box-shadow: 2px 2px rgba(0,0,0,0.3);*/
 }
 
@@ -202,13 +228,29 @@ html {
 }
 
 .badgeImgContainer img {
-    height: 180px;
-    width: 200px;
+    height: auto;
+    width: 300px;
     align-self: center;
 }
 
+#socialMediaBtns {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.smbtn {
+    margin: 10px;
+}
+
+.smbtn:hover {
+    background-color: rgba(0,0,0,0.5)
+}
 .cardInfo {
-    height: 60px;
+    height: auto;/* auto;*//*60px;*/
+    text-decoration: none;
     padding: 0px 10px 0px 10px;
     background-color: rgb(243,250,254)
 }
@@ -226,6 +268,7 @@ html {
     }
     .modal-content {
         position: absolute;
+        line-height: 200%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -262,6 +305,31 @@ html {
 }
 
 
+
+#pdfBtn, #proceedToSocialBtn {
+    font-family: "Lato";
+    min-width: 125px; 
+    font-size: 14px;
+    background-color:blue;
+    border-radius: 22px;
+    min-height: 36px;
+    padding: 1px 12px 1px 12px;
+    text-decoration: none;
+    border-style: none;
+    border-color: white;
+    border-width: 2px;
+    color: white;
+    background-color:rgb(0,42,92);
+}
+
+#pdfBtn:hover, #proceedToSocialBtn:hover {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0,42,92);
+    color: rgb(0,42,92);
+    padding: 3px 12px 3px 12px;
+    background-color: white;
+}
 /*#sideText {
 
 }

@@ -154,94 +154,94 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 	sport: {
 		v4: {
 			academic: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Academic.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Academic.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Academic.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Academic.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Academic.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Academic.png'
 			},
 			badminton: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Badminton.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Badminton.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Badminton.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Badminton.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Badminton.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Badminton.png'
 			},
 			baseball: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Baseball.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Baseball.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Baseball.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Baseball.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Baseball.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Baseball.png'
 			},
 			basketball: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Basketball.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Basketball.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Basketball.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Basketball.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Basketball.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Basketball.png'
 			},
 			bowling: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Bowling.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Bowling.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Bowling.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Bowling.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Bowling.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Bowling.png'
 			},
 			cross_country: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-CrossCountry.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-CrossCountry.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-CrossCountry.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-CrossCountry.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-CrossCountry.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-CrossCountry.png'
 			},
 			football: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Football.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Football.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Football.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Football.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Football.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Football.png'
 			},
 			golf: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Golf.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Golf.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Golf.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Golf.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Golf.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Golf.png'
 			},
 			lacrosse: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Lacrosse.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Lacrosse.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Lacrosse.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Lacrosse.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Lacrosse.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Lacrosse.png'
 			},
 			soccer: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Soccer.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Soccer.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Soccer.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Soccer.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Soccer.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Soccer.png'
 			},
 			softball: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Softball.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Softball.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Softball.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Softball.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Softball.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Softball.png'
 			},
 			spirit: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Spirit.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Spirit.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Spirit.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Spirit.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Spirit.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Spirit.png'
 			},
 			swimming: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Swimming.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Swimming.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Swimming.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Swimming.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Swimming.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Swimming.png'
 			},
 			tennis: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Tennis.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Tennis.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Tennis.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Tennis.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Tennis.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Tennis.png'
 			},
 			track_and_field: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-TrackAndField.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-TrackAndField.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-TrackAndField.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-TrackAndField.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-TrackAndField.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-TrackAndField.png'
 			},
 			volleyball: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Volleyball.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Volleyball.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Volleyball.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Volleyball.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Volleyball.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Volleyball.png'
 			},
 			water_polo: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-WaterPolo.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-WaterPolo.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-WaterPolo.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-WaterPolo.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-WaterPolo.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-WaterPolo.png'
 			},
 			wrestling: {
-				gold: './assets/BadgeV4/SportsIconsGOLD/Gold-Sports-Icons-Wrestling.png',
-				0: './assets/BadgeV4/SportsIconsBLUE/Blue-Sports-Icons-Wrestling.png',
-				1: './assets/BadgeV4/SportsIconsWHITE/White-Sports-Icons-Wrestling.png'
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Wrestling.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Wrestling.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Wrestling.png'
 			}
 		}
 	},
@@ -250,13 +250,26 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 
 module.exports = badgeLayersConfig;
 },{}],3:[function(require,module,exports){
+/* 
+  main.js
+  About: 
+  Powers the user interface
+  of the BadgeRenderer. This file makes
+  use of jQuery and some NPM packages.
+
+  main.js does not actually get sent to
+  the user's browser, you need to build all
+  the dependencies into bundle.js which get sent over.
+
+  Created by: Joseph Varilla
+  Last Edited: 5/16/2019
+*/
 let CryptoJS = require("crypto-js");
 let BadgeImageConfig = require("./badgeLayersConfig.js");
 const RenderEngine = require("./RenderEngine.js");
 //const RenderEngineV2 = require("./RenderEngineV2.js");
 
 let jsPDF = require("jspdf");
-console.log(BadgeImageConfig);
 let decryptedText;
 let ciphertext;
 
@@ -284,7 +297,6 @@ $(() => {
 	    if (!results[2]) return '';
 	    let returnParam = decodeURIComponent(decodeURIComponent(results[2].replace(/\+/g, " ")));
 	    returnParam = returnParam.replace(/ /g, '+');
-	    console.log(returnParam);
 	    return returnParam;
 	}
 
@@ -309,7 +321,6 @@ $(() => {
 	// Renders the Badge Cards of already unlocked badges
 	// Sorts by recency of award new badges to the left
 	async function renderMultipleBadges() { 
-		console.log("rendered multiple badges");
 		let badges = await getBadgesFromLocalStorage();
 		badges.sort(function(a, b) {
 			let aDate = new Date(a.awardDate);
@@ -320,7 +331,6 @@ $(() => {
 			// Add To The MapofBadges
 			let badgeMapKey = "Badge-" + index;
 			mapOfBadges[badgeMapKey] = badge;
-			console.log(mapOfBadges);
 			let canvasId = `Badge-${index}`;
 			let badgeCardId = "badgeCard" + index
 
@@ -408,7 +418,6 @@ $(() => {
 
 				// Get the correct badge background based on distinction
 				let backgroundImgPath = BadgeImageConfig['background']['distinction']['v4'][badgeData.distinction];
-				console.log("Distinction", backgroundImgPath);
 				
 				/* Get the correct badge sport layer
 					Switch between blue and white icons in alternating years
@@ -424,7 +433,6 @@ $(() => {
 				
 				let sportImgPath = BadgeImageConfig['sport']['v4'][badgeData['sport']][sportLayerSelectorValue];
 				
-				console.log("Sport", sportImgPath);
 
 				// Render the badge
 				let renderEngine = new RenderEngine(canvas, [
@@ -477,7 +485,6 @@ $(() => {
 					window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
 					let badgeMapKey = "Badge-" + Object.keys(mapOfBadges).length
 					mapOfBadges[badgeMapKey] = badgeData;
-					console.log(mapOfBadges);
 
 					// Remove canvas used to draw the badge
 					$(canvasId).remove();
@@ -513,7 +520,6 @@ $(() => {
 					drawCertificate1(badgeData)
 				});	
 			} catch(err) { // Wrong key was entered
-				console.log(err);
 				$("#badgeUnlockStatus").text("");
 				feedback.text("Wrong key... Please try again");
 			}
@@ -526,9 +532,6 @@ $(() => {
 	
 	// Draw the certificate based on badge data
 	function drawCertificate1(badgeData) {
-		// let imageURI = badgeData.imageURI;
-		// console.log(imageURI);
-
 		// Get reference to certicate drawing canvas
 		let certificateCanvas = document.getElementById("myCertificate");
 		// Clear Canvas
@@ -542,7 +545,7 @@ $(() => {
 				{
 					type: "image",
 					name: "certBase",
-					imagePath: './CertificateAssets/Certificate-template.png',
+					imagePath: './CertificateAssets/CERTIFICATE_FINAL_BLANK.png',
 					x: 0,
 					y: 0
 				},
@@ -560,42 +563,66 @@ $(() => {
 					type: "text",
 					name: "date",
 					fontSize: "30px",
-					fontColor: "#1f0f66",
+					fontColor: "#012c5e",
 					fontFamily: "SignatureScript",
 					x: 540,//440,
-					y: 720, // 690,
-					text: `May 8th, 2019`
+					y: 740,//720, // 690,
+					text: "May 16th, 2019"//badgeData.awardDate.to
 				},
 				{
 					type: "text",
 					name: "issuer",
 					fontSize: "30px",
-					fontColor: "#1f0f66",
+					fontColor: "#012c5e",
 					fontFamily: "SignatureScript",
 					x: 850,//440,
-					y: 720, // 690,
+					y: 740, // 690,
 					text: badgeData.issuerName
 				},
 				{
 					type: "text",
 					name: "recipientName",
-					fontSize: "48px",
-					fontColor: "#1f0f66",
-					fontFamily: "Arial",
+					textAlign: "center",
+					fontSize: "60px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Arial",
 					x: 675,//440,
-					y: 350, // 690,
+					y: 380, // 690,
 					text: badgeData.recipientName
 				},
 				{
 					type: "text",
 					name: "awardName",
-					fontSize: "54px",
-					fontColor: "#1f0f66",
-					fontFamily: "Helvetica",
+					fontSize: "42px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Helvetica",
 					x: 675,//440,
 					y: 450, // 690,
 					text: badgeData.awardName
+				},
+				{
+					type: "text",
+					name: "date-label",
+					textAlign: "center",
+					fontSize: "24px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Arial",
+					x: 440,//440,
+					y: 765,
+					text: "Date"
+				},
+				{
+					type: "text",
+					name: "issuerTitle",
+					textAlign: "start",
+					fontSize: "24px",
+					fontColor: "#012c5e",
+					fontFamily: "Verdana",//"Arial",
+					x: 760,
+					y: 765,
+					text: badgeData.issuerTitle
 				}
+
 			]);
 		certRender.drawImage();
 	}
@@ -605,12 +632,126 @@ $(() => {
 		download.addEventListener("click", function() {
 			let certCanvas = document.getElementById("myCertificate")
 			var imgData = certCanvas.toDataURL("image/png");
-			//certCanvas.style.display = "block";
 	  		var pdf = new jsPDF('l');
-	  		//pdf.addImage(imgData, 'JPEG', 15, 40, 180, 160)
 	  		pdf.addImage(imgData, 'JPEG', 0, 0);
-	  		pdf.save("download.pdf");
+	  		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+	  		// Uses Badge Data in the Downloaded File Name
+	  		pdf.save(`${badgeData.recipientName}-${badgeData.awardName}-${badgeData.awardDate}.pdf`);
 	  	}, false);	
+
+
+	// Download Badge Image
+	function downloadURI(uri, name) {
+	  var link = document.createElement("a");
+	  link.download = name;
+	  link.href = uri;
+	  document.body.appendChild(link);
+	  link.click();
+	  document.body.removeChild(link);
+	  delete link;
+	}
+
+	function generateBadgeFileName(badgeData) {
+		let awardDate = badgeData.awardDate.replace(/\//ig, "_")
+		return `${badgeData.awardName}-${badgeData.recipientName}-${awardDate}-badge.png`;
+	}
+	function downloadBadgeImage(badgeData, fileName) {
+		downloadURI(badgeData.imageURI, fileName);
+	}
+
+	// Close Button Event Handler
+	var closeButton = document.querySelector(".close-button");
+	closeButton.addEventListener("click", function() {
+			var modal = document.querySelector(".modal");
+			modal.classList.toggle("show-modal");
+		});
+
+	function showModal(stepsArr, linkToSocialURL="0", socialLocation="0") {
+		$("#howToSteps").empty();
+		var modal = document.querySelector(".modal");
+		modal.classList.toggle("show-modal");
+		stepsArr.forEach((step, idx) => {
+			$("#howToSteps").append(`<li id="step-${idx}">${step.text}</li>`);
+		})
+
+		let proceedToSocialBtn = $("#proceedToSocialBtn");
+		if (linkToSocial != "0" && socialLocation != "0") {
+			proceedToSocialBtn.show();
+			proceedToSocialBtn.text(`Go To: ${socialLocation}`);
+			$("#linkToSocial").attr("href", linkToSocialURL);
+		} else {
+			proceedToSocialBtn.hide();
+			proceedToSocialBtn.text(``);
+		}
+	}
+
+	// Social Media Buttons Event Handlers
+	$("#facebookBtn").on('click', function() {
+		// Download Badge Image
+		//window.open('https://www.facebook.com', '_blank');
+		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+		let fileName = generateBadgeFileName(badgeData);
+
+		let facebookSteps = [
+			{
+				stepNumber: 1,
+				text: `Upload ${fileName} To Post (being downloaded right now)`
+			},
+			{
+				stepNumber: 2,
+				text: "Hit Share"
+			}
+		];
+		
+		
+		showModal(facebookSteps, "https://www.facebook.com", "Facebook");
+		downloadBadgeImage(badgeData, fileName);
+	});
+
+	$("#twitterBtn").on('click', function() {
+		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+		let fileName = generateBadgeFileName(badgeData);
+		let twitterSteps = [
+			{
+				stepNumber: 1,
+				text: `Upload ${fileName} To Post (being downloaded right now)`
+			},
+			{
+				stepNumber: 2,
+				text: "Hit Tweet"
+			}
+		];
+		
+		showModal(twitterSteps, "https://www.twitter.com", "Twitter");
+		// Download Badge Image
+		downloadBadgeImage(badgeData, fileName);
+	});
+
+	$("#embedHTMLBtn").on('click', function() {
+		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
+		let fileName = generateBadgeFileName(badgeData);
+		let embedHTMLSteps = [
+			{
+				stepNumber: 1,
+				text: "Upload the image to the a folder in your site"
+			},
+			{
+				stepNumber: 2,
+				text: `Copy the following into the HTML file\n
+					   &lt;img src="{PATH}/${fileName} /&gt;`
+			},
+			{
+				stepNumber: 3,
+				text:  `Replace {PATH} with the file path of folders you stored the picture in.\n
+					   (remove the curly braces too {} but keep the quotes and the <>) \n
+					   HINT: A file path looks like ./site/assets`
+			}
+		];
+		showModal(embedHTMLSteps);
+		// Download Badge Image
+		downloadBadgeImage(badgeData, fileName);
+	});
+
 });
 
 
