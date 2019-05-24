@@ -21,10 +21,10 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>CPS Badges</title>
 	<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
-</style>
+		body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+		.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+		.fa-anchor,.fa-coffee {font-size:200px}
+	</style>
 </head>
 <body>
 <script>
@@ -45,19 +45,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-card w3-left-align w3-large" style="background-color:#0c0c7a">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large" style="background-color:#0c0c7a" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-    <!-- <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 1</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 2</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 3</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 4</a> -->
+    <a href="#" class="w3-bar-item w3-button w3-padding-large" style="background-color:#0c0c7a;color:#0c0c7a">#</a>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-   <!--  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a> -->
   </div>
 </div>
 <!-- https://bit.ly/2T1Gp1M -->
@@ -108,13 +100,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </div>
 <!-- Second Grid -->
 <div class="w3-container" style="background-color: rgb(243,250,254);">
- <!--  <div class="w3-content"> -->
-<!--     <div id="lowerHalf"> -->
-			<h2>My Awards</h2>
-			<div id="badges">
-			</div>
-<!-- 		</div> -->
-  <!-- </div> -->
+	<h2>My Awards</h2>
+	<div id="badges"></div>
 </div>
 
 
@@ -123,14 +110,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- Badge Renderer Redesign Start -->
 	<div id="app">
 		<div id="upperHalf">
-			
-					<!-- <button id="printBtn">Print Badge</button> -->
 				</div>	
 			</div>
-
-
 		</div>
-		
 	</div>
 </div>
 <!-- Badge Renderer Redesign End -->
@@ -223,8 +205,5 @@ function myFunction() {
 	<div style="font-family: RobotoLight; color: #1f0f66;">abc</div>
 </div>
 <canvas id="myCertificate" style="background-color:white;display:none" height="816px" width="1056px"></canvas>
-	<!-- <canvas id="myCertificate" style="background-color:white;display:none" height="800px" width="1150px"></canvas>
- -->
-<!-- 	<script src="ui.js"></script> -->
 </body>
 </html>
