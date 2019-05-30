@@ -249,6 +249,7 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 }
 
 module.exports = badgeLayersConfig;
+
 },{}],3:[function(require,module,exports){
 /* 
   main.js
@@ -588,7 +589,7 @@ $(() => {
 					fontFamily: "Verdana",//"Arial",
 					x: 675,//440,
 					y: 380, // 690,
-					text: badgeData.recipientName
+					text: "Hubert Blaine Wolfe­schlegel­stein­hausen­berger­dorff Sr."//badgeData.recipientName
 				},
 				{
 					type: "text",
