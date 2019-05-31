@@ -279,6 +279,7 @@ function generateBadgeHTML(badgeCanvasId) {
 		return `<div><img src="${document.getElementById(badgeCanvasId).toDataURL('image/png', 1.0)}"/></div>`;
 }	
 
+
 $(() => {
 
 	// Contains Keys That Map To A Badge
@@ -754,6 +755,11 @@ $(() => {
 	});
 
 });
+
+/* Prevents the user from making changes to local storage */
+window.addEventListener('storage', function(e) {
+  localStorage.setItem(e.key, e.oldValue);
+})
 
 
 },{"./RenderEngine.js":1,"./badgeLayersConfig.js":2,"crypto-js":12,"jspdf":38}],4:[function(require,module,exports){
