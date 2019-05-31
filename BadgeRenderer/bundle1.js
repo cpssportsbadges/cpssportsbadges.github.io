@@ -273,7 +273,23 @@ const RenderEngine = require("./RenderEngine.js");
 let jsPDF = require("jspdf");
 let decryptedText;
 let ciphertext;
+const datesWithSuffixes = ['0th', '1st', '2nd', '3rd', 
+	'4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th',
+	'12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th',
+	'20th', '21st', '22nd', '23rd', '24th', '25th', '26th', '27th',
+	'28th', '29th', '30th', '31st'];
 
+	const monthNames = ['January', 'February', 'March', 'April',
+	'May', 'June', 'July', 'August', 'September', 'October', 'November',
+	'December'];
+
+/* Generate Formal Date String For Certificate */
+function generateFormalDateString(date) {
+	let dayOfMonth = date.getDate();
+	let month = date.getMonth();
+	let year = date.getFullYear();
+	return `${monthNames[month]} ${datesWithSuffixes[dayOfMonth]}, ${year}`;
+}
 /* Creates the badge html that is embeddable */
 function generateBadgeHTML(badgeCanvasId) {
 		return `<div><img src="${document.getElementById(badgeCanvasId).toDataURL('image/png', 1.0)}"/></div>`;
@@ -569,7 +585,7 @@ $(() => {
 					fontFamily: "SignatureScript",
 					x: 540,//440,
 					y: 740,//720, // 690,
-					text: "May 16th, 2019"//badgeData.awardDate.to
+					text: generateFormalDateString(new Date(badgeData.awardDate))//badgeData.awardDate.to
 				},
 				{
 					type: "text",
