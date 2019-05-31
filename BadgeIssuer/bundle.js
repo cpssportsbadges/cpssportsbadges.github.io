@@ -92,7 +92,7 @@ module.exports = BadgeLinkGenerator;
 */
 
 // PLEASE REPLACE WITH THE NEW URL OF THE BADGE RENDERER APPLICATION
-const rendererAppURL = 'https://jvarilla.github.io/BadgeRenderer/';
+const rendererAppURL = 'https://cpssportsbadges.github.io/BadgeRenderer/';
 
 /* Import CryptoJS - Used for creating hashes of badges
   to be appended to badge links */
@@ -167,6 +167,8 @@ const JSON_to_CSV = (arrOfJSONData) => {
   //csv.unshift(fields.join('\n')); //join via a new line character so it renders properly in excel
   csv.unshift(fields.join(',').concat(['\n'])) // add header column makes header columns horizontal
   // csv.join('\r\n');
+
+  // Remove the extra Record at the end
   csv.pop();
   // Inject new line characters between entries
  
