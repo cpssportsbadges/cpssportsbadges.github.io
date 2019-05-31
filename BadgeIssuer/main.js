@@ -14,7 +14,7 @@
 */
 
 // PLEASE REPLACE WITH THE NEW URL OF THE BADGE RENDERER APPLICATION
-const rendererAppURL = 'https://cpssportsbadge.github.io/BadgeRenderer/';
+const rendererAppURL = 'https://cpssportsbadges.github.io/BadgeRenderer/';
 
 /* Import CryptoJS - Used for creating hashes of badges
   to be appended to badge links */
