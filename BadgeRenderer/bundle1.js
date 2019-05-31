@@ -589,7 +589,7 @@ $(() => {
 					fontFamily: "Verdana",//"Arial",
 					x: 675,//440,
 					y: 380, // 690,
-					text: "Hubert Blaine Wolfe­schlegel­stein­hausen­berger­dorff Sr."//badgeData.recipientName
+					text: badgeData.recipientName
 				},
 				{
 					type: "text",
