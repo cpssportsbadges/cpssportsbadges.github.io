@@ -15,7 +15,7 @@
 let CryptoJS = require("crypto-js");
 let BadgeImageConfig = require("./badgeLayersConfig.js");
 const RenderEngine = require("./RenderEngine.js");
-//const RenderEngineV2 = require("./RenderEngineV2.js");
+const RenderEngineV2 = require("./RenderEngineV2.js");
 
 let jsPDF = require("jspdf");
 let decryptedText;
@@ -203,7 +203,7 @@ $(() => {
 				
 
 				// Render the badge
-				let renderEngine = new RenderEngine(canvas, [
+				let renderEngine = new RenderEngineV2(canvas, [
 					{
 						type: "image",
 						name: "background",
@@ -240,7 +240,7 @@ $(() => {
 					}
 				] )
 				
-				renderEngine.drawImage()
+				renderEngine.drawLayersAsync()//renderEngine.drawImage()
 				.then((output) => { // Create a image url of the badge image to store
 					let imageURI = canvas.toDataURL("imageURI/png");
 					badgeData.imageURI = imageURI;
@@ -311,7 +311,7 @@ $(() => {
 		context.clearRect(0, 0, certificateCanvas.width, certificateCanvas.height);
 		
 		// Draw the certificate
-		let certRender = new RenderEngine(certificateCanvas, [
+		let certRender = new RenderEngineV2(certificateCanvas, [
 				{
 					type: "image",
 					name: "certBase",
@@ -394,7 +394,7 @@ $(() => {
 				}
 
 			]);
-		certRender.drawImage();
+		certRender.drawLayersAsync();
 	}
 
 	// Handles the download of the certificate
