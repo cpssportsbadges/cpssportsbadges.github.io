@@ -2,138 +2,6 @@
 /*
 	Name: RenderEngine
 	Author: Joseph Varilla
-	Date: 4/12/2019 | Last Edited 5/16/2019
-	Description: A class to be used to 
-				load multiple image 
-				layers into a canvas to 
-				produce a superimposed image
-				(i.e. badge image, certificate)
-*/
-
-class RenderEngine {
-	// Context is the canvas context
-	// imageLayers is an array of file paths to the images
-	constructor(canvas, layers) {
-		// The canvas to be drawn on
-		this.canvas = canvas;
-
-		// The context to used to draw on canvas
-		this.ctx = this.canvas.getContext("2d");
-
-		// Alters the size of the whole image (all layers)
-		this.scaleFactor = {};
-		this.scaleFactor.x = 1;
-		this.scaleFactor.y = 1;
-
-		/* Draw an image layer provided the coords, 
-			img buffer, and indidual scale factors */
-		this.ctx.safeDraw = (img, x, y, scalex, scaley, callback) => {
-			this.ctx.drawImage(img, x, y, img.width * scalex * this.scaleFactor.x, img.height * scaley * this.scaleFactor.y);
-			callback();
-		}
-
-		// Turns the input layers into an array of layers with specific properties
-		this.layers = layers.map((layer, index) => {
-			let layerObj = {
-				order: index,
-				name: layer.name || `layer ${index}`,
-				x: layer.x || 0,
-				y: layer.y || 0,
-				scalex: layer.scalex || 1,
-				scaley: layer.scaley || 1,
-				scale: layer.scale || 100,
-			}
-			if (layer.type === "image") { // If it is an image layer
-				layerObj.type = "image";
-				layerObj.imagePath = layer.imagePath || "blank.png"
-			} else { // Assume that it is a text layer
-				layerObj.type = "text";
-				layerObj.text = layer.text || "";
-				layerObj.fontSize = layer.fontSize || "12px";
-				layerObj.fontFamily = layer.fontFamily || "Serif";
-				layerObj.fontColor = layer.fontColor || "black";
-				layerObj.textAlign = layer.textAlign || "center";
-			}
-
-			return layerObj;
-			
-		});
-	}
-
-	setScaleFactor(xScale, yScale) {
-		this.scaleFactor.x = xScale;
-		this.scaleFactor.y = yScale;
-	}
-	drawLayer(layer) { // Draws a single layer
-		return new Promise((resolve, reject) => {
-			try {
-
-				if (layer.type === "image") { // Draw the image layer
-					let layerImage = new Image();
-					// Set Layer Image Path
-					layerImage.src = layer.imagePath;
-	
-					layerImage.onload = () => {
-						window.setTimeout(() => {
-							// Draw The Image Layer
-							this.ctx.safeDraw(layerImage, layer.x, layer.y, layer.scalex, layer.scaley, () => {
-								// Resolve the layer Image
-								resolve(`${layer.name}`);
-							});
-						}, ((layer.order + 1 * 10) * 50)); // Need to set the timeout so that the badges will render in the correct order	
-					}
-					layerImage.onload();
-				} else { // Else write the text layer
-					window.setTimeout(() => {
-						this.ctx.textAlign = layer.textAlign;
-	    				this.ctx.font = `${layer.fontSize} ${layer.fontFamily}`;
-	    				console.log(layer.fontFamily);
-	    				this.ctx.fillStyle = layer.fontColor;
-						this.ctx.fillText(layer.text, layer.x, layer.y);
-						resolve(`${layer.name}`);
-					}, ((layer.order + 1 * 10) * 50))
-				}
-				
-			} catch (err) {
-				reject(`Error loading ${layer.name} layer`);
-			}
-		});
-	}
-
-	drawImage() { // Draw image with all layers with the first layer being in the back (drawn first)
-		return new Promise((resolve, reject) => {
-			try { // Draw All the layers
-				Promise.all(this.layers.map((layer) => {
-					return this.drawLayer(layer);
-				}))
-				.then((values) => {
-					console.log('order', values);
-					return new Promise((resolve, reject) => {
-						try {
-							window.setTimeout(() => {
-								resolve({layerOrder: values,
-								imageURI: this.canvas.toDataURL("image/png")
-								});
-							}, 500);	
-						} catch (err) {
-							reject(err);
-						}
-					});	
-				})
-				.then(values => resolve(values));
-			} catch (err) {
-				reject(err);
-			}
-		});
-
-	}
-}
-
-module.exports = RenderEngine;
-},{}],2:[function(require,module,exports){
-/*
-	Name: RenderEngineV2
-	Author: Joseph Varilla
 	Date: 6/1/2019 | Last Edited 5/16/2019
 	Description: A class to be used to 
 				load multiple image 
@@ -142,7 +10,7 @@ module.exports = RenderEngine;
 				(i.e. badge image, certificate)
 */
 
-class RenderEngineV2 {
+class RenderEngine {
 	// Context is the canvas context
 	// imageLayers is an array of file paths to the images
 	constructor(canvas, layers) {
@@ -312,8 +180,8 @@ class RenderEngineV2 {
 	}
 }
 
-module.exports = RenderEngineV2;
-},{}],3:[function(require,module,exports){
+module.exports = RenderEngine;
+},{}],2:[function(require,module,exports){
 /*
 	Name: badgeLayerConfig
 	Description: 
@@ -433,7 +301,7 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 
 module.exports = badgeLayersConfig;
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /* 
   main.js
   About: 
@@ -451,7 +319,7 @@ module.exports = badgeLayersConfig;
 let CryptoJS = require("crypto-js");
 let BadgeImageConfig = require("./badgeLayersConfig.js");
 const RenderEngine = require("./RenderEngine.js");
-const RenderEngineV2 = require("./RenderEngineV2.js");
+//const RenderEngineV2 = require("./RenderEngineV2.js");
 
 let jsPDF = require("jspdf");
 let decryptedText;
@@ -639,7 +507,7 @@ $(() => {
 				
 
 				// Render the badge
-				let renderEngine = new RenderEngineV2(canvas, [
+				let renderEngine = new RenderEngine(canvas, [
 					{
 						type: "image",
 						name: "background",
@@ -699,7 +567,7 @@ $(() => {
 						<div class="badgeImgContainer" id="${cardId}" >
 						</div>
 						<div class="cardInfo">
-						<h5><span class="awardName">${badgeData.badgeName} awarded to ${badgeData.recipientName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
+						<h5><span class="awardName">${badgeData.badgeName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
 						</div>
 			   		 </div></a>`);
 					document.getElementById(cardId).appendChild(myImage);
@@ -708,7 +576,6 @@ $(() => {
 					// Attach an event handler that allows the badge to be put in focus if selected
 					$(cardSelectorString).on("click", function(event) {
 						//Set Badge Image to the top center of the sceen (enlarged)
-						alert(cardId);
 						$("#badge").attr("src", badgeData.imageURI);
 						$("#badge").attr("data-badge", badgeMapKey);
 						$("#badgeNameDisplay").text(badgeData.badgeName);
@@ -747,7 +614,7 @@ $(() => {
 		context.clearRect(0, 0, certificateCanvas.width, certificateCanvas.height);
 		
 		// Draw the certificate
-		let certRender = new RenderEngineV2(certificateCanvas, [
+		let certRender = new RenderEngine(certificateCanvas, [
 				{
 					type: "image",
 					name: "certBase",
@@ -967,7 +834,7 @@ window.addEventListener('storage', function(e) {
 })
 
 
-},{"./RenderEngine.js":1,"./RenderEngineV2.js":2,"./badgeLayersConfig.js":3,"crypto-js":13,"jspdf":39}],5:[function(require,module,exports){
+},{"./RenderEngine.js":1,"./badgeLayersConfig.js":2,"crypto-js":12,"jspdf":38}],4:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -1200,7 +1067,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.AES;
 
 }));
-},{"./cipher-core":6,"./core":7,"./enc-base64":8,"./evpkdf":10,"./md5":15}],6:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6,"./enc-base64":7,"./evpkdf":9,"./md5":14}],5:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2081,7 +1948,7 @@ window.addEventListener('storage', function(e) {
 
 
 }));
-},{"./core":7,"./evpkdf":10}],7:[function(require,module,exports){
+},{"./core":6,"./evpkdf":9}],6:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2842,7 +2709,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS;
 
 }));
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -2978,7 +2845,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.enc.Base64;
 
 }));
-},{"./core":7}],9:[function(require,module,exports){
+},{"./core":6}],8:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3128,7 +2995,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.enc.Utf16;
 
 }));
-},{"./core":7}],10:[function(require,module,exports){
+},{"./core":6}],9:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3261,7 +3128,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.EvpKDF;
 
 }));
-},{"./core":7,"./hmac":12,"./sha1":31}],11:[function(require,module,exports){
+},{"./core":6,"./hmac":11,"./sha1":30}],10:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3328,7 +3195,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.format.Hex;
 
 }));
-},{"./cipher-core":6,"./core":7}],12:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],11:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3472,7 +3339,7 @@ window.addEventListener('storage', function(e) {
 
 
 }));
-},{"./core":7}],13:[function(require,module,exports){
+},{"./core":6}],12:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3491,7 +3358,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS;
 
 }));
-},{"./aes":5,"./cipher-core":6,"./core":7,"./enc-base64":8,"./enc-utf16":9,"./evpkdf":10,"./format-hex":11,"./hmac":12,"./lib-typedarrays":14,"./md5":15,"./mode-cfb":16,"./mode-ctr":18,"./mode-ctr-gladman":17,"./mode-ecb":19,"./mode-ofb":20,"./pad-ansix923":21,"./pad-iso10126":22,"./pad-iso97971":23,"./pad-nopadding":24,"./pad-zeropadding":25,"./pbkdf2":26,"./rabbit":28,"./rabbit-legacy":27,"./rc4":29,"./ripemd160":30,"./sha1":31,"./sha224":32,"./sha256":33,"./sha3":34,"./sha384":35,"./sha512":36,"./tripledes":37,"./x64-core":38}],14:[function(require,module,exports){
+},{"./aes":4,"./cipher-core":5,"./core":6,"./enc-base64":7,"./enc-utf16":8,"./evpkdf":9,"./format-hex":10,"./hmac":11,"./lib-typedarrays":13,"./md5":14,"./mode-cfb":15,"./mode-ctr":17,"./mode-ctr-gladman":16,"./mode-ecb":18,"./mode-ofb":19,"./pad-ansix923":20,"./pad-iso10126":21,"./pad-iso97971":22,"./pad-nopadding":23,"./pad-zeropadding":24,"./pbkdf2":25,"./rabbit":27,"./rabbit-legacy":26,"./rc4":28,"./ripemd160":29,"./sha1":30,"./sha224":31,"./sha256":32,"./sha3":33,"./sha384":34,"./sha512":35,"./tripledes":36,"./x64-core":37}],13:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3568,7 +3435,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.lib.WordArray;
 
 }));
-},{"./core":7}],15:[function(require,module,exports){
+},{"./core":6}],14:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3837,7 +3704,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.MD5;
 
 }));
-},{"./core":7}],16:[function(require,module,exports){
+},{"./core":6}],15:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -3916,7 +3783,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.mode.CFB;
 
 }));
-},{"./cipher-core":6,"./core":7}],17:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],16:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4033,7 +3900,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.mode.CTRGladman;
 
 }));
-},{"./cipher-core":6,"./core":7}],18:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],17:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4092,7 +3959,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.mode.CTR;
 
 }));
-},{"./cipher-core":6,"./core":7}],19:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],18:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4133,7 +4000,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.mode.ECB;
 
 }));
-},{"./cipher-core":6,"./core":7}],20:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],19:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4188,7 +4055,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.mode.OFB;
 
 }));
-},{"./cipher-core":6,"./core":7}],21:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],20:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4238,7 +4105,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.pad.Ansix923;
 
 }));
-},{"./cipher-core":6,"./core":7}],22:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],21:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4283,7 +4150,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.pad.Iso10126;
 
 }));
-},{"./cipher-core":6,"./core":7}],23:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],22:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4324,7 +4191,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.pad.Iso97971;
 
 }));
-},{"./cipher-core":6,"./core":7}],24:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],23:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4355,7 +4222,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.pad.NoPadding;
 
 }));
-},{"./cipher-core":6,"./core":7}],25:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],24:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4401,7 +4268,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.pad.ZeroPadding;
 
 }));
-},{"./cipher-core":6,"./core":7}],26:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6}],25:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4547,7 +4414,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.PBKDF2;
 
 }));
-},{"./core":7,"./hmac":12,"./sha1":31}],27:[function(require,module,exports){
+},{"./core":6,"./hmac":11,"./sha1":30}],26:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4738,7 +4605,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.RabbitLegacy;
 
 }));
-},{"./cipher-core":6,"./core":7,"./enc-base64":8,"./evpkdf":10,"./md5":15}],28:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6,"./enc-base64":7,"./evpkdf":9,"./md5":14}],27:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -4931,7 +4798,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.Rabbit;
 
 }));
-},{"./cipher-core":6,"./core":7,"./enc-base64":8,"./evpkdf":10,"./md5":15}],29:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6,"./enc-base64":7,"./evpkdf":9,"./md5":14}],28:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5071,7 +4938,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.RC4;
 
 }));
-},{"./cipher-core":6,"./core":7,"./enc-base64":8,"./evpkdf":10,"./md5":15}],30:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6,"./enc-base64":7,"./evpkdf":9,"./md5":14}],29:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5339,7 +5206,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.RIPEMD160;
 
 }));
-},{"./core":7}],31:[function(require,module,exports){
+},{"./core":6}],30:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5490,7 +5357,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.SHA1;
 
 }));
-},{"./core":7}],32:[function(require,module,exports){
+},{"./core":6}],31:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5571,7 +5438,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.SHA224;
 
 }));
-},{"./core":7,"./sha256":33}],33:[function(require,module,exports){
+},{"./core":6,"./sha256":32}],32:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -5771,7 +5638,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.SHA256;
 
 }));
-},{"./core":7}],34:[function(require,module,exports){
+},{"./core":6}],33:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -6095,7 +5962,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.SHA3;
 
 }));
-},{"./core":7,"./x64-core":38}],35:[function(require,module,exports){
+},{"./core":6,"./x64-core":37}],34:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -6179,7 +6046,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.SHA384;
 
 }));
-},{"./core":7,"./sha512":36,"./x64-core":38}],36:[function(require,module,exports){
+},{"./core":6,"./sha512":35,"./x64-core":37}],35:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -6503,7 +6370,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.SHA512;
 
 }));
-},{"./core":7,"./x64-core":38}],37:[function(require,module,exports){
+},{"./core":6,"./x64-core":37}],36:[function(require,module,exports){
 ;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -7274,7 +7141,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS.TripleDES;
 
 }));
-},{"./cipher-core":6,"./core":7,"./enc-base64":8,"./evpkdf":10,"./md5":15}],38:[function(require,module,exports){
+},{"./cipher-core":5,"./core":6,"./enc-base64":7,"./evpkdf":9,"./md5":14}],37:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
@@ -7579,7 +7446,7 @@ window.addEventListener('storage', function(e) {
 	return CryptoJS;
 
 }));
-},{"./core":7}],39:[function(require,module,exports){
+},{"./core":6}],38:[function(require,module,exports){
 (function (global){
 !function(t){"function"==typeof define&&define.amd?define(t):t()}(function(){"use strict";
 /** @license
@@ -7868,4 +7735,4 @@ Nt="undefined"!=typeof self&&self||"undefined"!=typeof window&&window||"undefine
    */
 var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.buffer=null}return t.prototype={ensureBuffer:function(t){var e=this.buffer,n=e?e.byteLength:0;if(t<n)return e;for(var r=512;r<t;)r<<=1;for(var i=new Uint8Array(r),o=0;o<n;++o)i[o]=e[o];return this.buffer=i},getByte:function(){for(var t=this.pos;this.bufferLength<=t;){if(this.eof)return null;this.readBlock()}return this.buffer[this.pos++]},getBytes:function(t){var e=this.pos;if(t){this.ensureBuffer(e+t);for(var n=e+t;!this.eof&&this.bufferLength<n;)this.readBlock();var r=this.bufferLength;r<n&&(n=r)}else{for(;!this.eof;)this.readBlock();n=this.bufferLength}return this.pos=n,this.buffer.subarray(e,n)},lookChar:function(){for(var t=this.pos;this.bufferLength<=t;){if(this.eof)return null;this.readBlock()}return String.fromCharCode(this.buffer[this.pos])},getChar:function(){for(var t=this.pos;this.bufferLength<=t;){if(this.eof)return null;this.readBlock()}return String.fromCharCode(this.buffer[this.pos++])},makeSubStream:function(t,e,n){for(var r=t+e;this.bufferLength<=r&&!this.eof;)this.readBlock();return new Stream(this.buffer,t,e,n)},skip:function(t){t||(t=1),this.pos+=t},reset:function(){this.pos=0}},t}(),kt=function(){if("undefined"!=typeof Uint32Array){var k=new Uint32Array([16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15]),I=new Uint32Array([3,4,5,6,7,8,9,10,65547,65549,65551,65553,131091,131095,131099,131103,196643,196651,196659,196667,262211,262227,262243,262259,327811,327843,327875,327907,258,258,258]),C=new Uint32Array([1,2,3,4,65541,65543,131081,131085,196625,196633,262177,262193,327745,327777,393345,393409,459009,459137,524801,525057,590849,591361,657409,658433,724993,727041,794625,798721,868353,876545]),B=[new Uint32Array([459008,524368,524304,524568,459024,524400,524336,590016,459016,524384,524320,589984,524288,524416,524352,590048,459012,524376,524312,589968,459028,524408,524344,590032,459020,524392,524328,59e4,524296,524424,524360,590064,459010,524372,524308,524572,459026,524404,524340,590024,459018,524388,524324,589992,524292,524420,524356,590056,459014,524380,524316,589976,459030,524412,524348,590040,459022,524396,524332,590008,524300,524428,524364,590072,459009,524370,524306,524570,459025,524402,524338,590020,459017,524386,524322,589988,524290,524418,524354,590052,459013,524378,524314,589972,459029,524410,524346,590036,459021,524394,524330,590004,524298,524426,524362,590068,459011,524374,524310,524574,459027,524406,524342,590028,459019,524390,524326,589996,524294,524422,524358,590060,459015,524382,524318,589980,459031,524414,524350,590044,459023,524398,524334,590012,524302,524430,524366,590076,459008,524369,524305,524569,459024,524401,524337,590018,459016,524385,524321,589986,524289,524417,524353,590050,459012,524377,524313,589970,459028,524409,524345,590034,459020,524393,524329,590002,524297,524425,524361,590066,459010,524373,524309,524573,459026,524405,524341,590026,459018,524389,524325,589994,524293,524421,524357,590058,459014,524381,524317,589978,459030,524413,524349,590042,459022,524397,524333,590010,524301,524429,524365,590074,459009,524371,524307,524571,459025,524403,524339,590022,459017,524387,524323,589990,524291,524419,524355,590054,459013,524379,524315,589974,459029,524411,524347,590038,459021,524395,524331,590006,524299,524427,524363,590070,459011,524375,524311,524575,459027,524407,524343,590030,459019,524391,524327,589998,524295,524423,524359,590062,459015,524383,524319,589982,459031,524415,524351,590046,459023,524399,524335,590014,524303,524431,524367,590078,459008,524368,524304,524568,459024,524400,524336,590017,459016,524384,524320,589985,524288,524416,524352,590049,459012,524376,524312,589969,459028,524408,524344,590033,459020,524392,524328,590001,524296,524424,524360,590065,459010,524372,524308,524572,459026,524404,524340,590025,459018,524388,524324,589993,524292,524420,524356,590057,459014,524380,524316,589977,459030,524412,524348,590041,459022,524396,524332,590009,524300,524428,524364,590073,459009,524370,524306,524570,459025,524402,524338,590021,459017,524386,524322,589989,524290,524418,524354,590053,459013,524378,524314,589973,459029,524410,524346,590037,459021,524394,524330,590005,524298,524426,524362,590069,459011,524374,524310,524574,459027,524406,524342,590029,459019,524390,524326,589997,524294,524422,524358,590061,459015,524382,524318,589981,459031,524414,524350,590045,459023,524398,524334,590013,524302,524430,524366,590077,459008,524369,524305,524569,459024,524401,524337,590019,459016,524385,524321,589987,524289,524417,524353,590051,459012,524377,524313,589971,459028,524409,524345,590035,459020,524393,524329,590003,524297,524425,524361,590067,459010,524373,524309,524573,459026,524405,524341,590027,459018,524389,524325,589995,524293,524421,524357,590059,459014,524381,524317,589979,459030,524413,524349,590043,459022,524397,524333,590011,524301,524429,524365,590075,459009,524371,524307,524571,459025,524403,524339,590023,459017,524387,524323,589991,524291,524419,524355,590055,459013,524379,524315,589975,459029,524411,524347,590039,459021,524395,524331,590007,524299,524427,524363,590071,459011,524375,524311,524575,459027,524407,524343,590031,459019,524391,524327,589999,524295,524423,524359,590063,459015,524383,524319,589983,459031,524415,524351,590047,459023,524399,524335,590015,524303,524431,524367,590079]),9],j=[new Uint32Array([327680,327696,327688,327704,327684,327700,327692,327708,327682,327698,327690,327706,327686,327702,327694,0,327681,327697,327689,327705,327685,327701,327693,327709,327683,327699,327691,327707,327687,327703,327695,0]),5];return(t.prototype=Object.create(Pt.prototype)).getBits=function(t){for(var e,n=this.codeSize,r=this.codeBuf,i=this.bytes,o=this.bytesPos;n<t;)void 0===(e=i[o++])&&E("Bad encoding in flate stream"),r|=e<<n,n+=8;return e=r&(1<<t)-1,this.codeBuf=r>>t,this.codeSize=n-=t,this.bytesPos=o,e},t.prototype.getCode=function(t){for(var e=t[0],n=t[1],r=this.codeSize,i=this.codeBuf,o=this.bytes,a=this.bytesPos;r<n;){var s;void 0===(s=o[a++])&&E("Bad encoding in flate stream"),i|=s<<r,r+=8}var l=e[i&(1<<n)-1],h=l>>16,u=65535&l;return(0==r||r<h||0==h)&&E("Bad encoding in flate stream"),this.codeBuf=i>>h,this.codeSize=r-h,this.bytesPos=a,u},t.prototype.generateHuffmanTable=function(t){for(var e=t.length,n=0,r=0;r<e;++r)t[r]>n&&(n=t[r]);for(var i=1<<n,o=new Uint32Array(i),a=1,s=0,l=2;a<=n;++a,s<<=1,l<<=1)for(var h=0;h<e;++h)if(t[h]==a){var u=0,c=s;for(r=0;r<a;++r)u=u<<1|1&c,c>>=1;for(r=u;r<i;r+=l)o[r]=a<<16|h;++s}return[o,n]},t.prototype.readBlock=function(){function t(t,e,n,r,i){for(var o=t.getBits(n)+r;0<o--;)e[l++]=i}var e=this.getBits(3);if(1&e&&(this.eof=!0),0!=(e>>=1)){var n,r;if(1==e)n=B,r=j;else if(2==e){for(var i=this.getBits(5)+257,o=this.getBits(5)+1,a=this.getBits(4)+4,s=Array(k.length),l=0;l<a;)s[k[l++]]=this.getBits(3);for(var h=this.generateHuffmanTable(s),u=0,c=(l=0,i+o),f=new Array(c);l<c;){var p=this.getCode(h);16==p?t(this,f,2,3,u):17==p?t(this,f,3,3,u=0):18==p?t(this,f,7,11,u=0):f[l++]=u=p}n=this.generateHuffmanTable(f.slice(0,i)),r=this.generateHuffmanTable(f.slice(i,c))}else E("Unknown block type in flate stream");for(var d=(_=this.buffer)?_.length:0,g=this.bufferLength;;){var m=this.getCode(n);if(m<256)d<=g+1&&(d=(_=this.ensureBuffer(g+1)).length),_[g++]=m;else{if(256==m)return void(this.bufferLength=g);var y=(m=I[m-=257])>>16;0<y&&(y=this.getBits(y));u=(65535&m)+y;m=this.getCode(r),0<(y=(m=C[m])>>16)&&(y=this.getBits(y));var v=(65535&m)+y;d<=g+u&&(d=(_=this.ensureBuffer(g+u)).length);for(var w=0;w<u;++w,++g)_[g]=_[g-v]}}}else{var b,x=this.bytes,N=this.bytesPos;void 0===(b=x[N++])&&E("Bad block header in flate stream");var L=b;void 0===(b=x[N++])&&E("Bad block header in flate stream"),L|=b<<8,void 0===(b=x[N++])&&E("Bad block header in flate stream");var A=b;void 0===(b=x[N++])&&E("Bad block header in flate stream"),(A|=b<<8)!=(65535&~L)&&E("Bad uncompressed block length in flate stream"),this.codeBuf=0,this.codeSize=0;var S=this.bufferLength,_=this.ensureBuffer(S+L),F=S+L;this.bufferLength=F;for(var P=S;P<F;++P){if(void 0===(b=x[N++])){this.eof=!0;break}_[P]=b}this.bytesPos=N}},t}function E(t){throw new Error(t)}function t(t){var e=0,n=t[e++],r=t[e++];-1!=n&&-1!=r||E("Invalid header in flate stream"),8!=(15&n)&&E("Unknown compression method in flate stream"),((n<<8)+r)%31!=0&&E("Bad FCHECK in flate stream"),32&r&&E("FDICT bit set in flate stream"),this.bytes=t,this.bytesPos=2,this.codeSize=0,this.codeBuf=0,Pt.call(this)}}();window.tmp=kt});try{module.exports=jsPDF}catch(t){}
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[4]);
+},{}]},{},[3]);

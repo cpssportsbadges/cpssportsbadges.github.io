@@ -15,7 +15,7 @@
 let CryptoJS = require("crypto-js");
 let BadgeImageConfig = require("./badgeLayersConfig.js");
 const RenderEngine = require("./RenderEngine.js");
-const RenderEngineV2 = require("./RenderEngineV2.js");
+//const RenderEngineV2 = require("./RenderEngineV2.js");
 
 let jsPDF = require("jspdf");
 let decryptedText;
@@ -203,7 +203,7 @@ $(() => {
 				
 
 				// Render the badge
-				let renderEngine = new RenderEngineV2(canvas, [
+				let renderEngine = new RenderEngine(canvas, [
 					{
 						type: "image",
 						name: "background",
@@ -263,7 +263,7 @@ $(() => {
 						<div class="badgeImgContainer" id="${cardId}" >
 						</div>
 						<div class="cardInfo">
-						<h5><span class="awardName">${badgeData.badgeName} awarded to ${badgeData.recipientName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
+						<h5><span class="awardName">${badgeData.badgeName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
 						</div>
 			   		 </div></a>`);
 					document.getElementById(cardId).appendChild(myImage);
@@ -272,7 +272,6 @@ $(() => {
 					// Attach an event handler that allows the badge to be put in focus if selected
 					$(cardSelectorString).on("click", function(event) {
 						//Set Badge Image to the top center of the sceen (enlarged)
-						alert(cardId);
 						$("#badge").attr("src", badgeData.imageURI);
 						$("#badge").attr("data-badge", badgeMapKey);
 						$("#badgeNameDisplay").text(badgeData.badgeName);
@@ -311,7 +310,7 @@ $(() => {
 		context.clearRect(0, 0, certificateCanvas.width, certificateCanvas.height);
 		
 		// Draw the certificate
-		let certRender = new RenderEngineV2(certificateCanvas, [
+		let certRender = new RenderEngine(certificateCanvas, [
 				{
 					type: "image",
 					name: "certBase",
