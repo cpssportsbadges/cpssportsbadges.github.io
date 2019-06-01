@@ -2,7 +2,7 @@
 /*
 	Name: RenderEngine
 	Author: Joseph Varilla
-	Date: 4/12/2019 | Last Edited 5/16/2019
+	Date: 6/1/2019 | Last Edited 5/16/2019
 	Description: A class to be used to 
 				load multiple image 
 				layers into a canvas to 
@@ -63,6 +63,57 @@ class RenderEngine {
 	setScaleFactor(xScale, yScale) {
 		this.scaleFactor.x = xScale;
 		this.scaleFactor.y = yScale;
+	}
+
+	drawLayersAsync() {
+		return new Promise((resolve, reject) => {
+			try {
+				let imageLayers = this.layers.filter((layer) => layer.type === "image");
+				console.log('image layers', imageLayers)
+				let numImagesToBeLoaded = imageLayers.length;
+				console.log('num image layers', numImagesToBeLoaded);
+				let arrOfLoadedImages = [];
+				let numImagesLoaded = 0;
+				let drawLayers = (numImgsLoaded, imgsToBeLoaded, loadedImagesArr, layers) => {
+					console.log('draw layers attempted');
+					if (numImgsLoaded === imgsToBeLoaded) {
+						let loadedImagesArrIdx = 0;
+						for (let layerIdx= 0; layerIdx < layers.length; layerIdx++) {
+							let layer = layers[layerIdx];
+							if (layer.type === "image") {
+								let currentImage = loadedImagesArr[loadedImagesArrIdx];
+								console.log('Current layer', currentImage);
+								//this.ctx.safeDraw(, layer.x, layer.y, layer.scalex, layer.scaley)
+								this.ctx.drawImage(currentImage, layer.x, layer.y, currentImage.width * layer.scalex * this.scaleFactor.x, currentImage.height * layer.scaley * this.scaleFactor.y);
+								loadedImagesArrIdx++;
+							} else {
+								this.ctx.textAlign = layer.textAlign;
+			    				this.ctx.font = `${layer.fontSize} ${layer.fontFamily}`;
+			    				console.log(layer.fontFamily);
+			    				this.ctx.fillStyle = layer.fontColor;
+								this.ctx.fillText(layer.text, layer.x, layer.y);
+							}
+						}
+						resolve({layerOrder: '',
+								 imageURI: this.canvas.toDataURL("image/png")})
+					}
+					
+				}
+				for (let imgLayersIdx = 0; imgLayersIdx < numImagesToBeLoaded; imgLayersIdx++) {
+					let layerImage = new Image();
+					layerImage.onload = () => {
+						numImagesLoaded++;
+						drawLayers(numImagesLoaded, numImagesToBeLoaded, arrOfLoadedImages, this.layers);
+					}
+					layerImage.src = imageLayers[imgLayersIdx].imagePath;
+					arrOfLoadedImages.push(layerImage);
+					console.log(arrOfLoadedImages);
+				}
+			} catch (err) {
+				reject(err);
+			}
+		})
+		
 	}
 	drawLayer(layer) { // Draws a single layer
 		return new Promise((resolve, reject) => {
@@ -493,7 +544,7 @@ $(() => {
 					}
 				] )
 				
-				renderEngine.drawImage()
+				renderEngine.drawLayersAsync()//renderEngine.drawImage()
 				.then((output) => { // Create a image url of the badge image to store
 					let imageURI = canvas.toDataURL("imageURI/png");
 					badgeData.imageURI = imageURI;
@@ -516,7 +567,7 @@ $(() => {
 						<div class="badgeImgContainer" id="${cardId}" >
 						</div>
 						<div class="cardInfo">
-						<h5><span class="awardName">${badgeData.badgeName} awarded to ${badgeData.recipientName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
+						<h5><span class="awardName">${badgeData.badgeName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
 						</div>
 			   		 </div></a>`);
 					document.getElementById(cardId).appendChild(myImage);
@@ -525,7 +576,6 @@ $(() => {
 					// Attach an event handler that allows the badge to be put in focus if selected
 					$(cardSelectorString).on("click", function(event) {
 						//Set Badge Image to the top center of the sceen (enlarged)
-						alert(cardId);
 						$("#badge").attr("src", badgeData.imageURI);
 						$("#badge").attr("data-badge", badgeMapKey);
 						$("#badgeNameDisplay").text(badgeData.badgeName);
@@ -647,7 +697,7 @@ $(() => {
 				}
 
 			]);
-		certRender.drawImage();
+		certRender.drawLayersAsync();
 	}
 
 	// Handles the download of the certificate
