@@ -511,7 +511,7 @@ $(() => {
 					$(canvasId).remove();
 
 					// Generate badge card to display newly unlocked badge
-					let cardId = badgeData.badgeName+badgeData.recipientName;
+					let cardId = "justUnlockedBadge"; //badgeData.badgeName+badgeData.recipientName;
 					$("#badges").append(`<a href="#badgeStage"><div class="badgeCard" data-badge="${badgeMapKey}" id="${cardId}-Card">
 						<div class="badgeImgContainer" id="${cardId}" >
 						</div>
@@ -520,11 +520,12 @@ $(() => {
 						</div>
 			   		 </div></a>`);
 					document.getElementById(cardId).appendChild(myImage);
-					let cardSelectorString = "#" + cardId + "-Card";
+					let cardSelectorString = "#" + cardId;
 
 					// Attach an event handler that allows the badge to be put in focus if selected
 					$(cardSelectorString).on("click", function(event) {
 						//Set Badge Image to the top center of the sceen (enlarged)
+						alert(cardId);
 						$("#badge").attr("src", badgeData.imageURI);
 						$("#badge").attr("data-badge", badgeMapKey);
 						$("#badgeNameDisplay").text(badgeData.badgeName);
