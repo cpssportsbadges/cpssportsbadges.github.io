@@ -20,13 +20,15 @@ const RenderEngine = require("./RenderEngine.js");
 let jsPDF = require("jspdf");
 let decryptedText;
 let ciphertext;
+
+// Dates and months used for certificate generation
 const datesWithSuffixes = ['0th', '1st', '2nd', '3rd', 
 	'4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th',
 	'12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th',
 	'20th', '21st', '22nd', '23rd', '24th', '25th', '26th', '27th',
 	'28th', '29th', '30th', '31st'];
 
-	const monthNames = ['January', 'February', 'March', 'April',
+const monthNames = ['January', 'February', 'March', 'April',
 	'May', 'June', 'July', 'August', 'September', 'October', 'November',
 	'December'];
 
@@ -96,6 +98,7 @@ $(() => {
 			// Add To The MapofBadges
 			let badgeMapKey = "Badge-" + index;
 			mapOfBadges[badgeMapKey] = badge;
+			console.log('Map OF Badges: ', mapOfBadges)
 			let canvasId = `Badge-${index}`;
 			let badgeCardId = "badgeCard" + index
 
@@ -250,12 +253,12 @@ $(() => {
 					window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
 					let badgeMapKey = "Badge-" + Object.keys(mapOfBadges).length
 					mapOfBadges[badgeMapKey] = badgeData;
-
+					console.log('Map OF Badges: ', mapOfBadges)
 					// Remove canvas used to draw the badge
 					$(canvasId).remove();
 
 					// Generate badge card to display newly unlocked badge
-					let cardId = badgeData.badgeName+badgeData.recipientName;
+					let cardId = "justUnlockedBadge"; //badgeData.badgeName+badgeData.recipientName;
 					$("#badges").append(`<a href="#badgeStage"><div class="badgeCard" data-badge="${badgeMapKey}" id="${cardId}-Card">
 						<div class="badgeImgContainer" id="${cardId}" >
 						</div>
@@ -264,11 +267,12 @@ $(() => {
 						</div>
 			   		 </div></a>`);
 					document.getElementById(cardId).appendChild(myImage);
-					let cardSelectorString = "#" + cardId + "-Card";
+					let cardSelectorString = "#" + cardId;
 
 					// Attach an event handler that allows the badge to be put in focus if selected
 					$(cardSelectorString).on("click", function(event) {
 						//Set Badge Image to the top center of the sceen (enlarged)
+						alert(cardId);
 						$("#badge").attr("src", badgeData.imageURI);
 						$("#badge").attr("data-badge", badgeMapKey);
 						$("#badgeNameDisplay").text(badgeData.badgeName);
@@ -281,6 +285,7 @@ $(() => {
 					$("#needsToBeUnlocked").hide();
 					$("#unlockBadge").show();
 					$("#badge").attr("src", badgeData.imageURI);
+					$("#badge").attr("data-badge", badgeMapKey);
 					$("#badgeNameDisplay").text(badgeData.badgeName);
 					drawCertificate1(badgeData)
 				});	
@@ -399,6 +404,7 @@ $(() => {
 			var imgData = certCanvas.toDataURL("image/png");
 	  		var pdf = new jsPDF('l');
 	  		pdf.addImage(imgData, 'JPEG', 0, 0);
+	  		console.log('badgestagebadgedata', mapOfBadges[$("#badge").attr('data-badge')]);
 	  		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
 	  		// Uses Badge Data in the Downloaded File Name
 	  		pdf.save(`${badgeData.recipientName}-${badgeData.awardName}-${badgeData.awardDate}.pdf`);
