@@ -290,6 +290,11 @@ $(() => {
   }
 
 })
+
+/* Prevents the user from making changes to local storage */
+window.addEventListener('storage', function(e) {
+  localStorage.setItem(e.key, e.oldValue);
+})
  
 
 
