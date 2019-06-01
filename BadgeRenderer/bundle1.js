@@ -351,6 +351,7 @@ $(() => {
 			// Add To The MapofBadges
 			let badgeMapKey = "Badge-" + index;
 			mapOfBadges[badgeMapKey] = badge;
+			console.log('Map OF Badges: ', mapOfBadges)
 			let canvasId = `Badge-${index}`;
 			let badgeCardId = "badgeCard" + index
 
@@ -505,7 +506,7 @@ $(() => {
 					window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
 					let badgeMapKey = "Badge-" + Object.keys(mapOfBadges).length
 					mapOfBadges[badgeMapKey] = badgeData;
-
+					console.log('Map OF Badges: ', mapOfBadges)
 					// Remove canvas used to draw the badge
 					$(canvasId).remove();
 
@@ -536,6 +537,7 @@ $(() => {
 					$("#needsToBeUnlocked").hide();
 					$("#unlockBadge").show();
 					$("#badge").attr("src", badgeData.imageURI);
+					$("#badge").attr("data-badge", badgeMapKey);
 					$("#badgeNameDisplay").text(badgeData.badgeName);
 					drawCertificate1(badgeData)
 				});	
@@ -654,6 +656,7 @@ $(() => {
 			var imgData = certCanvas.toDataURL("image/png");
 	  		var pdf = new jsPDF('l');
 	  		pdf.addImage(imgData, 'JPEG', 0, 0);
+	  		console.log('badgestagebadgedata', mapOfBadges[$("#badge").attr('data-badge')]);
 	  		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
 	  		// Uses Badge Data in the Downloaded File Name
 	  		pdf.save(`${badgeData.recipientName}-${badgeData.awardName}-${badgeData.awardDate}.pdf`);
