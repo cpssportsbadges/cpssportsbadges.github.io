@@ -109,6 +109,12 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Wrestling.png',
 				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Wrestling.png',
 				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Wrestling.png'
+			},
+
+			raja: {
+				gold: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Raja.png',
+				0: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Raja.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Raja.png'
 			}
 		}
 	},
