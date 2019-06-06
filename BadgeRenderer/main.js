@@ -216,25 +216,29 @@ $(() => {
 						name: "sport",
 						imagePath: sportImgPath,
 						x: 380,
-						y: 600
+						y: 610
 					},
 					{
 						type: "text",
+						textAlign: "center",
 						name: "badge name",
 						fontSize: "50px",
 						fontFamily: "Helvetica",
 						fontColor: "white",
-						x: 450,
+						maxTextWidth: 550,
+						x: 470,//450,
 						y: 565,
 						text: badgeData.awardName
 					},
 					{
 						type: "text",
 						name: "recpient name",
+						maxTextWidth: 360,
+						textAlign: "center",
 						fontSize: "28px",
 						fontColor: "black",
 						fontFamily: "Helvetica",
-						x: 460,
+						x: 470,//460,
 						y: 220,
 						text: badgeData.recipientName
 					}
@@ -321,21 +325,20 @@ $(() => {
 				{
 					type: "image",
 					name: "sport",
-					// scalex: 2.5,
-					// scaley: 2.5,
-
-					x: 130,
+					x: 120,//130,
 					y: 140,
 					imagePath: BadgeImageConfig['sport']['v4'][badgeData.sport][1]
 				},
 				{
 					type: "text",
 					name: "date",
+					textAlign: "left",
 					fontSize: "30px",
 					fontColor: "#012c5e",
 					fontFamily: "SignatureScript",
-					x: 540,//440,
-					y: 740,//720, // 690,
+					maxTextWidth: 210,
+					x: 418,
+					y: 740,
 					text: generateFormalDateString(new Date(badgeData.awardDate))//badgeData.awardDate.to
 				},
 				{
@@ -343,8 +346,10 @@ $(() => {
 					name: "issuer",
 					fontSize: "30px",
 					fontColor: "#012c5e",
+					textAlign: "left",
 					fontFamily: "SignatureScript",
-					x: 850,//440,
+					maxTextWidth: 210,
+					x: 763,//850,//440,
 					y: 740, // 690,
 					text: badgeData.issuerName
 				},
@@ -354,42 +359,48 @@ $(() => {
 					textAlign: "center",
 					fontSize: "60px",
 					fontColor: "#012c5e",
-					fontFamily: "Verdana",//"Arial",
-					x: 675,//440,
-					y: 380, // 690,
+					fontFamily: "Verdana",
+					maxTextWidth: 650,
+					x: 686,//700,
+					y: 380,
 					text: badgeData.recipientName
 				},
 				{
 					type: "text",
 					name: "awardName",
+					textAlign: "center",
 					fontSize: "42px",
 					fontColor: "#012c5e",
-					fontFamily: "Verdana",//"Helvetica",
-					x: 675,//440,
+					fontFamily: "Verdana",
+					maxTextWidth: 600,
+					x: 686,//700,//440,
 					y: 450, // 690,
 					text: badgeData.awardName
 				},
 				{
 					type: "text",
 					name: "date-label",
-					textAlign: "center",
-					fontSize: "24px",
+					textAlign: "left",
+					fontSize: "18px",//"24px",
 					fontColor: "#012c5e",
-					fontFamily: "Verdana",//"Arial",
-					x: 440,//440,
+					fontFamily: "Verdana",
+					maxTextWidth: 210,
+					x: 418,//x: 440,
 					y: 765,
 					text: "Date"
 				},
 				{
 					type: "text",
 					name: "issuerTitle",
-					textAlign: "start",
-					fontSize: "24px",
+					maxTextWidth: 210,
+					textAlign: "left",
+					fontSize: "18px",//"24px",
 					fontColor: "#012c5e",
-					fontFamily: "Verdana",//"Arial",
-					x: 760,
+					fontFamily: "Verdana",
+					x: 763,
 					y: 765,
 					text: badgeData.issuerTitle
+					
 				}
 
 			]);
