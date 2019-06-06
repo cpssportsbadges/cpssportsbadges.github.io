@@ -52,6 +52,7 @@ class RenderEngine {
 				layerObj.fontFamily = layer.fontFamily || "Serif";
 				layerObj.fontColor = layer.fontColor || "black";
 				layerObj.textAlign = layer.textAlign || "center";
+				layerObj.maxTextWidth = layer.maxTextWidth || null;
 			}
 
 			return layerObj;
@@ -90,7 +91,16 @@ class RenderEngine {
 			    				this.ctx.font = `${layer.fontSize} ${layer.fontFamily}`;
 			    				console.log(layer.fontFamily);
 			    				this.ctx.fillStyle = layer.fontColor;
-								this.ctx.fillText(layer.text, layer.x, layer.y);
+								
+								if (layer.maxTextWidth !== null) {
+									try {
+										this.ctx.fillText(layer.text, layer.x, layer.y, layer.maxTextWidth);
+									} catch (err) {
+										this.ctx.fillText(layer.text, layer.x, layer.y);
+									}
+								} else {
+									this.ctx.fillText(layer.text, layer.x, layer.y);
+								}
 							}
 						}
 						resolve({layerOrder: '',
