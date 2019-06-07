@@ -205,6 +205,8 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 	background: {
 		distinction: {
 			v4: {
+				X: "./assets/BadgeV4/Base-Layers/CPS_Sports_Base_Layer-Default.png",
+				x: "./assets/BadgeV4/Base-Layers/CPS_Sports_Base_Layer-Default.png",
 				a: "./assets/BadgeV4/Base-Layers/CPS_Sports_Base_Layer-Default.png",
 				0: "./assets/BadgeV4/Base-Layers/CPS_Sports_Base_Layer-Default.png",
 				1: "./assets/BadgeV4/Base-Layers/CPS_Sports_Base_Layer-Gold.png",
