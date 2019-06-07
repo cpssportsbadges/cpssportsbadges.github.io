@@ -22,6 +22,11 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 	},
 	sport: {
 		v4: {
+			x: {
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Academic.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Academic.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Academic.png'
+			},
 			academic: {
 				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Academic.png',
 				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Academic.png',

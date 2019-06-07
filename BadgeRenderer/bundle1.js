@@ -216,6 +216,11 @@ const badgeLayersConfig = {// paths relative to BadgeRenderer
 	},
 	sport: {
 		v4: {
+			x: {
+				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Academic.png',
+				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Academic.png',
+				1: './assets/BadgeV4/WhiteIcons/White-Sports-Icons-Academic.png'
+			},
 			academic: {
 				gold: './assets/BadgeV4/GoldIcons/Gold-Sports-Icons-Academic.png',
 				0: './assets/BadgeV4/BlueIcons/Blue-Sports-Icons-Academic.png',
@@ -499,6 +504,7 @@ $(() => {
 
 				badgeData.badgeName = badgeData.awardName;
 				
+				console.log(badgeData.sport);
 				// Create canvas to draw the badge
 				let canvasId = `Badge-${key}`;
 				$("#badges").append(`<canvas id=${canvasId} height="800" width="1000" hidden></canvas>`);
@@ -521,8 +527,16 @@ $(() => {
 					sportLayerSelectorValue = (new Date(badgeData['awardDate'])).getFullYear() % 2;
 				}
 				
-				let sportImgPath = BadgeImageConfig['sport']['v4'][badgeData['sport']][sportLayerSelectorValue];
+				// Set the sport img path to the the correct sport or the default
+				let sportImgPath;
+				try {
+					sportImgPath1 = BadgeImageConfig['sport']['v4'][badgeData['sport']][sportLayerSelectorValue];
+				} catch (err) {
+					sportImgPath =	BadgeImageConfig['sport']['v4']['x'][sportLayerSelectorValue];
+				}
+				//|| BadgeImageConfig['sport']['v4'][badgeData['x']][sportLayerSelectorValue];
 				
+				console.log('SPORT IMG PATH: ', sportImgPath);
 
 				// Render the badge
 				let renderEngine = new RenderEngine(canvas, [
@@ -635,6 +649,12 @@ $(() => {
 		// Reset the canvas by drawing a blank layer over everything
 		context.clearRect(0, 0, certificateCanvas.width, certificateCanvas.height);
 		
+		let sportImgPath;
+				try {
+					sportImgPath = BadgeImageConfig['sport']['v4'][badgeData['sport']][1];
+				} catch (err) {
+					sportImgPath =	BadgeImageConfig['sport']['v4']['x'][1];
+				}
 		// Draw the certificate
 		let certRender = new RenderEngine(certificateCanvas, [
 				{
@@ -649,7 +669,8 @@ $(() => {
 					name: "sport",
 					x: 120,//130,
 					y: 140,
-					imagePath: BadgeImageConfig['sport']['v4'][badgeData.sport][1]
+					// Set the sport image to the corresponding one or a default of the academic one
+					imagePath: sportImgPath
 				},
 				{
 					type: "text",
