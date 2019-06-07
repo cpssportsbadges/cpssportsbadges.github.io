@@ -503,8 +503,10 @@ $(() => {
 				badgeData.email = badgeData.recipientEmail;
 
 				badgeData.badgeName = badgeData.awardName;
-				
-				console.log(badgeData.sport);
+				console.log('before', badgeData.sport);
+				let sportConverter = badgeData.sport.toLowerCase().trim().replace(/ +/g, '_');
+				badgeData.sport = sportConverter;
+				console.log('after', badgeData.sport);
 				// Create canvas to draw the badge
 				let canvasId = `Badge-${key}`;
 				$("#badges").append(`<canvas id=${canvasId} height="800" width="1000" hidden></canvas>`);
@@ -530,7 +532,7 @@ $(() => {
 				// Set the sport img path to the the correct sport or the default
 				let sportImgPath;
 				try {
-					sportImgPath1 = BadgeImageConfig['sport']['v4'][badgeData['sport']][sportLayerSelectorValue];
+					sportImgPath = BadgeImageConfig['sport']['v4'][badgeData['sport']][sportLayerSelectorValue];
 				} catch (err) {
 					sportImgPath =	BadgeImageConfig['sport']['v4']['x'][sportLayerSelectorValue];
 				}
