@@ -65,9 +65,28 @@ class BadgeLinkGenerator {
 	        let bytes = this.CryptoJS.AES.encrypt(badgeDataString, badgeKey);
 	        let badgeHash = bytes.toString();
 	        let badgeURL = this.getBadgeURL(badgeHash, this.linkBase);
+	        let recipientFullName = badgeData.recipientFirstName + " " + badgeData.recipientLastName;
+	       	console.log(badgeData);
+	       	let issuerTitleTxt;
+	       	issuerTitleTxt = badgeData.issuerTitle ?  badgeData.issuerTitle.trim() : "X";
+	       	var trimmedIssuerTitle = issuerTitleTxt.trim();
+	       	console.log(trimmedIssuerTitle);
+	       	let issuerFullName;
+	       	if (trimmedIssuerTitle.toUpperCase() !== "X") {
+	       		issuerFullName = badgeData.issuerFirstName + " " + badgeData.issuerLastName;
+	       	} else {
+	       		issuerFullName = badgeData.issuerFirstName + " " + badgeData.issuerLastName + " -" + trimmedIssuerTitle;
+	       	}
+
+	       	// Replace underscores with spaces so that the sport looks natural in emails
+	       	let sportDisplay;
+	       	sportDisplay = badgeData.sport ? badgeData.sport.trim().replace(/_/g, " ") : "X";
+
 
 	        // CSV fields in the final output file
-	        return {email: recipientEmail, url: badgeURL, key: badgeKey}
+	        return {email: recipientEmail, link: badgeURL, key: badgeKey,
+	        name: recipientFullName, issuer: issuerFullName, sport: sportDisplay,
+	    	award: badgeData.awardName, issuerTitle: badgeData.issuerTitle};
   		});		
 	}
 
