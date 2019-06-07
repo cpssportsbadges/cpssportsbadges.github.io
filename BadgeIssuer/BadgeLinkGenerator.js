@@ -82,7 +82,9 @@ class BadgeLinkGenerator {
 	       	let sportDisplay;
 	       	sportDisplay = badgeData.sport ? badgeData.sport.trim().replace(/_/g, " ") : "X";
 
-
+	       	if (sportDisplay === "academic") {
+	       		sportDisplay = "academics";
+	       	}
 	        // CSV fields in the final output file
 	        return {email: recipientEmail, link: badgeURL, key: badgeKey,
 	        name: recipientFullName, issuer: issuerFullName, sport: sportDisplay,
