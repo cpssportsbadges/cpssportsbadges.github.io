@@ -20,7 +20,7 @@ const RenderEngine = require("./RenderEngine.js");
 let jsPDF = require("jspdf");
 let decryptedText;
 let ciphertext;
-
+let insertingANewBadge = false;
 // Dates and months used for certificate generation
 const datesWithSuffixes = ['0th', '1st', '2nd', '3rd', 
 	'4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th',
@@ -252,7 +252,9 @@ $(() => {
 				.then((myImage) => {
 					// Store the badge image url along with badge data in local storage	
 					if (badgeData !== null) {
+						insertingANewBadge = true;
 						window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
+						insertingANewBadge = false;
 						let badgeMapKey = "Badge-" + Object.keys(mapOfBadges).length
 						mapOfBadges[badgeMapKey] = badgeData;
 						// Remove canvas used to draw the badge
@@ -541,7 +543,7 @@ $(() => {
 
 /* Prevents the user from making changes to local storage */
 window.addEventListener('storage', function(e) {
-  if (e.newValue !== null) {// Allow them to delete records
+  if (e.newValue !== null || !insertingANewBadge) {// Allow them to delete records
   	  localStorage.setItem(e.key, e.oldValue);
   }
 })
