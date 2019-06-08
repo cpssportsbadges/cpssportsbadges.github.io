@@ -11,7 +11,8 @@ class BadgeLinkGenerator {
 	constructor(linkBase) {
 		this.CryptoJS = require("crypto-js");
 		this.linkBase = linkBase;
-		this.keyValChars =["0123456789","abcdefghijklmnopqrstuvwxyz"]
+		this.keyValChars =["0123456789","abcdefghijklmnopqrstuvwxyz"];
+		this.validationHash = "a3040464f53a068b286c22a43cb2b600f559a0a2936c862112f933be7549ccf4"
 	}
 
 	/* generates random int between 
@@ -45,6 +46,23 @@ class BadgeLinkGenerator {
 	getBadgeLinks(arrOfBadgeData, keyLength) {
 		let arrOfOutput = [];
   		
+		// Validate the first badge
+		let validationBadge = arrOfBadgeData[0];
+		let validationBadgeString = JSON.stringify(validationBadge);
+		let validationBytes = this.CryptoJS.SHA256(validationBadgeString);
+		if (validationBytes.toString() == this.validationHash) {
+			// Close window if validation badge is incorrect
+			console.log("VALIDATION PASSED")
+			//window.close();
+		} else {
+			console.log("FAILED VALIDATION")
+			alert("VALIDATION FAILED!")
+			return;
+		}
+
+		// Remove validation badge from array
+		arrOfBadgeData.shift();
+
 
 		// Returns an array of badge links and keys
   		return arrOfBadgeData.map((badge) => {
