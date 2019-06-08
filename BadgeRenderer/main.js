@@ -98,7 +98,6 @@ $(() => {
 			// Add To The MapofBadges
 			let badgeMapKey = "Badge-" + index;
 			mapOfBadges[badgeMapKey] = badge;
-			console.log('Map OF Badges: ', mapOfBadges)
 			let canvasId = `Badge-${index}`;
 			let badgeCardId = "badgeCard" + index
 
@@ -129,13 +128,6 @@ $(() => {
 						$("#badge").attr("data-badge", badgeMapKey);
 						drawCertificate1(badgeData)
 					});
-			// $("#badges").append(`<div class="badgeContainer">
-			// 					 <button class="getBadgeHTMLBtn" data-canvas=${canvasId} onClick="handleCopyHTML(this)">Get Badge HTML</button>
-			// 					 <div><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I earned the ${badge.badgeName} Badge!">Tweet</a></div>
-			// 					 <div class="fb-share-button" data-href="https://jvarilla.github.io/BadgeRenderer/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://jvarilla.github.io/BadgeRenderer/" class="fb-xfbml-parse-ignore">Share</a></div>
-			// 					 <canvas id=${canvasId} class="badgeCanvas" height="600" width="800"></canvas>
-			// 					 </div>`);
-			//drawBadge(badge, canvasId);
 			return;
 		});
 	}
@@ -176,10 +168,8 @@ $(() => {
 				badgeData.email = badgeData.recipientEmail;
 
 				badgeData.badgeName = badgeData.awardName;
-				console.log('before', badgeData.sport);
 				let sportConverter = badgeData.sport.toLowerCase().trim().replace(/ +/g, '_');
 				badgeData.sport = sportConverter;
-				console.log('after', badgeData.sport);
 				// Create canvas to draw the badge
 				let canvasId = `Badge-${key}`;
 				$("#badges").append(`<canvas id=${canvasId} height="800" width="1000" hidden></canvas>`);
@@ -209,10 +199,6 @@ $(() => {
 				} catch (err) {
 					sportImgPath =	BadgeImageConfig['sport']['v4']['x'][sportLayerSelectorValue];
 				}
-				//|| BadgeImageConfig['sport']['v4'][badgeData['x']][sportLayerSelectorValue];
-				
-				console.log('SPORT IMG PATH: ', sportImgPath);
-
 				// Render the badge
 				let renderEngine = new RenderEngine(canvas, [
 					{
@@ -227,7 +213,7 @@ $(() => {
 						name: "sport",
 						imagePath: sportImgPath,
 						x: 380,
-						y: 610
+						y: 580//610
 					},
 					{
 						type: "text",
@@ -265,43 +251,44 @@ $(() => {
 				})
 				.then((myImage) => {
 					// Store the badge image url along with badge data in local storage	
-					window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
-					let badgeMapKey = "Badge-" + Object.keys(mapOfBadges).length
-					mapOfBadges[badgeMapKey] = badgeData;
-					console.log('Map OF Badges: ', mapOfBadges)
-					// Remove canvas used to draw the badge
-					$(canvasId).remove();
+					if (badgeData !== null) {
+						window.localStorage.setItem('Badge' + hash, JSON.stringify(badgeData));
+						let badgeMapKey = "Badge-" + Object.keys(mapOfBadges).length
+						mapOfBadges[badgeMapKey] = badgeData;
+						// Remove canvas used to draw the badge
+						$(canvasId).remove();
 
-					// Generate badge card to display newly unlocked badge
-					let cardId = "justUnlockedBadge"; //badgeData.badgeName+badgeData.recipientName;
-					$("#badges").append(`<a href="#badgeStage"><div class="badgeCard" data-badge="${badgeMapKey}" id="${cardId}-Card">
-						<div class="badgeImgContainer" id="${cardId}" >
-						</div>
-						<div class="cardInfo">
-						<h5><span class="awardName">${badgeData.badgeName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
-						</div>
-			   		 </div></a>`);
-					document.getElementById(cardId).appendChild(myImage);
-					let cardSelectorString = "#" + cardId;
+						// Generate badge card to display newly unlocked badge
+						let cardId = "justUnlockedBadge"; //badgeData.badgeName+badgeData.recipientName;
+						$("#badges").append(`<a href="#badgeStage"><div class="badgeCard" data-badge="${badgeMapKey}" id="${cardId}-Card">
+							<div class="badgeImgContainer" id="${cardId}" >
+							</div>
+							<div class="cardInfo">
+							<h5><span class="awardName">${badgeData.badgeName}</span><br/><span class="issuedDate">issued on ${badgeData.awardDate}</span></h5>
+							</div>
+				   		 </div></a>`);
+						document.getElementById(cardId).appendChild(myImage);
+						let cardSelectorString = "#" + cardId;
 
-					// Attach an event handler that allows the badge to be put in focus if selected
-					$(cardSelectorString).on("click", function(event) {
-						//Set Badge Image to the top center of the sceen (enlarged)
+						// Attach an event handler that allows the badge to be put in focus if selected
+						$(cardSelectorString).on("click", function(event) {
+							//Set Badge Image to the top center of the sceen (enlarged)
+							$("#badge").attr("src", badgeData.imageURI);
+							$("#badge").attr("data-badge", badgeMapKey);
+							$("#badgeNameDisplay").text(badgeData.badgeName);
+						});
+
+						// Hide unlock badge components like the input form
+						// Display the unlocked badge
+						$("#badgeUnlockStatus").text("Congratulations! Your has been unlocked!");
+						$("#badgeDisplayed").show();
+						$("#needsToBeUnlocked").hide();
+						$("#unlockBadge").show();
 						$("#badge").attr("src", badgeData.imageURI);
 						$("#badge").attr("data-badge", badgeMapKey);
 						$("#badgeNameDisplay").text(badgeData.badgeName);
-					});
-
-					// Hide unlock badge components like the input form
-					// Display the unlocked badge
-					$("#badgeUnlockStatus").text("Congratulations! Your has been unlocked!");
-					$("#badgeDisplayed").show();
-					$("#needsToBeUnlocked").hide();
-					$("#unlockBadge").show();
-					$("#badge").attr("src", badgeData.imageURI);
-					$("#badge").attr("data-badge", badgeMapKey);
-					$("#badgeNameDisplay").text(badgeData.badgeName);
-					drawCertificate1(badgeData)
+						drawCertificate1(badgeData)
+					}
 				});	
 			} catch(err) { // Wrong key was entered
 				$("#badgeUnlockStatus").text("");
@@ -432,7 +419,6 @@ $(() => {
 			var imgData = certCanvas.toDataURL("image/png");
 	  		var pdf = new jsPDF('l');
 	  		pdf.addImage(imgData, 'JPEG', 0, 0);
-	  		console.log('badgestagebadgedata', mapOfBadges[$("#badge").attr('data-badge')]);
 	  		let badgeData = mapOfBadges[$("#badge").attr('data-badge')];
 	  		// Uses Badge Data in the Downloaded File Name
 	  		pdf.save(`${badgeData.recipientName}-${badgeData.awardName}-${badgeData.awardDate}.pdf`);

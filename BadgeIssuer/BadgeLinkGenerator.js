@@ -4,7 +4,7 @@
 	links and keys
 
 	Created By: Joseph Varilla
-	Last EditedL 5/15/2019
+	Last EditedL 6/6/2019
 */
 
 class BadgeLinkGenerator {
@@ -51,9 +51,7 @@ class BadgeLinkGenerator {
 		let validationBadgeString = JSON.stringify(validationBadge);
 		let validationBytes = this.CryptoJS.SHA256(validationBadgeString);
 		if (validationBytes.toString() == this.validationHash) {
-			// Close window if validation badge is incorrect
 			console.log("VALIDATION PASSED")
-			//window.close();
 		} else {
 			console.log("FAILED VALIDATION")
 			alert("VALIDATION FAILED!")
@@ -61,16 +59,20 @@ class BadgeLinkGenerator {
 		}
 
 		// Remove validation badge from array
-		arrOfBadgeData.shift();
+		var vBadge = arrOfBadgeData.shift();
+		console.log(vBadge);
 
+	       
+	        // Stamp that the badge was verified
+	        let stamp = this.validationHash;
 
 		// Returns an array of badge links and keys
   		return arrOfBadgeData.map((badge) => {
   			let recipientEmail = badge.recipientEmail;
   			let badgeKey = this.getRandomKey(keyLength);
   			
-
-	        let badgeData = {};
+  			 let badgeData = {};
+        	badgeData["validationStamp"] = stamp
 
 	        for (var key in badge) {
 	        	//	Do Not include the recipient's email in the badge hash
@@ -79,16 +81,15 @@ class BadgeLinkGenerator {
     			}
 			}
 
+			// Turn the badge data into a string
 	        let badgeDataString = JSON.stringify(badgeData);
 	        let bytes = this.CryptoJS.AES.encrypt(badgeDataString, badgeKey);
 	        let badgeHash = bytes.toString();
 	        let badgeURL = this.getBadgeURL(badgeHash, this.linkBase);
 	        let recipientFullName = badgeData.recipientFirstName + " " + badgeData.recipientLastName;
-	       	console.log(badgeData);
 	       	let issuerTitleTxt;
 	       	issuerTitleTxt = badgeData.issuerTitle ?  badgeData.issuerTitle.trim() : "X";
 	       	var trimmedIssuerTitle = issuerTitleTxt.trim();
-	       	console.log(trimmedIssuerTitle);
 	       	let issuerFullName;
 	       	if (trimmedIssuerTitle.toUpperCase() !== "X") {
 	       		issuerFullName = badgeData.issuerFirstName + " " + badgeData.issuerLastName;

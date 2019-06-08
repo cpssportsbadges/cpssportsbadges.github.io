@@ -10,7 +10,7 @@
   the dependencies into bundle.js which get sent over.
 
   Created by: Joseph Varilla
-  Last Edited: 5/15/2019
+  Last Edited: 6/6/2019
 */
 
 // PLEASE REPLACE WITH THE NEW URL OF THE BADGE RENDERER APPLICATION
@@ -161,10 +161,8 @@ $(() => {
         } else { // Handle the csv file upload
           return function(e) { // Convert CSV to JSON
             let csvText = e.target.result;
-            console.log(csvText);
             // Remove excess commas (empty rows)
-            csvText = csvText.replace(/\n\,{3,}/gm, "")
-            console.log(csvText);
+            csvText = csvText.replace(/\n\,{3,}/gm, "");
 
             let jsonArr = CSV_to_JSON(csvText, ',');
             
