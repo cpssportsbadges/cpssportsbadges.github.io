@@ -212,10 +212,10 @@ $(() => {
 })
 
 /* Prevents the user from making changes to local storage */
-window.addEventListener('storage', function(e) {
-  if (e.newValue !== null) {// Allow them to delete records
-      localStorage.setItem(e.key, e.oldValue);
-  }
-})
+// window.addEventListener('storage', function(e) {
+//   if (e.newValue !== null) {// Allow them to delete records
+//       localStorage.setItem(e.key, e.oldValue);
+//   }
+// })
  
 

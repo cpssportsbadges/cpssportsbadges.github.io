@@ -869,11 +869,11 @@ $(() => {
 });
 
 /* Prevents the user from making changes to local storage */
-window.addEventListener('storage', function(e) {
-  if (e.newValue !== null || !insertingANewBadge) {// Allow them to delete records
-  	  localStorage.setItem(e.key, e.oldValue);
-  }
-})
+// window.addEventListener('storage', function(e) {
+//   if (e.newValue !== null || !insertingANewBadge) {// Allow them to delete records
+//   	  localStorage.setItem(e.key, e.oldValue);
+//   }
+// })
 
 
 },{"./RenderEngine.js":1,"./badgeLayersConfig.js":2,"crypto-js":12,"jspdf":38}],4:[function(require,module,exports){
