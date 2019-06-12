@@ -20,7 +20,7 @@
   ],
   "start_url": "/BadgeRenderer/",
   "background_color": "#0c0c7a",
-  "display": "standalone",
+  "display": "minimal-ui",
   "scope": "/BadgeRenderer/",
   "theme_color": "#0c0c7a"
 }
