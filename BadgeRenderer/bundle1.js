@@ -405,8 +405,13 @@ $(() => {
 	function getBadgesFromLocalStorage() { 
 		let badges = [];
 		for (element in window.localStorage) {
-			if (element.includes("Badge")) {
-				badges.push(JSON.parse(window.localStorage[element]));
+			if (element.includes("Badge") && window.localStorage[element] !== null) {
+				try {
+					badges.push(JSON.parse(window.localStorage[element]));
+				} catch (err) {
+					continue;
+				}
+				
 			}
 		}
 		return badges;
